@@ -427,9 +427,9 @@ items: Item[] = [
         name: 'CA-11798 Klauzula na współmałżonka cz. 1',
         show: false,
         links: [
-          { image: 'assets/tydzien1/0a.jpg',type:'foto', label: 'przelew plik pdf' },
-          { image: 'assets/tydzien1/1a.jpg',type:'foto', label: 'szukanie po ciągu znaków' },
-          { image: 'assets/tydzien1/2a.jpg',type:'foto', label: 'przypisanie do właściwej kategorii' },
+          { image: 'assets/tydzien2/0a.jpg',type:'foto', label: 'przelew plik pdf' },
+          { image: 'assets/tydzien2/1a.jpg',type:'foto', label: 'szukanie po ciągu znaków' },
+          { image: 'assets/tydzien2/2a.jpg',type:'foto', label: 'przypisanie do właściwej kategorii' },
           { text: this.firstWeekDay0, type:'opis', label: 'CA-11798 Klauzula na współmałżonka cz. 1' },
         ]
       },
@@ -437,8 +437,8 @@ items: Item[] = [
         name: 'CA-11792 RODO dla GP aktualizacja',
         show: false,
         links: [
-          { image: 'assets/tydzien1/0b.jpg',type:'foto', label: 'rodo rpt' },
-          { image: 'assets/tydzien1/1b.jpg',type:'foto', label: 'rodo pdf' },
+          { image: 'assets/tydzien2/0b.jpg',type:'foto', label: 'rodo 1' },
+          { image: 'assets/tydzien2/1b.jpg',type:'foto', label: 'rodo 2' },
           { text: this.firstWeekDay1, type:'opis', label: 'CA-11792 RODO dla GP aktualizacja' },
         ]
       },
@@ -446,9 +446,9 @@ items: Item[] = [
         name: 'utrzymanie 3 nowe filtry',
         show: false,
         links: [
-          { image: 'assets/tydzien1/CAM-3986.jpg',type:'foto', label: 'Tylko sprawy, gdzie termin pierwszej licytacji przypada nie wcześniej jak za 2 tyg.' },
-          { image: 'assets/tydzien1/CAM-3987.jpg',type:'foto', label: 'Tylko sprawy z zabezpieczoną nieruchomością lub sprawy bez zabepieczonej nieruchomości' },
-          { image: 'assets/tydzien1/CAM-4071.jpg',type:'foto', label: 'Tylko klienci, którzy mają PESEL lub klienci bez nr PESEL' },
+          { image: 'assets/tydzien2/CAM-3986.jpg',type:'foto', label: 'Tylko sprawy, gdzie termin pierwszej licytacji przypada nie wcześniej jak za 2 tyg.' },
+          { image: 'assets/tydzien2/CAM-3987.jpg',type:'foto', label: 'Tylko sprawy z zabezpieczoną nieruchomością lub sprawy bez zabepieczonej nieruchomości' },
+          { image: 'assets/tydzien2/CAM-4071.jpg',type:'foto', label: 'Tylko klienci, którzy mają PESEL lub klienci bez nr PESEL' },
           { text: this.firstWeekDay1, type:'opis', label: 'utrzymanie 3 nowe filtry' },
         ]
       }
