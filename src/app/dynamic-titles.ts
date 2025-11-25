@@ -2,14 +2,14 @@
 
 export class DynamicTitles {
     static getFirstWeekTitle(startDate: Date): string {
-    return 'Sprint 9 <i><b>29 X - 12 XI</b></i>';
+    return '<b>Sprint 9:</b> <i>29 X - 12 XI</i>';
     
   }
     static getSecondWeekTitle(startDate: Date): string {
-    return 'Sprint 10 <i><b>12 XI - 26 XI</b></i>';
+    return '<b>Sprint 10:</b> <i>12 XI - 26 XI</i>';
   }
 
   static getThirdWeekTitle(startDate: Date): string {
-   return 'Sprint 11 <i><b>26 XI - 10 XII</b></i>';
+   return '<b>Sprint 11:</b> <i>26 XI - 10 XII</i>';
   }
 }

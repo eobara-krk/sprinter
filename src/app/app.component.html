@@ -49,7 +49,7 @@
     <div class="divider"></div>
 
     <!-- EVENTY -->
-  <div *ngFor="let item of items; let i = index; trackBy: trackByTitle" class="event-card" [attr.id]="'folder-' + i">
+  <div *ngFor="let item of items; let i = index, trackBy: trackByTitle" class="event-card" [attr.id]="'folder-' + i">
 
       <!-- Nagłówek wydarzenia -->
       <div class="event-header" (click)="toggle(item)">
@@ -139,7 +139,7 @@
                   <!-- Jeśli link ma zagnieżdżone linki (drugi poziom) -->
                   <ng-container *ngIf="l.links && l.links.length > 0">
                     <div class="nested-group">
-                      <div class="nested-header" (click)="toggleNestedGroup(l)">
+                      <div class="nested-header" (click)="toggleOnlyNestedGroup(l, links)">
                         <span class="nested-icon">{{ l.show ? '▼' : '▶' }}</span>
                         <span [ngSwitch]="l.type">
                           <span *ngSwitchCase="'film'">🎬</span>
@@ -156,7 +156,7 @@
                       
                       <!-- Zagnieżdżone linki -->
                       <div *ngIf="l.show" class="nested-links">
-                        <a *ngFor="let nestedLink of l.links"
+                        <a *ngFor="let nestedLink of l.links; trackBy: trackByNestedLink"
                            class="grid-link nested-link"
                            [class.today-highlight]="(nestedLink.label || nestedLink.url) ? isToday(nestedLink.label || nestedLink.url || '') : false"
                            [href]="nestedLink.url || null"
@@ -201,6 +201,7 @@
                              (load)="onImageLoad($event)"
                              (error)="onImageError($event)"
                              (click)="toggleFullscreen(l.image); $event.preventDefault(); $event.stopPropagation();" />
+                             <span class="link-label" *ngIf="l.label">{{ l.label }}</span>
 
                       </div>
                       

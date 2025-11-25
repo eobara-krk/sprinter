@@ -213,7 +213,7 @@ export class AppComponent implements OnInit {
     return this.audioPlayer.isPlaying(url);
   }
 
-  // Automatyczne otwieranie folderów z dzisiejszą datą
+  // Automatyczne otwieranie folderów z dzisiejsą datą
   openTodayFolders = () => this.folderVisibilityService.openTodayFolders(
     this.items,
     (title: string) => this.dateUtilsService.isTodayInTitleRange(title, this.currentDateTime),
@@ -243,8 +243,15 @@ export class AppComponent implements OnInit {
   // ----------------------
   toggleLink = (group: LinkGroup) => this.folderVisibilityService.toggleLink(group, this.summaryPassword);
 
-  // Metoda do przełączania zagnieżdżonych grup
-  toggleNestedGroup = (nestedGroup: SingleLink) => this.folderVisibilityService.toggleNestedGroup(nestedGroup);
+  // Metoda do przełączania zagnieżdżonych grup (tylko jeden otwarty, kliknięcie na otwarty zamyka)
+  toggleOnlyNestedGroup = (nestedGroup: SingleLink, siblings: SingleLink[]) => {
+    if (nestedGroup.show) {
+      nestedGroup.show = false;
+    } else {
+      siblings.forEach(s => s.show = false);
+      nestedGroup.show = true;
+    }
+  };
 
   // ----------------------
   // TRACKBY dla *ngFor
@@ -355,6 +362,13 @@ export class AppComponent implements OnInit {
   this.hasScrolledToToday = true;
   }
 
+        // ----------------------
+  // TRACKBY dla zagnieżdżonych linków
+  // ----------------------
+  trackByNestedLink(index: number, link: SingleLink) {
+    return link.label || link.url || index;
+  }
+
   // ----------------------
   // SPRAWDZANIE CZY GRUPA MA ELEMENTY FOTO
   // ----------------------
@@ -393,19 +407,14 @@ items: Item[] = [
   show: false, // opcjonalnie, żeby nie był od razu rozwinięty
   links: [
     {
-        name: 'CA-cvy',
+        name: 'XForm sprawdzające naruszenia w komunikatach',
         show: false,
         links: [
-          { image: 'assets/tydzien1/0.jpg',type:'foto' },
+          { image: 'assets/tydzien1/pismaAdres.jpg',type:'foto', label: 'adres na pismach' },
+          { image: 'assets/tydzien1/smsMaileAdres.jpg',type:'foto', label: 'adres sms/maile' },
+          { image: 'assets/tydzien1/maileCzcionka.jpg',type:'foto', label: 'maile czcionka' },
+          { image: 'assets/tydzien1/smsZnaki.jpg',type:'foto', label: 'zakazane znaki w sms' },
           { text: this.firstWeekDay0, type:'opis', label: 'CA-cvy' },
-        ]
-      },
-          {
-        name: 'CA-cvy',
-        show: false,
-        links: [
-          { image: 'assets/tydzien1/0.jpg',type:'foto' },
-          { text: this.firstWeekDay1, type:'opis', label: 'CA-cvy' },
         ]
       }
     ] 
@@ -415,19 +424,32 @@ items: Item[] = [
   show: false,
    links: [
     {
-        name: 'CA-cvy',
+        name: 'CA-11798 Klauzula na współmałżonka cz. 1',
         show: false,
         links: [
-          { image: 'assets/tydzien1/0.jpg',type:'foto' },
-          { text: this.firstWeekDay0, type:'opis', label: 'CA-cvy' },
+          { image: 'assets/tydzien1/0a.jpg',type:'foto', label: 'przelew plik pdf' },
+          { image: 'assets/tydzien1/1a.jpg',type:'foto', label: 'szukanie po ciągu znaków' },
+          { image: 'assets/tydzien1/2a.jpg',type:'foto', label: 'przypisanie do właściwej kategorii' },
+          { text: this.firstWeekDay0, type:'opis', label: 'CA-11798 Klauzula na współmałżonka cz. 1' },
         ]
       },
-          {
-        name: 'CA-cvy',
+        {
+        name: 'CA-11792 RODO dla GP aktualizacja',
         show: false,
         links: [
-          { image: 'assets/tydzien1/0.jpg',type:'foto' },
-          { text: this.firstWeekDay1, type:'opis', label: 'CA-cvy' },
+          { image: 'assets/tydzien1/0b.jpg',type:'foto', label: 'rodo rpt' },
+          { image: 'assets/tydzien1/1b.jpg',type:'foto', label: 'rodo pdf' },
+          { text: this.firstWeekDay1, type:'opis', label: 'CA-11792 RODO dla GP aktualizacja' },
+        ]
+      },
+       {
+        name: 'utrzymanie 3 nowe filtry',
+        show: false,
+        links: [
+          { image: 'assets/tydzien1/CAM-3986.jpg',type:'foto', label: 'Tylko sprawy, gdzie termin pierwszej licytacji przypada nie wcześniej jak za 2 tyg.' },
+          { image: 'assets/tydzien1/CAM-3987.jpg',type:'foto', label: 'Tylko sprawy z zabezpieczoną nieruchomością lub sprawy bez zabepieczonej nieruchomości' },
+          { image: 'assets/tydzien1/CAM-4071.jpg',type:'foto', label: 'Tylko klienci, którzy mają PESEL lub klienci bez nr PESEL' },
+          { text: this.firstWeekDay1, type:'opis', label: 'utrzymanie 3 nowe filtry' },
         ]
       }
     ] 
@@ -454,4 +476,7 @@ items: Item[] = [
       }
     ] 
       },]
+
+
+
 }
