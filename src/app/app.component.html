@@ -277,21 +277,6 @@
     </div>
 
 
-  <!-- STOPKA w kontenerku -->
-  <div class="footer-section">
-    <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-      <div style="font-size: 0.95em; color: #666;">Przydatne linki:  <a href="https://krukeu.sharepoint.com/sites/ITINTHQPL/SitePages/bibliotekaszablonow.aspx" target="_blank" rel="noopener">bibliotek szablonów</a></div>
-      <div class="znak-wodny">
-        © <span class="ozdobne">EO</span>
-      </div>
-    </div>
-    <button class="close-button" (click)="closePage()">
-      <span class="close-icon">×</span>
-      <span class="close-text">Zamknij stronę</span>
-    </button>
-  </div>
-</main>
-
 <!-- FULLSCREEN IMAGE - overlay poza main -->
 <div id="fullscreen-overlay" class="fullscreen-local" *ngIf="fullscreenImage" (click)="toggleFullscreen()">
   <img [src]="fullscreenImage" 
