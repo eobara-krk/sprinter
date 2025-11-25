@@ -1,59 +1,56 @@
+
+html, body {
+  height: 100%;
+  background: linear-gradient(135deg, rgb(230,245,255) 0%, rgb(0,125,250) 100%) !important;
+}
+
 .kruk-image {
   margin-top: -38px;
 }
 /* PODSTAWOWE ZMIENNE */
 :host {
-  --blue: #3b82f6;
-  --pink: #ff4fcf;
-  --violet: #8a2be2;
-  --orange: #ff6b6b;
+  background: rgb(230,245,255);
+  --blue: rgb(0,125,250);
+  --green: rgb(25,190,55);
+  --red: rgb(255,50,25);
   --gray-900: #111827;
   --gray-700: #4b5563;
   font-family: "Inter", sans-serif;
 
 /* KLIKALNY LINK W TEKŚCIE */
+
 .inline-link {
   color: var(--blue);
   text-decoration: underline;
   cursor: pointer;
   transition: all 0.2s ease;
+  background: rgba(0,125,250,0.07);
+  border-radius: 4px;
+  padding: 2px 4px;
 }
 
 .inline-link:hover {
-  color: var(--violet);
+  color: var(--green);
   text-decoration: none;
-  background: rgba(59, 130, 246, 0.1);
-  padding: 2px 4px;
-  border-radius: 4px;
+  background: rgba(0,125,250,0.18);
 }
 
 /* KONTAINER */
 main {
   width: 100%;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 2rem 1rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  background-attachment: fixed;
-}
-
-.placeholder {
-  position: relative;
-  width: 100%;
   max-width: 700px;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin: 0 auto;
+  background: rgba(255,255,255,0.85);
   border-radius: 24px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.15);
   padding: 2rem;
-  box-shadow: 
-    0 25px 50px rgba(0, 0, 0, 0.15),
-    0 0 0 1px rgba(255, 255, 255, 0.05);
+  min-height: 80vh;
+  margin-top: 3vh;
+  margin-bottom: 3vh;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  position: relative;
   animation: fadeInUp 0.8s ease-out;
 }
 
@@ -131,18 +128,6 @@ main {
   gap: 0.8rem;
 }
 
-.date-line {
-  font-size: 0.9rem;
-  color: #374151;
-  font-weight: 600;
-  padding: 0.4rem 0.8rem;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 1.2rem;
-}
 
 .totus-image img {
   width: 40px;
@@ -155,64 +140,14 @@ main {
   justify-content: flex-end;
 }
 
-/* Tytuł obok logo */
-.header-title {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  text-align: left;
-}
-
-.header-title h1 {
-  font-size: 2rem;
-  margin: 0;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  animation: shimmer 4s ease-in-out infinite;
-}
 
 @keyframes shimmer {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.8; }
 }
 
-.header-title p {
-  margin: 0;
-  font-size: 1rem;
-  color: rgba(118, 75, 162, 0.8);
-  font-weight: 500;
-  letter-spacing: 0.01em;
-}
 
-/* Podtytuł na całą szerokość */
-.header-subtitle {
-  width: 100%;
-  text-align: center;
-  margin-top: 1rem;
-}
 
-.header-subtitle p {
-  margin: 0;
-  font-size: 1rem;
-  color: rgba(118, 75, 162, 0.8);
-  font-weight: 500;
-  letter-spacing: 0.01em;
-}
-
-/* DIVIDER */
-.divider {
-  width: 100%;
-  height: 3px;
-  border-radius: 2px;
-  background: linear-gradient(90deg, transparent, #667eea, #764ba2, transparent);
-  margin: 1.5rem 0;
-  box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
-  animation: pulse 3s ease-in-out infinite;
-}
 
 @keyframes pulse {
   0%, 100% { opacity: 1; }
@@ -300,11 +235,6 @@ main {
   word-wrap: break-word;
 }
 
-.expand-icon {
-  flex-shrink: 0;
-  font-size: 0.9rem;
-  color: var(--gray-700);
-}
 
 /* EVENT DESCRIPTION */
 .event-description {
@@ -339,18 +269,20 @@ main {
 
 .pill {
   padding: 0.5rem 1rem;
-  background: var(--bg-hover);
-  color: var(--blue);
-  border-radius: var(--pill-radius);
+  background: linear-gradient(90deg, var(--blue) 0%, var(--green) 100%);
+  color: white;
+  border-radius: 20px;
   text-decoration: none;
   font-weight: 500;
   font-size: 0.875rem;
   transition: background 0.3s ease, transform 0.2s ease;
   cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,125,250,0.08);
 }
 
 .pill:hover {
-  background: rgba(59,130,246,0.15);
+  background: linear-gradient(90deg, var(--green) 0%, var(--red) 100%);
+  color: #fff;
   transform: translateY(-1px);
 }
 
@@ -425,27 +357,27 @@ main {
   font-size: 0.9rem;
 }
 
-.main-link {
+  font-size: 0.9rem;
+  color: rgb(0,125,250);
   font-weight: 600;
-  font-size: 1rem;
-  background: var(--bg-hover);
-  border-radius: var(--pill-radius);
-}
-
-.today-highlight {
-  background: linear-gradient(135deg, #fce4ec, #f8bbd9);
-  border: 1px solid #e91e63;
-  font-weight: bold;
+  padding: 0.4rem 0.8rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 0;
+  margin-bottom: 0;
   border-radius: 8px;
   padding: 0.2rem 0.5rem;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(233, 30, 99, 0.2);
+  box-shadow: 0 2px 4px rgba(0,125,250, 0.2);
 }
 
 .today-highlight:hover {
   background: linear-gradient(135deg, #f48fb1, #f06292);
   border-color: #c2185b;
-  box-shadow: 0 4px 8px rgba(233, 30, 99, 0.3);
+  box-shadow: 0 4px 8px rgba(0,125,250, 0.3);
 }
 
 /* LOGO W LEWYM GÓRNYM ROGU */
@@ -513,17 +445,6 @@ main {
     opacity: 1;
     transform: translateX(0);
   }
-}
-
-.date-line {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #3b82f6;
-  background-color: #fffae6;
-  padding: 0.2rem 0.5rem;
-  border-radius: 6px;
-  border: 1px solid #f1c40f;
-  margin-bottom: 0.5rem;
 }
 
 .totus-image {
@@ -699,9 +620,9 @@ main {
   transform: translateY(0);
 }
 
-/* FOOTER */
+
 .footer-section {
-  margin-top: 2rem;
+  margin-top: auto;
   position: relative;
   padding-top: 1.5rem;
   border-top: 2px solid #d1d5db;
@@ -711,50 +632,8 @@ main {
   gap: 1rem;
 }
 
-.close-button {
-  background: linear-gradient(135deg, #6b7280, #4b5563);
-  border: 2px solid #d1d5db;
-  border-radius: 12px;
-  padding: 0.75rem 1.5rem;
-  color: white;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 12px rgba(107, 114, 128, 0.2);
-  position: relative;
-  overflow: hidden;
-}
 
-.close-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transition: left 0.5s ease;
-}
 
-.close-button:hover::before {
-  left: 100%;
-}
-
-.close-button:hover {
-  background: linear-gradient(135deg, #3b82f6, #2563eb);
-  border-color: #f1c40f;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
-}
-
-.close-button:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
-}
 
 .close-icon {
   font-size: 1.2rem;
@@ -948,9 +827,6 @@ main {
     padding: 0.4rem 0.8rem;
   }
   
-  .date-line {
-    font-size: 0.875rem;
-  }
   
   .totus-image img {
     width: 50px;
@@ -961,7 +837,6 @@ main {
     font-size: 0.95rem;
     padding: 0.7rem 1.3rem;
   }
-}
 
 @media (max-width: 480px) {
   .placeholder { 
@@ -1005,27 +880,9 @@ main {
     height: 50px;
   }
   
-  .header-title {
-    text-align: left;
-    overflow: hidden; /* Nie pozwala na overflow */
-    word-wrap: break-word; /* Łamie długie słowa */
-  }
+
   
-  .header-title h1 { 
-    font-size: 1.2rem; 
-    line-height: 1.2;
-    margin: 0;
-    overflow: hidden;
-    text-overflow: ellipsis; /* Dodaje ... gdy za długie */
-  }
-  
-  .header-title p { 
-    font-size: 0.75rem; 
-    margin-top: 0.2rem;
-    margin: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+
   
   .date-section {
     flex-direction: row;
@@ -1040,15 +897,7 @@ main {
     width: 100%; /* Pełna szerokość */
   }
   
-  .date-line {
-    font-size: 0.75rem;
-    padding: 0.25rem 0.5rem;
-    text-align: right;
-    white-space: nowrap; /* Nie łamie linii */
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  
+ 
   .totus-image img {
     width: 30px;
     height: 30px;
@@ -1119,13 +968,7 @@ main {
     margin-top: 0.5rem;
   }
   
-  /* Audio player responsive */
-  
-  .date-line {
-    font-size: 0.85rem;
-    margin: 0;
-  }
-  
+ 
   .totus-image {
     margin-top: 0.5rem;
   }
@@ -1153,36 +996,25 @@ main {
     font-size: 0.65rem;
   }
   
-  .footer-section {
-    margin-top: 1.5rem;
-    padding-top: 1rem;
-  }
-  
-  .close-button {
-    font-size: 0.9rem;
-    padding: 0.65rem 1.2rem;
-    border-radius: 10px;
-  }
+/* FOOTER */
+.footer-section {
+  margin-top: 2rem;
+  position: relative;
+  padding-top: 1.5rem;
+  border-top: 2px solid #d1d5db;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
   
   /* Kompaktowe grupy na mobile */
   .groups-container {
     margin-top: 0.5rem;
   }
   
-  .main-link {
-    margin-bottom: 0.4rem;
-  }
-  
-  .group-header {
-    font-size: 0.85rem;
-    padding: 0.5rem;
-  }
-  
-  /* Lepsze zarządzanie przestrzenią na mobile */
-  .pill-group {
-    padding: 0.5rem;
-  }
-  
+
   /* Mniejsze odstępy między elementami */
   .divider {
     margin: 0.8rem 0;
@@ -1248,23 +1080,6 @@ main {
   box-shadow: 0 6px 16px rgba(233, 30, 99, 0.3) !important;
 }
 
-.main-link {
-  background: rgba(255, 255, 255, 0.1) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  margin-bottom: 0 !important;
-  border-radius: 16px 16px 0 0 !important;
-  min-width: 100% !important;
-  flex-shrink: 0 !important;
-}
-
-.sub-links-container {
-  position: relative;
-  padding: 12px;
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 0 0 16px 16px;
-  width: 100%;
-  box-sizing: border-box;
-}
 
 .today-highlight .sub-links-container {
   background: rgba(252, 228, 236, 0.6) !important;
@@ -1419,7 +1234,7 @@ main {
 /* EXPAND ICON */
 .expand-icon {
   font-size: 0.8rem;
-  color: #666;
+  color: var(--blue);
   margin-right: 0.5rem;
   min-width: 12px;
   display: inline-block;
@@ -1574,7 +1389,7 @@ main {
 /* Kontener na przycisk toggle w prawym górnym rogu (dla rozwiniętego) */
 .text-toggle-container {
   position: absolute;
-  top: 0.5rem;
+  font-size: 12px;
   right: 0.5rem;
   z-index: 10;
 }

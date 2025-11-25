@@ -14,7 +14,7 @@
                  loading="lazy" />
           </div>
           <div class="header-title">
-            <h1>DROGA MARYI <br>33 - dniowe rekolekcje<br> {{ daysRangeLabel }} {{ currentDateTime | date:'yyyy' }} r.</h1>
+              <h1>Podsumowania sprintów <br>2025 r.</h1>
           </div>
         </div>
   <!-- Usunięto nadmiarowy zamykający tag div po zakomentowanej sekcji left-column -->
@@ -29,41 +29,23 @@
               (error)="onImageError($event)"
               loading="lazy" />
           </div>
-          <div class="date-line" style="text-align: center;">{{ currentDateTime | date:'EEEE dd.MM.yyyy':'':'pl-PL' }} r.</div>
+          <div class="date-line" style="text-align: center;"><h2>{{ currentDateTime | date:'EEEE dd.MM.yyyy':'':'pl-PL' }} r.</h2></div>
+          
           <div class="audio-section" style="display: flex; flex-direction: column; align-items: flex-end; width: 100%;">
             <div style="display: flex; flex-direction: column; align-items: flex-end; width: 100%;">
               <div style="display: flex; gap: 8px; align-items: center; justify-content: flex-end; width: 100%;">
-                <button (click)="toggleAudio()" 
-                        class="audio-toggle-btn"
-                        title="Odtwórz/Pauza melodię Totus Tuus">
-                  <span class="play-icon" *ngIf="!audioPlayer.isPlaying(audioUrl)">▶️</span>
-                  <span class="play-icon" *ngIf="audioPlayer.isPlaying(audioUrl)">⏸️</span>
-                  <span class="audio-title">Totus Tuus</span>
-                  <span class="audio-status" *ngIf="!audioPlayer.isPlaying(audioUrl)">Naciśnij aby odtworzyć</span>
-                  <span class="audio-status" *ngIf="audioPlayer.isPlaying(audioUrl)">Odtwarzanie...</span>
-                </button>
+  
               </div>
               <div style="display: flex; justify-content: flex-end; width: 100%;">
-                <button *ngIf="audioPlayer.isPlaying(audioUrl)"
-                        (click)="stopAudio()"
-                        class="audio-stop-btn"
-                        style="margin-top: 8px;"
-                        title="Stop Totus Tuus">
-                  ⏹️ Stop
-                </button>
+               
               </div>
             </div>
           </div>
         </div>
       </div>
-      
-      <!-- Podtytuł na całą szerokość -->
-      <div class="header-subtitle">
-        <p>Nowenna do św. Ludwika i 33 dniowe rozważania</p>
-        <p>{{ daysToEnd }}</p>
-      </div>
     </div>
 
+  <hr class="custom-divider">
     <div class="divider"></div>
 
     <!-- EVENTY -->
@@ -282,10 +264,13 @@
       </div>
     </div>
 
-    <!-- Stopka z przyciskiem -->
+
+  </div>
+
+    <!-- STOPKA w kontenerku -->
     <div class="footer-section">
       <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-  <div style="font-size: 0.95em; color: #666;">Na podstawie <a href='https://drogamaryi.pl/' target='_blank' rel='noopener'>drogamaryi.pl</a> – do użytku wspólnoty.</div>
+        <div style="font-size: 0.95em; color: #666;">Przydatne linki:  <a href="https://krukeu.sharepoint.com/sites/ITINTHQPL/SitePages/bibliotekaszablonow.aspx" target="_blank" rel="noopener">bibliotek szablonów</a></div>
         <div class="znak-wodny">
           © <span class="ozdobne">EO</span>
         </div>
@@ -296,7 +281,6 @@
       </button>
     </div>
 
-  </div>
 
   <!-- FULLSCREEN IMAGE - poza wszystkimi kontenerami -->
   <div class="fullscreen-local" *ngIf="fullscreenImage" (click)="toggleFullscreen()">
