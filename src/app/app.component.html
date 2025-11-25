@@ -68,9 +68,6 @@
                class="event-thumb"
                (click)="toggleFullscreen(item.image); $event.stopPropagation();" />
 
-          <div class="fullscreen-local" *ngIf="fullscreenImage === item.image" (click)="toggleFullscreen(item.image)">
-            <img [src]="item.image" class="fullscreen-local-image" />
-          </div>
         </div>
 
         <!-- GRUPY LINKÓW I OPISY -->
@@ -84,9 +81,6 @@
                    class="event-thumb"
                    (click)="toggleFullscreen(group.image); $event.stopPropagation();" />
 
-              <div class="fullscreen-local" *ngIf="fullscreenImage === group.image" (click)="toggleFullscreen(group.image)">
-                <img [src]="group.image" class="fullscreen-local-image" />
-              </div>
             </div>
 
             <!-- GŁÓWNY LINK GRUPY (tylko jeśli jest jeden link) -->
@@ -283,11 +277,25 @@
     </div>
 
 
-  <!-- FULLSCREEN IMAGE - poza wszystkimi kontenerami -->
-  <div class="fullscreen-local" *ngIf="fullscreenImage" (click)="toggleFullscreen()">
-    <img [src]="fullscreenImage" 
-         class="fullscreen-local-image"
-         loading="eager"
-         decoding="async" />
+  <!-- STOPKA w kontenerku -->
+  <div class="footer-section">
+    <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+      <div style="font-size: 0.95em; color: #666;">Przydatne linki:  <a href="https://krukeu.sharepoint.com/sites/ITINTHQPL/SitePages/bibliotekaszablonow.aspx" target="_blank" rel="noopener">bibliotek szablonów</a></div>
+      <div class="znak-wodny">
+        © <span class="ozdobne">EO</span>
+      </div>
+    </div>
+    <button class="close-button" (click)="closePage()">
+      <span class="close-icon">×</span>
+      <span class="close-text">Zamknij stronę</span>
+    </button>
   </div>
 </main>
+
+<!-- FULLSCREEN IMAGE - overlay poza main -->
+<div id="fullscreen-overlay" class="fullscreen-local" *ngIf="fullscreenImage" (click)="toggleFullscreen()">
+  <img [src]="fullscreenImage" 
+       class="fullscreen-local-image"
+       loading="eager"
+       decoding="async" />
+</div>
