@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, NgFor, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { NovenaTexts } from './novena-texts';
-import { TvelveDaysTexts } from './tvelvedays-texts'; 
 import { FirstWeekTexts } from './firstWeek-texts';
 import  {SecondWeekTexts } from './secondWeek-texts';
 import {ThirdWeekTexts} from './thirdWeek-texts';  
-import {OddanieTexts} from './oddanie-texts';
 import { WhatsAppFormatterService } from './whatsapp-formatter.service';
 import { TextFormatService } from './text-format.service';
 import { TextVisibilityService } from './text-visibility.service';
@@ -205,10 +202,6 @@ export class AppComponent implements OnInit {
     setTimeout(() => {
       this.scrollToToday();
     }, 2000);
-
-    // Dodano: podgląd tekstów nowenny w konsoli
-    console.log('Tekst pierwszego dnia:', this.nowenna1);
-    console.log('Tekst drugiego dnia:', this.nowenna2);
   }
 
   // Odtwarzanie lokalnych audio przez serwis
@@ -377,569 +370,88 @@ export class AppComponent implements OnInit {
   }
 
 
-readonly litania = NovenaTexts.litania;
-readonly nowenna0 = NovenaTexts.dzien0;
-readonly nowenna1 = NovenaTexts.dzien1;
-readonly nowenna2 = NovenaTexts.dzien2;
-readonly nowenna3 = NovenaTexts.dzien3;
-readonly nowenna4 = NovenaTexts.dzien4;
-readonly nowenna5 = NovenaTexts.dzien5;
-readonly nowenna6 = NovenaTexts.dzien6;
-readonly nowenna7 = NovenaTexts.dzien7  
-readonly nowenna8 = NovenaTexts.dzien8;
-readonly nowenna9 = NovenaTexts.dzien9;
-
-readonly tvelveDay0 = TvelveDaysTexts.dzien0;
-readonly tvelveDay1 = TvelveDaysTexts.dzien1;
-readonly tvelveDay2 = TvelveDaysTexts.dzien2;
-readonly tvelveDay3 = TvelveDaysTexts.dzien3;
-readonly tvelveDay4 = TvelveDaysTexts.dzien4;
-readonly tvelveDay5 = TvelveDaysTexts.dzien5;
-readonly tvelveDay6 = TvelveDaysTexts.dzien6; 
-readonly tvelveDay7 = TvelveDaysTexts.dzien7;
-readonly tvelveDay8 = TvelveDaysTexts.dzien8;
-readonly tvelveDay9 = TvelveDaysTexts.dzien9;
-readonly tvelveDay10 = TvelveDaysTexts.dzien10;
-readonly tvelveDay11 = TvelveDaysTexts.dzien11;
-readonly tvelveDay12 = TvelveDaysTexts.dzien12;
 
 readonly firstWeekDay0 = FirstWeekTexts.dzien0;
 readonly firstWeekDay1 = FirstWeekTexts.dzien1;
-readonly firstWeekDay2 = FirstWeekTexts.dzien2;
-readonly firstWeekDay3 = FirstWeekTexts.dzien3;
-readonly firstWeekDay4 = FirstWeekTexts.dzien4;
-readonly firstWeekDay5 = FirstWeekTexts.dzien5;
-readonly firstWeekDay6 = FirstWeekTexts.dzien6;
-readonly firstWeekDay7 = FirstWeekTexts.dzien7;
+
 
 readonly secondWeekDay0 = SecondWeekTexts.dzien0;
 readonly secondWeekDay1 = SecondWeekTexts.dzien1;
-readonly secondWeekDay2 = SecondWeekTexts.dzien2
-readonly secondWeekDay3 = SecondWeekTexts.dzien3;
-readonly secondWeekDay4 = SecondWeekTexts.dzien4;
-readonly secondWeekDay5 = SecondWeekTexts.dzien5;
-readonly secondWeekDay6 = SecondWeekTexts.dzien6;
-readonly secondWeekDay7 = SecondWeekTexts.dzien7;
+
 
 readonly thirdWeekDay0 = ThirdWeekTexts.dzien0;
 readonly thirdWeekDay1 = ThirdWeekTexts.dzien1;
-readonly thirdWeekDay2 = ThirdWeekTexts.dzien2;
-readonly thirdWeekDay3 = ThirdWeekTexts.dzien3;
-readonly thirdWeekDay4 = ThirdWeekTexts.dzien4;
-readonly thirdWeekDay5 = ThirdWeekTexts.dzien5;
-readonly thirdWeekDay6 = ThirdWeekTexts.dzien6;
-readonly thirdWeekDay7 = ThirdWeekTexts.dzien7;
 
-readonly oddanieDayAkt = OddanieTexts.dzienAkt;
-readonly oddanieDay0 = OddanieTexts.dzien0;  
+
+
 
 
 items: Item[] = [
-  { 
-  title: DynamicTitles.getNovenaTitle(this.startDate),
-    show: false,
-    links: [
-      {
-        name: `Wprowadzenie`,
-        show: false,
-        links: [
-          { text: this.nowenna0, type:'opis', label: 'Wprowadzenie' },
-          { text: this.litania, type:'opis', label: 'Litania do św. Ludwika' }
-         
-        ]
-      },
-      
-      {
-        name: `01: ${this.getDatePlusDays(this.startDate, 0)}`,
-        show: false,
-        links: [
-          { image: 'assets/nowenna/01.jpg', type:'foto' },
-          { text: this.prependDateFromName(`01: ${this.getDatePlusDays(this.startDate, 0)}`, this.nowenna1), type:'opis', label: 'Czułe serce św. Ludwika' }
-         
-        ]
-      },
-      {
-        name: `02: ${this.getDatePlusDays(this.startDate, 1)}`,
-        show: false,
-        links: [
-          { image: 'assets/nowenna/02.jpg',type:'foto' },
-          { text: this.prependDateFromName(`02: ${this.getDatePlusDays(this.startDate, 1)}`, this.nowenna2), type:'opis', label: 'Duchowe wzrastanie św. Ludwika i nasze' }
-        
-        ]
-      },
-      {
-        name: `03: ${this.getDatePlusDays(this.startDate, 2)}`,
-        show: false,
-        links: [
-          { image: 'assets/nowenna/03.jpg',type:'foto' },
-          { text: this.prependDateFromName(`03: ${this.getDatePlusDays(this.startDate, 2)}`, this.nowenna3), type:'opis', label: 'Zaufanie Bogu' }
-          
-        ]
-      },
-      {
-        name: `04: ${this.getDatePlusDays(this.startDate, 3)}`,
-        show: false,
-        links: [
-          { image: 'assets/nowenna/04.jpg',type:'foto' },
-          { text: this.prependDateFromName(`04: ${this.getDatePlusDays(this.startDate, 3)}`, this.nowenna4), type:'opis', label: 'Głosiciel królestwa Jezusa Chrystusa przez Maryję' }
-        ]
-      },
-      {
-        name: `05: ${this.getDatePlusDays(this.startDate, 4)}`,
-        show: false,
-        links: [
-          { image: 'assets/nowenna/05.jpg',type:'foto' },
-          { text: this.prependDateFromName(`05: ${this.getDatePlusDays(this.startDate, 4)}`, this.nowenna5), type:'opis', label: 'Nauczyciel prawdziwego nabożeństwa do Najświętszej Maryi Panny i duchowości ofiarowania się Jezusowi przez ręce Maryi' }
-        ]
-      },
-      {
-        name: `06: ${this.getDatePlusDays(this.startDate, 5)}`,
-        show: false,
-        links: [
-          { image: 'assets/nowenna/06.jpg',type:'foto' },
-          { text: this.prependDateFromName(`06: ${this.getDatePlusDays(this.startDate, 5)}`, this.nowenna6), type:'opis', label: 'Miłość do Kościoła' }
-        ]
-      },
-      {
-        name: `07: ${this.getDatePlusDays(this.startDate, 6)}`,
-        show: false,
-        links: [
-          { image: 'assets/nowenna/07.jpg',type:'foto' },
-          { text: this.prependDateFromName(`07: ${this.getDatePlusDays(this.startDate, 6)}`, this.nowenna7), type:'opis', label: 'Apostoł Krzyża i Chrystusowego zwycięstwa' }
-        ]
-      },
-      {
-        name: `08: ${this.getDatePlusDays(this.startDate, 7)}`,
-        show: false,
-        links: [
-          { image: 'assets/nowenna/08.jpg',type:'foto' },
-          { text: this.prependDateFromName(`08: ${this.getDatePlusDays(this.startDate, 7)}`, this.nowenna8), type:'opis', label: 'Nauczyciel trwania w łasce' }
-        ]
-      },
-      {
-        name: `09: ${this.getDatePlusDays(this.startDate, 8)}`,
-        show: false,
-        links: [
-          { image: 'assets/nowenna/09.jpg',type:'foto' },
-          { text: this.prependDateFromName(`09: ${this.getDatePlusDays(this.startDate, 8)}`, this.nowenna9), type:'opis', label: 'Prowadzi nas do miłości do Jezusa' }
-        ]
-      }
-    ]
-  },
-  { 
-  title: DynamicTitles.getTwelveDaysTitle(this.startDate),
-    show: false,
-    links: [
-      {
-        name: 'Wprowadzenie',
-        show: false,
-        links: [
-          { image: 'assets/12dni/00.jpg',type:'foto' },
-          { text: this.tvelveDay0, type:'opis', label: 'Wprowadzenie' },
-          { url:'https://drogamaryi.pl/edycje/5-listopada-2025/12-dni-wprowadzenie/audio', type:'audio', label:'audio Wprowadzenia (online)', hidden: true },
-          { url:'assets/12dni/Droga_Maryi_12_dni_wprowadzenie.mp3', type:'audio', label:'12 dni: Wprowadzenie' }
-        ]
-      },
-      {
-        name: `01: ${this.getDatePlusDays(this.startDate, 9)}`, // 9 dni po starcie nowenny
-        show: false,
-        links: [
-          { image: 'assets/12dni/01.jpg',type:'foto'},
-          { text: this.prependDateFromName(`01: ${this.getDatePlusDays(this.startDate, 9)}`, this.tvelveDay1), type:'opis', label: 'Odkryj łaskę Bożej miłości' },
-  { url:'https://drogamaryi.pl/edycje/5-listopada-2025/12-dni-dzien-1/audio', type:'audio', label:'audio (online)', hidden: true },
-  { url:'assets/12dni/Droga_Maryi_12_dni_dzien_1.mp3', type:'audio', label:'1/ 12 dni : Odkryj łaskę Bożej miłości' }
-        ]
-      },
-      {
-        name: `02: ${this.getDatePlusDays(this.startDate, 10)}`,
-        show: false,
-        links: [
-          { image: 'assets/12dni/02.jpg',type:'foto' },
-          { text: this.prependDateFromName(`02: ${this.getDatePlusDays(this.startDate, 10)}`, this.tvelveDay2), type:'opis', label: 'Odkryj łaskę poznania prawdy o grzechu' },
-  { url:'https://drogamaryi.pl/edycje/5-listopada-2025/12-dni-dzien-2/audio', type:'audio', label:'audio (online)', hidden: true },
-  { url:'assets/12dni/Droga_Maryi_12_dni_dzien_2.mp3', type:'audio', label:'2/ 12 dni : Odkryj łaskę poznania prawdy o grzechu' }
-        ]
-      },
-      {
-        name: `03: ${this.getDatePlusDays(this.startDate, 11)}`,
-        show: false,
-        links: [
-          { image: 'assets/12dni/03.jpg',type:'foto' },
-          { text: this.prependDateFromName(`03: ${this.getDatePlusDays(this.startDate, 11)}`, this.tvelveDay3), type:'opis', label: 'Odkryj łaskę zbawienia' },
-  { url:'https://drogamaryi.pl/edycje/5-listopada-2025/12-dni-dzien-3/audio', type:'audio', label:'audio (online)', hidden: true },
-  { url:'assets/12dni/Droga_Maryi_12_dni_dzien_3.mp3', type:'audio', label:'3/ 12 dni : Odkryj łaskę zbawienia' }
-        ]
-      },
-      {
-        name: `04: ${this.getDatePlusDays(this.startDate, 12)}`,
-        show: false,
-        links: [
-          { image: 'assets/12dni/04.jpg',type:'foto' },
-          { text: this.prependDateFromName(`04: ${this.getDatePlusDays(this.startDate, 12)}`, this.tvelveDay4), type:'opis', label: 'Odkryj łaskę nawrócenia i oddania życia Panu Jezusowi' },
-  { url:'https://drogamaryi.pl/edycje/5-listopada-2025/12-dni-dzien-4/audio', type:'audio', label:'audio (online)', hidden: true },
-  { url:'assets/12dni/Droga_Maryi_12_dni_dzien_4.mp3', type:'audio', label:'4/ 12 dni : Odkryj łaskę nawrócenia i oddania życia Panu Jezusowi' }
-
-         
-        ]
-      },
-      {
-        name: `05: ${this.getDatePlusDays(this.startDate, 13)}`,
-       show: false,
-        links: [
-          { image: 'assets/12dni/05.jpg',type:'foto' },
-          { text: this.prependDateFromName(`05: ${this.getDatePlusDays(this.startDate, 13)}`, this.tvelveDay5), type:'opis', label: 'Błogosławieni ubodzy w duchu' },
-  { url:'https://drogamaryi.pl/edycje/5-listopada-2025/12-dni-dzien-5/audio', type:'audio', label:'audio (online)', hidden: true },
-  { url:'assets/12dni/Droga_Maryi_12_dni_dzien_5.mp3', type:'audio', label:'5/ 12 dni : Błogosławieni ubodzy w duchu' }
-        ]
-      },
-      {
-        name: `06: ${this.getDatePlusDays(this.startDate, 14)}`,
-        show: false,
-        links: [
-          { image: 'assets/12dni/06.jpg',type:'foto' },
-          { text: this.prependDateFromName(`06: ${this.getDatePlusDays(this.startDate, 14)}`, this.tvelveDay6), type:'opis', label: 'Błogosławieni, którzy się smucą' },
-  { url:'https://drogamaryi.pl/edycje/5-listopada-2025/12-dni-dzien-6/audio', type:'audio', label:'audio (online)', hidden: true },
-  { url:'assets/12dni/Droga_Maryi_12_dni_dzien_6.mp3', type:'audio', label:'6/ 12 dni : Błogosławieni, którzy się smucą' }
-        ]
-      },
-      {
-        name: `07: ${this.getDatePlusDays(this.startDate, 15)}`,
-        show: false,
-        links: [
-
-          { image: 'assets/12dni/07.jpg',type:'foto' },
-          { text: this.prependDateFromName(`07: ${this.getDatePlusDays(this.startDate, 15)}`, this.tvelveDay7), type:'opis', label: 'Błogosławieni cisi' },
-  { url:'https://drogamaryi.pl/edycje/5-listopada-2025/12-dni-dzien-7/audio', type:'audio', label:'audio (online)', hidden: true },
-  { url:'assets/12dni/Droga_Maryi_12_dni_dzien_7.mp3', type:'audio', label:'7/ 12 dni : Błogosławieni cisi' }
-        ]
-      },
-      {
-        name: `08: ${this.getDatePlusDays(this.startDate, 16)}`,
-        show: false,
-        links: [
-          { image: 'assets/12dni/08.jpg',type:'foto' },
-          { text: this.prependDateFromName(`08: ${this.getDatePlusDays(this.startDate, 16)}`, this.tvelveDay8), type:'opis', label: 'Błogosławieni, którzy łakną i pragną sprawiedliwości.' },
-  { url:'https://drogamaryi.pl/edycje/5-listopada-2025/12-dni-dzien-8/audio', type:'audio', label:'audio (online)', hidden: true },
-  { url:'assets/12dni/Droga_Maryi_12_dni_dzien_8.mp3', type:'audio', label:'8/ 12 dni : Błogosławieni, którzy łakną i pragną sprawiedliwości.' }
-        ]
-      },
-      {
-        name: `09: ${this.getDatePlusDays(this.startDate, 17)}`,
-        show: false,
-        links: [
-           { image: 'assets/12dni/09.jpg',type:'foto' },
-           { text: this.prependDateFromName(`09: ${this.getDatePlusDays(this.startDate, 17)}`, this.tvelveDay9), type:'opis', label: 'Błogosławieni miłosierni' },
-          { url:'https://drogamaryi.pl/edycje/5-listopada-2025/12-dni-dzien-9/audio', type:'audio', label:'audio (online)', hidden: true },
-  { url:'assets/12dni/Droga_Maryi_12_dni_dzien_9.mp3', type:'audio', label:'9/ 12 dni : Błogosławieni miłosierni' }
-        ]
-      },
-      {
-        name: `10: ${this.getDatePlusDays(this.startDate, 18)}`,
-        show: false,
-        links: [
-          { image: 'assets/12dni/10.jpg',type:'foto' },
-          { text: this.prependDateFromName(`10: ${this.getDatePlusDays(this.startDate, 18)}`, this.tvelveDay10), type:'opis', label: 'Błogosławieni czystego serca' },
-          { url:'https://drogamaryi.pl/edycje/5-listopada-2025/12-dni-dzien-10/audio', type:'audio', label:'audio (online)', hidden: true },
-  { url:'assets/12dni/Droga_Maryi_12_dni_dzien_10.mp3', type:'audio', label:'10/ 12 dni : Błogosławieni czystego serca' }
-        ]
-      },
-      {
-        name: `11: ${this.getDatePlusDays(this.startDate, 19)}`,
-        show: false,
-        links: [
-          { image: 'assets/12dni/11.jpg',type:'foto' },
-          { text: this.prependDateFromName(`11: ${this.getDatePlusDays(this.startDate, 19)}`, this.tvelveDay11), type:'opis', label: 'Błogosławieni, którzy wprowadzają pokój' },
-          { url:'https://drogamaryi.pl/edycje/5-listopada-2025/12-dni-dzien-11/audio', type:'audio', label:'audio (online)', hidden: true },
-  { url:'assets/12dni/Droga_Maryi_12_dni_dzien_11.mp3', type:'audio', label:'11/ 12 dni : Błogosławieni, którzy wprowadzają pokój' }
-        ]
-      },
-      {
-        name: `12: ${this.getDatePlusDays(this.startDate, 20)}`,
-        show: false,
-        links: [
-          { image: 'assets/12dni/12.jpg',type:'foto' },
-          { text: this.prependDateFromName(`12: ${this.getDatePlusDays(this.startDate, 20)}`, this.tvelveDay12), type:'opis', label: 'Błogosławieni, którzy cierpią prześladowanie dla sprawiedliwości' },
-          { url:'https://drogamaryi.pl/edycje/5-listopada-2025/12-dni-dzien-12/audio', type:'audio', label:'audio (online)', hidden: true },
-  { url:'assets/12dni/Droga_Maryi_12_dni_dzien_12.mp3', type:'audio', label:'12/ 12 dni : Błogosławieni, którzy cierpią prześladowanie dla sprawiedliwości' }
-        ]
-      },
-    ]
-  },
-
+ 
 {
   title: DynamicTitles.getFirstWeekTitle(this.startDate),
   show: false, // opcjonalnie, żeby nie był od razu rozwinięty
   links: [
     {
-        name: 'Wprowadzenie',
+        name: 'CA-cvy',
         show: false,
         links: [
           { image: 'assets/tydzien1/0.jpg',type:'foto' },
-          { text: this.firstWeekDay0, type:'opis', label: 'Wprowadzenie' },
-          { url:'https://drogamaryi.pl/edycje/5-listopada-2025/tydzien-pierwszy-wprowadzenie/audio', type:'audio', label:'audio Wprowadzenia (online)', hidden: true },
-          { url:'assets/tydzien1/Droga_Maryi_tydzien_pierwszy_wprowadzenie.mp3', type:'audio', label:'tydz.1: Wprowadzenie' }
+          { text: this.firstWeekDay0, type:'opis', label: 'CA-cvy' },
         ]
       },
-    {
-        name: `01: ${this.getDatePlusDays(this.startDate, 21)}`,
+          {
+        name: 'CA-cvy',
         show: false,
         links: [
-          { image: 'assets/tydzien1/1.jpg',type:'foto' },
-          { text: this.prependDateFromName(`${this.getDatePlusDays(this.startDate, 21)}`, this.firstWeekDay1), type:'opis', label: 'Pożądliwość ciała' },
-          { url:'https://drogamaryi.pl/edycje/5-listopada-2025/tydzien-pierwszy-dzien-1/audio', type:'audio', label:'audio (online)', hidden: true },
-          { url:'assets/tydzien1/Droga_Maryi_tydzien_pierwszy_dzien_1.mp3', type:'audio', label:'1/ tydz. 1 : Pożądliwość ciała' }
+          { image: 'assets/tydzien1/0.jpg',type:'foto' },
+          { text: this.firstWeekDay1, type:'opis', label: 'CA-cvy' },
         ]
-      },
-        {
-        name: `02: ${this.getDatePlusDays(this.startDate, 22)}`,
-       show: false,
-        links: [
-          { image: 'assets/tydzien1/2.jpg',type:'foto' },
-          { text: this.prependDateFromName(`${this.getDatePlusDays(this.startDate, 22)}`, this.firstWeekDay2), type:'opis', label: 'Emocje' },
-          { url:'https://drogamaryi.pl/edycje/5-listopada-2025/tydzien-pierwszy-dzien-2/audio', type:'audio', label:'audio (online)', hidden: true },
-          { url:'assets/tydzien1/Droga_Maryi_tydzien_pierwszy_dzien_2.mp3', type:'audio', label:'2/ tydz. 1 : Emocje' }
-        ]
-      },
-       {
-        name: `03: ${this.getDatePlusDays(this.startDate, 23)}`,
-       show: false,
-        links: [
-          { image: 'assets/tydzien1/3.jpg',type:'foto' },
-          { text: this.prependDateFromName(`${this.getDatePlusDays(this.startDate, 23)}`, this.firstWeekDay3), type:'opis', label: 'Wyobraźnia i obraz samego siebie' },
-          { url:'https://drogamaryi.pl/edycje/5-listopada-2025/tydzien-pierwszy-dzien-3/audio', type:'audio', label:'audio (online)', hidden: true },
-          { url:'assets/tydzien1/Droga_Maryi_tydzien_pierwszy_dzien_3.mp3', type:'audio', label:'3/ tydz. 1 : Wyobraźnia i obraz samego siebie' }
-        ]
-      },
-       {
-        name: `04: ${this.getDatePlusDays(this.startDate, 24)}`,
-       show: false,
-        links: [
-          { image: 'assets/tydzien1/4.jpg',type:'foto' },
-          { text: this.prependDateFromName(`${this.getDatePlusDays(this.startDate, 24)}`, this.firstWeekDay4), type:'opis', label: 'Pamięć' },
-          { url:'https://drogamaryi.pl/edycje/5-listopada-2025/tydzien-pierwszy-dzien-4/audio', type:'audio', label:'audio (online)', hidden: true },
-          { url:'assets/tydzien1/Droga_Maryi_tydzien_pierwszy_dzien_4.mp3', type:'audio', label:'4/ tydz. 1 : Pamięć' }
-        ]
-      },
-       {
-        name: `05: ${this.getDatePlusDays(this.startDate, 25)}`,
-       show: false,
-        links: [
-          { image: 'assets/tydzien1/5.jpg',type:'foto' },
-          { text: this.prependDateFromName(`${this.getDatePlusDays(this.startDate, 25)}`, this.firstWeekDay5), type:'opis', label: 'Lęki' },
-          { url:'https://drogamaryi.pl/edycje/5-listopada-2025/tydzien-pierwszy-dzien-5/audio', type:'audio', label:'audio (online)', hidden: true },
-          { url:'assets/tydzien1/Droga_Maryi_tydzien_pierwszy_dzien_5.mp3', type:'audio', label:'5/ tydz. 1 : Lęki' }
-        ]
-      },
-       {
-        name: `06: ${this.getDatePlusDays(this.startDate, 26)}`,
-       show: false,
-        links: [
-          { image: 'assets/tydzien1/6.jpg',type:'foto' },
-          { text: this.prependDateFromName(`${this.getDatePlusDays(this.startDate, 26)}`, this.firstWeekDay6), type:'opis', label: 'Pycha życiowa' },
-          { url:'https://drogamaryi.pl/edycje/5-listopada-2025/tydzien-pierwszy-dzien-6/audio', type:'audio', label:'audio (online)', hidden: true },
-          { url:'assets/tydzien1/Droga_Maryi_tydzien_pierwszy_dzien_6.mp3', type:'audio', label:'6/ tydz. 1 : Pycha życiowa' }
-        ]
-      },
-       {
-        name: `07: ${this.getDatePlusDays(this.startDate, 27)}`,
-       show: false,
-        links: [
-          { image: 'assets/tydzien1/7.jpg',type:'foto' },
-          { text: this.prependDateFromName(`${this.getDatePlusDays(this.startDate, 27)}`, this.firstWeekDay7), type:'opis', label: 'Przebaczenie' },
-          { url:'https://drogamaryi.pl/edycje/5-listopada-2025/tydzien-pierwszy-dzien-7/audio', type:'audio', label:'audio (online)', hidden: true },
-          { url:'assets/tydzien1/Droga_Maryi_tydzien_pierwszy_dzien_7.mp3', type:'audio', label:'7/ tydz. 1 : Przebaczenie' }
-        ]
-      },
+      }
     ] 
 },
 {
   title: DynamicTitles.getSecondWeekTitle(this.startDate),
   show: false,
-  links: [
-        {
-        name: 'Wprowadzenie',
+   links: [
+    {
+        name: 'CA-cvy',
         show: false,
         links: [
-          { image: 'assets/tydzien2/0.jpg',type:'foto' },
-          { text: this.secondWeekDay0, type:'opis', label: 'Wprowadzenie' },
-          { url:'https://drogamaryi.pl/edycje/5-listopada-2025/tydzien-drugi-wprowadzenie/audio', type:'audio', label:'audio Wprowadzenia (online)', hidden: true },
-          { url:'assets/tydzien2/Droga_Maryi_tydzien_drugi_wprowadzenie.mp3', type:'audio', label:'tydz. 2: Wprowadzenie' }
+          { image: 'assets/tydzien1/0.jpg',type:'foto' },
+          { text: this.firstWeekDay0, type:'opis', label: 'CA-cvy' },
         ]
       },
-     {
-        name: `01: ${this.getDatePlusDays(this.startDate, 28)}`,
+          {
+        name: 'CA-cvy',
         show: false,
         links: [
-          { image: 'assets/tydzien2/1.jpg',type:'foto' },
-          { text: this.prependDateFromName(`${this.getDatePlusDays(this.startDate, 28)}`, this.secondWeekDay1), type:'opis', label: 'Maryja Nowa Ewa' },
-          { url:'https://drogamaryi.pl/edycje/5-listopada-2025/tydzien-drugi-dzien-1/audio', type:'audio', label:'audio (online)', hidden: true },
-          { url:'assets/tydzien2/Droga_Maryi_tydzien_drugi_dzien_1.mp3', type:'audio', label:'1/ tydz. 2 : Maryja Nowa Ewa' }
+          { image: 'assets/tydzien1/0.jpg',type:'foto' },
+          { text: this.firstWeekDay1, type:'opis', label: 'CA-cvy' },
         ]
-      },
-        {
-        name: `02: ${this.getDatePlusDays(this.startDate, 29)}`,
-       show: false,
-        links: [
-          { image: 'assets/tydzien2/2.jpg',type:'foto' },
-          { text: this.prependDateFromName(`${this.getDatePlusDays(this.startDate, 29)}`, this.secondWeekDay2), type:'opis', label: 'Dziewictwo i macierzyństwo Maryi' },
-          { url:'https://drogamaryi.pl/edycje/5-listopada-2025/tydzien-drugi-dzien-2/audio', type:'audio', label:'audio (online)', hidden: true },
-          { url:'assets/tydzien2/Droga_Maryi_tydzien_drugi_dzien_2.mp3', type:'audio', label:'2/ tydz. 2 : Dziewictwo i macierzyństwo Maryi' }
-        ]
-      },
-       {
-        name: `03: ${this.getDatePlusDays(this.startDate, 30)}`,
-       show: false,
-        links: [
-          { image: 'assets/tydzien2/3.jpg',type:'foto' },
-          { text: this.prependDateFromName(`${this.getDatePlusDays(this.startDate, 30)}`, this.secondWeekDay3), type:'opis', label: 'Niepokalane Poczęcie' },
-          { url:'https://drogamaryi.pl/edycje/5-listopada-2025/tydzien-drugi-dzien-3/audio', type:'audio', label:'audio (online)', hidden: true },
-          { url:'assets/tydzien2/Droga_Maryi_tydzien_drugi_dzien_3.mp3', type:'audio', label:'3/ tydz. 2 : Niepokalane Poczęcie' }
-        ]
-      },
-       {
-        name: `04: ${this.getDatePlusDays(this.startDate, 31)}`,
-       show: false,
-        links: [
-          { image: 'assets/tydzien2/4.jpg',type:'foto' },
-          { text: this.prependDateFromName(`${this.getDatePlusDays(this.startDate, 31)}`, this.secondWeekDay4), type:'opis', label: 'Wniebowzięcie Najświętszej Maryi Panny' },
-          { url:'https://drogamaryi.pl/edycje/5-listopada-2025/tydzien-drugi-dzien-4/audio', type:'audio', label:'audio (online)', hidden: true },
-          { url:'assets/tydzien2/Droga_Maryi_tydzien_drugi_dzien_4.mp3', type:'audio', label:'4/ tydz. 2 : Wniebowzięcie Najświętszej Maryi Panny' }
-        ]
-      },
-       {
-        name: `05: ${this.getDatePlusDays(this.startDate, 32)}`,
-       show: false,
-        links: [
-          { image: 'assets/tydzien2/5.jpg',type:'foto' },
-          { text: this.prependDateFromName(`${this.getDatePlusDays(this.startDate, 32)}`, this.secondWeekDay5), type:'opis', label: 'Maryja Niewiasta Eucharystii' },
-          { url:'https://drogamaryi.pl/edycje/5-listopada-2025/tydzien-drugi-dzien-5/audio', type:'audio', label:'audio (online)', hidden: true },
-          { url:'assets/tydzien2/Droga_Maryi_tydzien_drugi_dzien_5.mp3', type:'audio', label:'5/ tydz. 2 : Maryja Niewiasta Eucharystii' }
-        ]
-      },
-       {
-        name: `06: ${this.getDatePlusDays(this.startDate, 33)}`,
-       show: false,
-        links: [
-          { image: 'assets/tydzien2/6.jpg',type:'foto' },
-          { text: this.prependDateFromName(`${this.getDatePlusDays(this.startDate, 33)}`, this.secondWeekDay6), type:'opis', label: 'Niepokalane Serce Maryi – naszym schronieniem' },
-          { url:'https://drogamaryi.pl/edycje/5-listopada-2025/tydzien-drugi-dzien-6/audio', type:'audio', label:'audio (online)', hidden: true },
-          { url:'assets/tydzien2/Droga_Maryi_tydzien_drugi_dzien_6.mp3', type:'audio', label:'6/ tydz. 2 : Niepokalane Serce Maryi – naszym schronieniem' }
-        ]
-      },
-       {
-        name: `07: ${this.getDatePlusDays(this.startDate, 34)}`,
-       show: false,
-        links: [
-          { image: 'assets/tydzien2/7.jpg',type:'foto' },
-          { text: this.prependDateFromName(`${this.getDatePlusDays(this.startDate, 34)}`, this.secondWeekDay7), type:'opis', label: 'Apostołowie Tryumfu Niepokalanego Serca Maryi' },
-          { url:'https://drogamaryi.pl/edycje/5-listopada-2025/tydzien-drugi-dzien-7/audio', type:'audio', label:'audio (online)', hidden: true },
-          { url:'assets/tydzien2/Droga_Maryi_tydzien_drugi_dzien_7.mp3', type:'audio', label:'7/ tydz. 2 : Apostołowie Tryumfu Niepokalanego Serca Maryi' }
-        ]
-      },
-  ] 
+      }
+    ] 
 },
 {
   title: DynamicTitles.getThirdWeekTitle(this.startDate),
   show: false,
-  links: [
-        {
-        name: 'Wprowadzenie',
-        show: false,
-        links: [
-          { image: 'assets/tydzien3/0.jpg',type:'foto' },
-          { text: this.thirdWeekDay0, type:'opis', label: 'Wprowadzenie' },
-          { url:'https://drogamaryi.pl/edycje/5-listopada-2025/tydzien-trzeci-wprowadzenie/audio', type:'audio', label:'audio Wprowadzenia (online)', hidden: true },
-          { url:'assets/tydzien3/Droga_Maryi_tydzien_trzeci_wprowadzenie.mp3', type:'audio', label:'tydz. 3: Wprowadzenie' }
-        ]
-      },
+   links: [
     {
-        name: `01: ${this.getDatePlusDays(this.startDate, 35)}`,
+        name: 'CA-cvy',
         show: false,
         links: [
-          { image: 'assets/tydzien3/1.jpg',type:'foto' },
-          { text: this.prependDateFromName(`${this.getDatePlusDays(this.startDate, 35)}`, this.thirdWeekDay1), type:'opis', label: 'Zwiastowanie. Jezus-Słowo Boże. Jezus-Ewangelia.' },
-          { url:'https://drogamaryi.pl/edycje/5-listopada-2025/tydzien-trzeci-dzien-1/audio', type:'audio', label:'audio (online)', hidden: true },
-          { url:'assets/tydzien3/Droga_Maryi_tydzien_trzeci_dzien_1.mp3', type:'audio', label:'1/ tydz. 3 : Zwiastowanie. Jezus-Słowo Boże. Jezus-Ewangelia.' }
+          { image: 'assets/tydzien1/0.jpg',type:'foto' },
+          { text: this.firstWeekDay0, type:'opis', label: 'CA-cvy' },
         ]
       },
-        {
-        name: `02: ${this.getDatePlusDays(this.startDate, 36)}`,
-       show: false,
+          {
+        name: 'CA-cvy',
+        show: false,
         links: [
-          { image: 'assets/tydzien3/2.jpg',type:'foto' },
-          { text: this.prependDateFromName(`${this.getDatePlusDays(this.startDate, 36)}`, this.thirdWeekDay2), type:'opis', label: 'Boże Narodzenie. Jezus-Dziecko. Jezus-Chleb' },
-          { url:'https://drogamaryi.pl/edycje/5-listopada-2025/tydzien-trzeci-dzien-2/audio', type:'audio', label:'audio (online)', hidden: true },
-          { url:'assets/tydzien3/Droga_Maryi_tydzien_trzeci_dzien_2.mp3', type:'audio', label:'2/ tydz. 3 : Boże Narodzenie. Jezus-Dziecko. Jezus-Chleb' }
+          { image: 'assets/tydzien1/0.jpg',type:'foto' },
+          { text: this.firstWeekDay1, type:'opis', label: 'CA-cvy' },
         ]
-      },
-       {
-        name: `03: ${this.getDatePlusDays(this.startDate, 37)}`,
-       show: false,
-        links: [
-          { image: 'assets/tydzien3/3.jpg',type:'foto' },
-          { text: this.prependDateFromName(`${this.getDatePlusDays(this.startDate, 37)}`, this.thirdWeekDay3), type:'opis', label: 'Ofiarowanie w świątyni. Jezus-Prawo Miłości. Jezus-droga do Nieba.' },
-          { url:'https://drogamaryi.pl/edycje/5-listopada-2025/tydzien-trzeci-dzien-3/audio', type:'audio', label:'audio (online)', hidden: true },
-          { url:'assets/tydzien3/Droga_Maryi_tydzien_trzeci_dzien_3.mp3', type:'audio', label:'3/ tydz. 3 : Ofiarowanie w świątyni. Jezus-Prawo Miłości. Jezus-droga do Nieba.' }
-        ]
-      },
-       {
-        name: `04: ${this.getDatePlusDays(this.startDate, 38)}`,
-       show: false,
-        links: [
-          { image: 'assets/tydzien3/4.jpg',type:'foto' },
-          { text: this.prependDateFromName(`${this.getDatePlusDays(this.startDate, 38)}`, this.thirdWeekDay4), type:'opis', label: 'Znalezienie w świątyni. Jezus szukany i znaleziony. Jezus zjednoczony z Ojcem' },
-          { url:'https://drogamaryi.pl/edycje/5-listopada-2025/tydzien-trzeci-dzien-4/audio', type:'audio', label:'audio (online)', hidden: true },
-          { url:'assets/tydzien3/Droga_Maryi_tydzien_trzeci_dzien_4.mp3', type:'audio', label:'4/ tydz. 3 : Znalezienie w świątyni. Jezus szukany i znaleziony. Jezus zjednoczony z Ojcem' }
-        ]
-      },
-       {
-        name: `05: ${this.getDatePlusDays(this.startDate, 39)}`,
-       show: false,
-        links: [
-          { image: 'assets/tydzien3/5.jpg',type:'foto' },
-          { text: this.prependDateFromName(`${this.getDatePlusDays(this.startDate, 39)}`, this.thirdWeekDay5), type:'opis', label: 'Cud przemiany wody w wino w Kanie Galilejskiej. Jezus Zbawiciel. Jezus Źródło przemiany' },
-          { url:'https://drogamaryi.pl/edycje/5-listopada-2025/tydzien-trzeci-dzien-5/audio', type:'audio', label:'audio (online)', hidden: true },
-          { url:'assets/tydzien3/Droga_Maryi_tydzien_trzeci_dzien_5.mp3', type:'audio', label:'5/ tydz. 3 : Cud przemiany wody w wino w Kanie Galilejskiej. Jezus Zbawiciel. Jezus Źródło przemiany' }
-        ]
-      },
-       {
-        name: `06: ${this.getDatePlusDays(this.startDate, 40)}`,
-       show: false,
-        links: [
-          { image: 'assets/tydzien3/6.jpg',type:'foto' },
-          { text: this.prependDateFromName(`${this.getDatePlusDays(this.startDate, 40)}`, this.thirdWeekDay6), type:'opis', label: 'Ukrzyżowanie. Jezus Król. Jezus MIŁOŚĆ' },
-          { url:'https://drogamaryi.pl/edycje/5-listopada-2025/tydzien-trzeci-dzien-6/audio', type:'audio', label:'audio (online)', hidden: true },
-          { url:'assets/tydzien3/Droga_Maryi_tydzien_trzeci_dzien_6.mp3', type:'audio', label:'6/ tydz. 3 : Ukrzyżowanie. Jezus Król. Jezus MIŁOŚĆ' }
-        ]
-      },
-       {
-        name: `07: ${this.getDatePlusDays(this.startDate, 41)}`,
-       show: false,
-        links: [
-          { image: 'assets/tydzien3/7.jpg',type:'foto' },
-          { text: this.prependDateFromName(`${this.getDatePlusDays(this.startDate, 41)}`, this.thirdWeekDay7), type:'opis', label: 'Zesłanie Ducha Świętego. Jezus Kościół. Jezus Chrzczący Duchem Świętym.' },
-          { url:'https://drogamaryi.pl/edycje/5-listopada-2025/tydzien-trzeci-dzien-7/audio', type:'audio', label:'audio (online)', hidden: true },
-          { url:'assets/tydzien3/Droga_Maryi_tydzien_trzeci_dzien_7.mp3', type:'audio', label:'7/ tydz. 3 : Zesłanie Ducha Świętego. Jezus Kościół. Jezus Chrzczący Duchem Świętym.' }
-        ]
+      }
+    ] 
       },]
-},
-{
-  title: DynamicTitles.getDedicationDayTitle(this.startDate),
-  show: false,
-  links: [
-      {
-        name: `01: ${this.getDatePlusDays(this.startDate, 42)}`,
-        show: false,
-        links: [  
-          { image: 'assets/oddanie/1.jpg',type:'foto' },      
-          { text: this.prependDateFromName(`${this.getDatePlusDays(this.startDate, 42)}`, this.oddanieDay0), type:'opis', label: 'Dzień oddania się Panu Jezusowi przez Maryję w Niewolę Miłości' },
-          { url:'https://drogamaryi.pl/edycje/5-listopada-2025/dzien-oddania/audio', type:'audio', label:'audio (online)', hidden: true  },
-          { url:'assets/oddanie/Droga_Maryi_dzien_oddania_sie_panu_Jezusowi_przez_Maryje_w_niewole_milosci.mp3', type:'audio', label:'Dzień oddania się Panu Jezusowi przez Maryję w Niewolę Miłości' },
-          { text: this.prependDateFromName(`${this.getDatePlusDays(this.startDate, 42)}`, this.oddanieDayAkt), type:'opis', label: 'Akt oddania siebie Jezusowi Chrystusowi, Mądrości Wcielonej, przez ręce Maryi' },
-          { url: 'assets/oddanie/akt.pdf',type:'pdf', label:'Pobierz Akt oddania (PDF)'}      
-        ]
-      }]
-}
-];
-
 }
