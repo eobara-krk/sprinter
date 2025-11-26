@@ -221,41 +221,16 @@
                       <!-- Przycisk zamykania na samym dole okienka tekstu (absolute bottom right) -->
                       <button *ngIf="l.show" (click)="textVisibilityService.toggleTextVisibility(l); $event.stopPropagation();" class="close-text-btn" title="Zamknij tekst" style="position:absolute; bottom:8px; right:8px; background:none; border:none; font-size:1.3em; cursor:pointer; color:#888; z-index:2;">✖</button>
                     </div>
-
-                    <!-- Zwykły link (z URL) lub odtwarzacz audio dla Wprowadzenia (lokalny) -->
-                    <ng-container *ngIf="l.type === 'audio' && l.url && !l.hidden">
-                      <div class="grid-link sub-link audio-section" style="margin-bottom:8px; display: flex; flex-direction: column; align-items: flex-start; width: 100%;">
-                        <button (click)="toggleAudio(l.url)"
-                                class="audio-toggle-btn"
-                                [class.playing]="isLocalAudioPlaying(l.url)"
-                                title="{{isLocalAudioPlaying(l.url) ? 'Pauza' : 'Odtwórz'}} {{ l.label }}">
-                          <span class="play-icon">{{isLocalAudioPlaying(l.url) ? '⏸️' : '▶️'}}</span>
-                          <span class="audio-title">{{ l.label }}</span>
-                          <span class="audio-status">{{isLocalAudioPlaying(l.url) ? 'Odtwarzanie...' : 'Naciśnij aby odtworzyć'}}</span>
-                        </button>
-                        <div *ngIf="isLocalAudioPlaying(l.url)" style="width: 100%; display: flex; justify-content: flex-end;">
-                          <button (click)="stopAudio(l.url)"
-                                  class="audio-stop-btn"
-                                  title="Stop {{ l.label }}">
-                            ⏹️ Stop
-                          </button>
-                        </div>
-                      </div>
-                    </ng-container>
                   </ng-container>
                 </ng-container>
                   </div>
                 </div>
               </ng-container>
             </div>
-
           </ng-container>
         </div>
-
       </div>
     </div>
-
-
   </div>
 
     <!-- STOPKA w kontenerku -->
