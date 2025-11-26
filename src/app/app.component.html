@@ -213,7 +213,7 @@
                         <span class="text-toggle-icon">▼</span>
                       </div>
                       <!-- Przycisk toggle w prawym górnym rogu gdy tekst jest rozwinięty -->
-                      <div *ngIf="l.show" class="text-toggle-container">
+                      <div *ngIf="l.show" class="text-toggle-container" style="position:absolute; top:8px; right:8px; z-index:10;">
                         <span class="text-toggle-icon" (click)="textVisibilityService.toggleTextVisibility(l); $event.stopPropagation();">▲</span>
                       </div>
                       <!-- Zawartość tekstowa -->

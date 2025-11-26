@@ -823,10 +823,13 @@ html, body {
   }
   
  
+  .totus-image {
+    margin-top: 0.5rem;
+  }
+  
   .totus-image img {
-    width: 30px;
-    height: 30px;
-    flex-shrink: 0; /* Nie kurczy się */
+    width: 35px;
+    height: 35px;
   }
   
   .audio-toggle-btn {
@@ -1184,11 +1187,11 @@ html, body {
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   padding: 0.75rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: #e6f0ff !important; /* delikatnie niebieskie tło, wymuszone */
 }
 
 .text-item:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: #e6f0ff !important; /* nie zmienia tła po najechaniu */
   border-color: rgba(255, 255, 255, 0.2);
 }
 
@@ -1212,9 +1215,16 @@ html, body {
 
 
 .text-toggle-label {
-  font-weight: 500;
+  font-weight: 600;
   color: #333333;
-  flex: 1;
+  font-family: 'Lato', Arial, sans-serif;
+  font-size: 1.08rem;
+  background: #e6f0ff;
+  padding: 4px 14px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(59,130,246,0.08);
+  letter-spacing: 0.01em;
+  display: inline-block;
 }
 
 /* Kontener na przycisk toggle w prawym górnym rogu (dla rozwiniętego) */
