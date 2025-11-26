@@ -373,9 +373,9 @@ export class AppComponent implements OnInit {
   }
 
 
-
-readonly firstWeekDay0 = FirstWeekTexts.dzien0;
 readonly firstWeekDay1 = FirstWeekTexts.dzien1;
+readonly firstWeekDay2 = FirstWeekTexts.dzien2;
+readonly firstWeekDay3 = FirstWeekTexts.dzien3;
 
 
 readonly secondWeekDay0 = SecondWeekTexts.dzien0;
@@ -400,9 +400,9 @@ items: Item[] = [
         show: false,
         links: [
           { image: 'assets/tydzien1/pismaAdres.jpg',type:'foto', label: 'adres na pismach' },
-          { image: 'assets/tydzien1/smsMaileAdres.jpg',type:'foto', label: 'adres sms/maile' },
-          { text: this.firstWeekDay1, type:'opis', label: 'maile czcionka' },
-          { text: this.firstWeekDay0, type:'opis', label: 'zakazane znaki w sms' },
+           { text: this.firstWeekDay1, type:'opis', label: 'adres sms/maile' },
+          { text: this.firstWeekDay2, type:'opis', label: 'maile czcionka' },
+          { text: this.firstWeekDay3, type:'opis', label: 'zakazane znaki w sms' },
         ]
       }
     ] 
@@ -418,7 +418,7 @@ items: Item[] = [
           { image: 'assets/tydzien2/0a.jpg',type:'foto', label: 'przelew plik pdf' },
           { image: 'assets/tydzien2/1a.jpg',type:'foto', label: 'szukanie po ciągu znaków' },
           { image: 'assets/tydzien2/2a.jpg',type:'foto', label: 'przypisanie do właściwej kategorii' },
-          { text: this.firstWeekDay0, type:'opis', label: 'CA-11798 Klauzula na współmałżonka cz. 1' },
+          { text: this.secondWeekDay1, type:'opis', label: 'CA-11798 Klauzula na współmałżonka cz. 1' },
         ]
       },
         {
@@ -427,17 +427,17 @@ items: Item[] = [
         links: [
           { image: 'assets/tydzien2/0b.jpg',type:'foto', label: 'rodo 1' },
           { image: 'assets/tydzien2/1b.jpg',type:'foto', label: 'rodo 2' },
-          { text: this.firstWeekDay1, type:'opis', label: 'CA-11792 RODO dla GP aktualizacja' },
+          { text: this.secondWeekDay0, type:'opis', label: 'CA-11792 RODO dla GP aktualizacja' },
         ]
       },
        {
         name: 'utrzymanie 3 nowe filtry',
         show: false,
         links: [
-          { image: 'assets/tydzien2/CAM-3986.jpg',type:'foto', label: 'Tylko sprawy, gdzie termin pierwszej licytacji przypada nie wcześniej jak za 2 tyg.' },
-          { image: 'assets/tydzien2/CAM-3987.jpg',type:'foto', label: 'Tylko sprawy z zabezpieczoną nieruchomością lub sprawy bez zabepieczonej nieruchomości' },
+          { image: 'assets/tydzien2/CAM-3986.jpg',type:'foto', label: 'Tylko sprawy,<br>gdzie termin pierwszej licytacji przypada nie wcześniej jak za 2 tyg.' },
+          { image: 'assets/tydzien2/CAM-3987.jpg',type:'foto', label: 'Tylko sprawy z zabezpieczoną nieruchomością <br>lub sprawy bez zabepieczonej nieruchomości' },
           { image: 'assets/tydzien2/CAM-4071.jpg',type:'foto', label: 'Tylko klienci, którzy mają PESEL lub klienci bez nr PESEL' },
-          { text: this.firstWeekDay1, type:'opis', label: 'utrzymanie 3 nowe filtry' },
+          { text: this.secondWeekDay1, type:'opis', label: 'utrzymanie 3 nowe filtry' },
         ]
       }
     ] 
@@ -451,7 +451,7 @@ items: Item[] = [
         show: false,
         links: [
           { image: 'assets/tydzien1/0.jpg',type:'foto' },
-          { text: this.firstWeekDay0, type:'opis', label: 'CA-cvy' },
+          { text: this.thirdWeekDay0, type:'opis', label: 'CA-cvy' },
         ]
       },
           {
@@ -459,7 +459,7 @@ items: Item[] = [
         show: false,
         links: [
           { image: 'assets/tydzien1/0.jpg',type:'foto' },
-          { text: this.firstWeekDay1, type:'opis', label: 'CA-cvy' },
+          { text: this.thirdWeekDay1, type:'opis', label: 'CA-cvy' },
         ]
       }
     ] 

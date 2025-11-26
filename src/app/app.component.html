@@ -195,7 +195,7 @@
                              (load)="onImageLoad($event)"
                              (error)="onImageError($event)"
                              (click)="toggleFullscreen(l.image); $event.preventDefault(); $event.stopPropagation();" />
-                             <span class="link-label" *ngIf="l.label">{{ l.label }}</span>
+                        <span class="link-label" *ngIf="l.label" [innerHTML]="l.label"></span>
 
                       </div>
                       
@@ -208,7 +208,7 @@
                       <div *ngIf="!l.show" class="text-collapsed-header" (click)="textVisibilityService.toggleTextVisibility(l); $event.stopPropagation();">
                         <div class="text-collapsed-left">
                           <span class="text-icon">📝</span>
-                          <span class="text-toggle-label">{{ l.label || 'Czułe serce św. Ludwika' }}</span>
+                          <div class="text-toggle-label" [innerHTML]="l.label || 'Czułe serce św. Ludwika'"></div>
                         </div>
                         <span class="text-toggle-icon">▼</span>
                       </div>
