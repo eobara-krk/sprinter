@@ -720,8 +720,9 @@ html, body {
   image-rendering: -webkit-optimize-contrast;
 /* --- NAJWAŻNIEJSZE: popup tekstowy --- */
 .text-fullscreen-content {
-  background: #fff !important;
+  background: #e3f2fd !important;
   border: 4px solid #2563eb !important;
+  position: relative !important;
   border-radius: 18px !important;
   box-shadow: 0 8px 32px rgba(59,130,246,0.18) !important;
   padding: 32px !important;
@@ -730,13 +731,17 @@ html, body {
   line-height: 1.5 !important;
   width: fit-content !important;
   min-width: 220px !important;
-  max-width: 90vw !important;
+  max-width: 650px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  word-break: break-word !important;
   min-height: 40px !important;
   user-select: text !important;
   transition: none !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: flex-end !important;
+  position: relative !important;
 }
 }
 

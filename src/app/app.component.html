@@ -254,8 +254,8 @@
   <ng-container *ngFor="let group of item.links">
     <ng-container *ngFor="let l of group.links">
       <div class="text-fullscreen-overlay" *ngIf="l.type==='opis' && l.text && l.show" (click)="textVisibilityService.toggleTextVisibility(l)">
-        <div class="text-fullscreen-content" (click)="$event.stopPropagation()">
-          <button (click)="textVisibilityService.toggleTextVisibility(l); $event.stopPropagation();" class="close-text-btn" title="Zamknij tekst" style="position:absolute; top:8px; right:8px; background:none; border:none; font-size:1.3em; cursor:pointer; color:#888; z-index:10;">✖</button>
+        <div class="text-fullscreen-content" (click)="textVisibilityService.toggleTextVisibility(l)">
+          <button (click)="textVisibilityService.toggleTextVisibility(l)" class="close-text-btn" title="Zamknij tekst" style="position:absolute; top:12px; right:12px; background:#2563eb; border:none; font-size:1.3em; cursor:pointer; color:#fff; z-index:10; border-radius:50%; width:32px; height:32px; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(59,130,246,0.18);">✖</button>
           <div class="sub-text" style="font-size:1.3em; font-weight:600; margin-bottom:1em; color:#2563eb;">{{ l.label }}</div>
           <div class="sub-text" [innerHTML]="textFormatService.processTextWithLinks(l.text)"></div>
         </div>

@@ -42,7 +42,42 @@ static dzien0: string = `<div style="font-family: 'Segoe UI', Tahoma, sans-serif
   </div>
 </div>`;
 
-static dzien1: string = `<b>jakis tekst</b>
-<i> kolejny tekst </i>
-Kolejny`;
+static dzien1: string = `<div style="font-family: 'Lato', sans-serif; font-size: 16px; color: #2e2e2e; background-color: #f4f6f9; padding: 30px; line-height: 1.6;">
+  <div style="max-width: 700px; margin: 0 auto; background-color: #ffffff; border-radius: 10px; padding: 20px; border: 1px solid #d0d0d0;">
+
+    <h2 style="font-size: 20px; color: #34495e; margin-bottom: 16px;">
+      &#128206; Aktualizacja linków Google Fonts i języka w mailach
+    </h2>
+
+    <p style="margin-bottom: 16px;">
+      W Excelu znajduje się lista szablonów maili (tylko własne), które zawierają <strong>stary link do czcionki Lato</strong> lub ustawienie <code>lang="en"</code>.
+      Aby poprawnie wyświetlały się polskie znaki oraz używana była aktualna czcionka, należy zastosować poniższe zmiany w kodzie maili.
+    </p>
+
+    <pre style="background-color:#f5f5dc; border-radius:6px; padding:15px; font-family:'Fira Code', monospace; color:#1e3a8a; font-size:14px; white-space: pre-wrap; line-height:1.5; overflow-x:auto;">
+&lt;link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&amp;subset=latin-ext&amp;display=swap" rel="stylesheet"&gt;
+&lt;html lang="pl"&gt;
+    </pre>
+
+    <div style="margin-top:10px; color: #34495e; font-size: 14px; line-height:1.5;">
+      <strong>Wyjaśnienie:</strong>
+      <ul style="padding-left: 18px; margin-top: 6px;">
+        <li>
+          <code>&lt;link href="https://fonts.googleapis.com/css2?family=Lato:..." rel="stylesheet"&gt;</code> – aktualizuje czcionkę <strong>Lato</strong> w wagach 400 (normal) i 700 (bold) z polskimi znakami (<code>latin-ext</code>). <strong>display=swap</strong> sprawia, że tekst wyświetla się natychmiast, nawet podczas ładowania czcionki.
+        </li>
+        <li>
+          <code>&lt;html lang="pl"&gt;</code> – ustawia język dokumentu na polski, co poprawia wyświetlanie polskich znaków oraz dostępność.
+        </li>
+      </ul>
+      <p style="margin-top:6px;">
+        Dzięki temu Twój mail będzie wyświetlał się poprawnie w większości klientów pocztowych, a polskie znaki nie będą „rozjeżdżać się”.
+      </p>
+    </div>
+
+    <p style="margin-top: 16px; color: red; font-size: 14px;">
+      &#9888; Nieużycie powyższych zmian może spowodować <strong>niepoprawne wyświetlanie polskich znaków</strong> lub użycie przestarzałej czcionki.
+    </p>
+
+  </div>
+</div>`;
 }

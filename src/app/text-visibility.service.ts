@@ -38,6 +38,10 @@ export class TextVisibilityService {
             popup.style.boxShadow = '0 8px 32px rgba(59,130,246,0.18)';
             popup.style.padding = '32px';
             popup.style.color = '#111';
+            popup.style.maxWidth = '1400px';
+            popup.style.width = '100%';
+            popup.style.boxSizing = 'border-box';
+            popup.style.wordBreak = 'break-word';
             // Jasno niebieskie tło pod literami
             const subText = popup.querySelector('.sub-text') as HTMLElement;
             if (subText) {

@@ -401,7 +401,7 @@ items: Item[] = [
         links: [
           { image: 'assets/tydzien1/pismaAdres.jpg',type:'foto', label: 'adres na pismach' },
           { image: 'assets/tydzien1/smsMaileAdres.jpg',type:'foto', label: 'adres sms/maile' },
-          { image: 'assets/tydzien1/maileCzcionka.jpg',type:'foto', label: 'maile czcionka' },
+          { text: this.firstWeekDay1, type:'opis', label: 'maile czcionka' },
           { text: this.firstWeekDay0, type:'opis', label: 'zakazane znaki w sms' },
         ]
       }
