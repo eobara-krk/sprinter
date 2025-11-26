@@ -1,3 +1,20 @@
+/* FULLSCREEN OVERLAY dla tekstu */
+.text-fullscreen-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  pointer-events: auto;
+  background: none;
+}
+
 main {
   width: 100%;
   max-width: 700px;
@@ -701,9 +718,26 @@ html, body {
   user-select: none;
   -webkit-user-select: none;
   image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
-  opacity: 1;
-  animation: fadeInImage 0.4s ease forwards;
+/* --- NAJWAŻNIEJSZE: popup tekstowy --- */
+.text-fullscreen-content {
+  background: #fff !important;
+  border: 4px solid #2563eb !important;
+  border-radius: 18px !important;
+  box-shadow: 0 8px 32px rgba(59,130,246,0.18) !important;
+  padding: 32px !important;
+  color: #111 !important;
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+  width: fit-content !important;
+  min-width: 220px !important;
+  max-width: 90vw !important;
+  min-height: 40px !important;
+  user-select: text !important;
+  transition: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-end !important;
+}
 }
 
 /* Only override what is needed for mobile */
@@ -1230,8 +1264,9 @@ html, body {
 /* Kontener na przycisk toggle w prawym górnym rogu (dla rozwiniętego) */
 .text-toggle-container {
   position: absolute;
-  font-size: 12px;
-  right: 0.5rem;
+  font-size: 24px;
+  right: 12px;
+  top: 12px;
   z-index: 10;
 }
 

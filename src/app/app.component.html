@@ -212,15 +212,8 @@
                         </div>
                         <span class="text-toggle-icon">▼</span>
                       </div>
-                      <!-- Przycisk toggle w prawym górnym rogu gdy tekst jest rozwinięty -->
-                      <div *ngIf="l.show" class="text-toggle-container" style="position:absolute; top:8px; right:8px; z-index:10;">
-                        <span class="text-toggle-icon" (click)="textVisibilityService.toggleTextVisibility(l); $event.stopPropagation();">▲</span>
-                      </div>
-                      <!-- Zawartość tekstowa -->
-                      <div *ngIf="l.show" class="sub-text" [innerHTML]="textFormatService.processTextWithLinks(l.text)"></div>
-                      <!-- Przycisk zamykania na samym dole okienka tekstu (absolute bottom right) -->
-                      <button *ngIf="l.show" (click)="textVisibilityService.toggleTextVisibility(l); $event.stopPropagation();" class="close-text-btn" title="Zamknij tekst" style="position:absolute; bottom:8px; right:8px; background:none; border:none; font-size:1.3em; cursor:pointer; color:#888; z-index:2;">✖</button>
                     </div>
+                    <!-- overlay tekstu przeniesiony na koniec pliku -->
                   </ng-container>
                 </ng-container>
                   </div>
@@ -254,4 +247,19 @@
        class="fullscreen-local-image"
        loading="eager"
        decoding="async" />
+</div>
+
+<!-- FULLSCREEN TEXT - overlay poza main -->
+<div *ngFor="let item of items" style="display:contents">
+  <ng-container *ngFor="let group of item.links">
+    <ng-container *ngFor="let l of group.links">
+      <div class="text-fullscreen-overlay" *ngIf="l.type==='opis' && l.text && l.show" (click)="textVisibilityService.toggleTextVisibility(l)">
+        <div class="text-fullscreen-content" (click)="$event.stopPropagation()">
+          <button (click)="textVisibilityService.toggleTextVisibility(l); $event.stopPropagation();" class="close-text-btn" title="Zamknij tekst" style="position:absolute; top:8px; right:8px; background:none; border:none; font-size:1.3em; cursor:pointer; color:#888; z-index:10;">✖</button>
+          <div class="sub-text" style="font-size:1.3em; font-weight:600; margin-bottom:1em; color:#2563eb;">{{ l.label }}</div>
+          <div class="sub-text" [innerHTML]="textFormatService.processTextWithLinks(l.text)"></div>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
 </div>
