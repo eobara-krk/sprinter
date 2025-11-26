@@ -54,7 +54,7 @@
       <!-- Nagłówek wydarzenia -->
       <div class="event-header" (click)="toggle(item)">
   <span *ngIf="isTodayInTitleRange(item.title) || hasInnerTodayGroups(item)">👉</span>
-  <span>📌 <span [innerHTML]="item.title"></span></span>
+  <span>📌 <span class="event-title" [innerHTML]="item.title"></span></span>
   <span>{{ item.show ? '▲' : '▼' }}</span>
       </div>
 
@@ -111,12 +111,12 @@
             <div *ngIf="group.type !== 'opis' && group.links && group.links.length > 1" 
                  class="group-container"
                  [class.expanded]="group.show"
-                 [class.today-highlight]="group.name ? isToday(group.name) : false">
+                 [class.today-highlight]="group.name ? isToday(group.name) : false"
+                 (click)="openOnly(group, item); $event.stopPropagation()">
                  
               <!-- Główny link grupy -->
               <div class="grid-link main-link"
-                   [class.today-highlight]="group.name ? isToday(group.name) : false"
-                   (click)="openOnly(group, item)">
+                   [class.today-highlight]="group.name ? isToday(group.name) : false">
                 <span *ngIf="(group.name && isToday(group.name)) || hasInnerTodayElements(group)">👉</span>
                 <span class="expand-icon">{{ group.show ? '▼' : '▶' }}</span>
                 <span>📁</span>
@@ -215,10 +215,6 @@
                       <!-- Przycisk toggle w prawym górnym rogu gdy tekst jest rozwinięty -->
                       <div *ngIf="l.show" class="text-toggle-container">
                         <span class="text-toggle-icon" (click)="textVisibilityService.toggleTextVisibility(l); $event.stopPropagation();">▲</span>
-                        <!-- Przycisk kopiowania tekstu + linku audio -->
-                        <span *ngIf="hasAudioLink(links)" class="copy-text-icon" (click)="copyAudioTextToClipboard(links); $event.stopPropagation();" title="Skopiuj tekst i link audio">🎵📋</span>
-                        <!-- Przycisk kopiowania samego tekstu -->
-                        <span *ngIf="!hasAudioLink(links)" class="copy-text-icon" (click)="copyAudioTextToClipboard([l]); $event.stopPropagation();" title="Skopiuj tekst">📋</span>
                       </div>
                       <!-- Zawartość tekstowa -->
                       <div *ngIf="l.show" class="sub-text" [innerHTML]="textFormatService.processTextWithLinks(l.text)"></div>

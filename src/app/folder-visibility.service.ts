@@ -50,6 +50,10 @@ export class FolderVisibilityService {
   }
 
   openOnly(items: Item[], groupToOpen: LinkGroup, item: Item, summaryPassword: string) {
+    if (groupToOpen.show) {
+      groupToOpen.show = false;
+      return;
+    }
     items.forEach((i: Item) => {
       if (i !== item) i.show = false;
       i.links?.forEach((g: LinkGroup) => g.show = false);
@@ -69,7 +73,7 @@ export class FolderVisibilityService {
       }
       return;
     }
-    groupToOpen.show = !groupToOpen.show;
+    groupToOpen.show = true;
   }
 
   collapseAll(items: Item[]) {
