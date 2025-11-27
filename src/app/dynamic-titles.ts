@@ -1,8 +1,8 @@
 
 // Poziomy drzewa:
 // 1. Sprint (tydzień)
-// 2. Zadanie (grupa)
-// 3. Kod (podgrupa)
+// 2. Zadanie (grupa) - 📁
+// 3. Kod (podgrupa) - 🧩
 
 export class DynamicTitles {
     static getFirstWeekTitle(startDate: Date): string {

@@ -21,15 +21,19 @@
         
         <!-- PRAWA STRONA: Data + Audio -->
         <div class="right-column">
-          <div class="kruk-image" style="width: 140px; height: 140px; display: flex; align-items: flex-start; justify-content: center; background: none; position: relative; flex-direction: column;">
+          <div style="width: 140px; display: flex; flex-direction: column; align-items: center;">
             <img src="assets/Logo_KRUK_cmyk.png" alt="Logo"
               class="logo-section-img"
-              style="position: absolute; top: 0; right: 0; width: 110px; height: 110px; background: transparent;"
+              style="max-width: 110px; max-height: 110px; width: auto; height: auto; background: transparent; margin-bottom: 8px; display: block;"
               (load)="onImageLoad($event)"
               (error)="onImageError($event)"
               loading="lazy" />
+          
+            <div class="date-line" style="text-align: center; width: 100%;">
+              <br>
+              <h2 style="font-size:1.1em; margin:0;">{{ currentDateTime | date:'EEEE dd.MM.yyyy':'':'pl-PL' }} r.</h2>
+            </div>
           </div>
-          <div class="date-line" style="text-align: center;"><h2>{{ currentDateTime | date:'EEEE dd.MM.yyyy':'':'pl-PL' }} r.</h2></div>
           
           <div class="audio-section" style="display: flex; flex-direction: column; align-items: flex-end; width: 100%;">
             <!-- Audio controls mogą być tu dodane, jeśli będą potrzebne -->
@@ -67,26 +71,14 @@
         <div class="groups-container">
           <ng-container *ngFor="let group of item.links; trackBy: trackByName">
 
+
             <!-- Miniaturka grupy -->
             <div class="event-image-container" *ngIf="group.image">
               <img [src]="group.image"
                    alt="Obraz grupy"
                    class="event-thumb"
                    (click)="toggleFullscreen(group.image); $event.stopPropagation();" />
-
             </div>
-
-            <!-- GŁÓWNY LINK GRUPY (tylko jeśli jest jeden link) -->
-            <a *ngIf="group.type !== 'opis' && group.links?.length === 1 && group.links?.[0]?.url"
-               class="grid-link main-link"
-               [class.today-highlight]="group.name ? isToday(group.name) : false"
-               [href]="getMainLink(group)"
-               target="_blank"
-               rel="noopener"
-               (click)="$event.stopPropagation()">
-              <span *ngIf="group.name && isToday(group.name)">👉</span>
-              {{ group.name }}
-            </a>
 
             <!-- OPIS -->
             <div *ngIf="group.type==='opis'" class="grid-link description-link" (click)="openOnly(group, item)">
@@ -99,6 +91,39 @@
                 <div class="justified-text" [innerHTML]="textFormatService.processTextWithLinks(group.text)"></div>
               </div>
             </div>
+
+              <!-- Wyświetl nazwę grupy, jeśli nie ma opisu ani linków, ale jest podgrupa 'Przegląd kodu' -->
+              <div *ngIf="!group.type && group.links && group.links.length === 1 && (group.links[0].name === 'Przegląd kodu' || group.links[0].name === 'zalacznik')" class="group-container">
+                <div class="grid-link main-link" (click)="group.links[0].show = !group.links[0].show; $event.stopPropagation();">
+                  <span class="expand-icon">{{ group.links[0].show ? '▼' : '▶' }}</span>
+                  <span *ngIf="group.links[0].name && group.links[0].name.toLowerCase().includes('przegląd')" style="color:#2563eb;font-size:1.3em">💻</span>
+                  <!-- folder tylko dla zalacznik -->
+                  <ng-container *ngIf="group.links[0].name === 'zalacznik'">
+                    <span class="folder-icon" style="color:gold">📁</span>
+                  </ng-container>
+                  <span class="zadanie-label">{{ group.name }}</span>
+                </div>
+                <!-- Album zdjęć w podgrupie lub PDF-y w zalacznik -->
+                <div *ngIf="group.links[0].show" class="sub-links-container">
+                  <photo-gallery *ngIf="group.links[0].name === 'Przegląd kodu' && hasPhotoElements(group.links[0].links || []) && getPhotoCount(group.links[0].links || []) > 1"
+                    [photos]="getPhotoElements(group.links[0].links || [])"
+                    [groupName]="group.links[0].name || ''">
+                  </photo-gallery>
+                  <ng-container *ngIf="group.links[0].name === 'zalacznik'">
+                    <div class="pdf-list">
+                      <a *ngFor="let pdf of group.links[0].links" class="grid-link sub-link pdf-item" [href]="pdf.url" target="_blank" rel="noopener">
+                        <span class="pdf-icon">
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="3" y="3" width="18" height="18" rx="4" fill="#d32f2f"/>
+                            <text x="6" y="17" font-size="10" font-family="Arial, sans-serif" fill="#fff" font-weight="bold">PDF</text>
+                          </svg>
+                        </span>
+                        <span [innerHTML]="pdf.label || pdf.url"></span>
+                      </a>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
 
             <!-- GRUPA Z WIELOMA LINKAMI (nie jest opisem i ma więcej niż 1 link) -->
             <div *ngIf="group.type !== 'opis' && group.links && group.links.length > 1" 
@@ -128,8 +153,9 @@
                     <div class="nested-group">
                       <div class="nested-header" (click)="toggleOnlyNestedGroup(l, links); $event.stopPropagation()">
                         <span class="nested-icon">{{ l.show ? '▼' : '▶' }}</span>
-                        <span>💻</span>
-                        {{ l.name || l.label || 'Kod' }}
+                        <span class="folder-icon" style="color:gold">📁</span>
+                        <ng-container *ngIf="l.name !== 'Przegląd kodu'; else kodIcon"></ng-container>
+                        <ng-template #kodIcon><span style="color:#2563eb;font-size:1.3em">💻</span> Przegląd kodu</ng-template>
                       </div>
                       <!-- Zagnieżdżone linki -->
                       <div *ngIf="l.show" class="nested-links">
@@ -142,8 +168,9 @@
                             <div class="nested-group">
                               <div class="nested-header" (click)="toggleOnlyNestedGroup(nestedLink, l.links); $event.stopPropagation()">
                                 <span class="nested-icon">{{ nestedLink.show ? '▼' : '▶' }}</span>
-                                <span>💻</span>
-                                {{ nestedLink.name || nestedLink.label || 'Kod' }}
+                                <span class="folder-icon" style="color:gold">📁</span>
+                                <ng-container *ngIf="nestedLink.name !== 'Przegląd kodu'; else kodIcon2"></ng-container>
+                                <ng-template #kodIcon2><span style="color:#2563eb;font-size:1.3em">💻</span> Przegląd kodu</ng-template>
                               </div>
                               <div *ngIf="nestedLink.show" class="nested-links">
                                 <photo-gallery *ngIf="hasPhotoElements(nestedLink.links) && getPhotoCount(nestedLink.links) > 1"
@@ -155,8 +182,9 @@
                                     <div class="nested-group">
                                       <div class="nested-header" (click)="toggleOnlyNestedGroup(deepLink, nestedLink.links); $event.stopPropagation()">
                                         <span class="nested-icon">{{ deepLink.show ? '▼' : '▶' }}</span>
-                                        <span>💻</span>
-                                        {{ deepLink.name || deepLink.label || 'Kod' }}
+                                        <span class="folder-icon" style="color:gold">📁</span>
+                                        <ng-container *ngIf="deepLink.name !== 'Przegląd kodu'; else kodIcon3"></ng-container>
+                                        <ng-template #kodIcon3><span style="color:#2563eb;font-size:1.3em">💻</span> Przegląd kodu</ng-template>
                                       </div>
                                       <div *ngIf="deepLink.show" class="nested-links">
                                         <photo-gallery *ngIf="hasPhotoElements(deepLink.links) && getPhotoCount(deepLink.links) > 1"
@@ -248,12 +276,10 @@
 
                   <!-- Zwykły link (bez zagnieżdżonych linków) -->
                   <ng-container *ngIf="!l.links || l.links.length === 0">
-                    
                     <!-- Element foto (tylko zdjęcie) -->
                     <div *ngIf="l.type==='foto'" 
                          class="grid-link sub-link foto-item"
                          [class.today-highlight]="(l.label || l.url) ? isToday(l.label || l.url || '') : false">
-                      
                       <div class="link-thumb-container">
                         <img [src]="l.image" 
                              alt="Miniaturka" 
@@ -264,11 +290,24 @@
                              (error)="onImageError($event)"
                              (click)="toggleFullscreen(l.image); $event.preventDefault(); $event.stopPropagation();" />
                         <span class="link-label" *ngIf="l.label" [innerHTML]="l.label"></span>
-
                       </div>
-                      
                       <span *ngIf="(l.label || l.url) && isToday(l.label || l.url || '')">👉</span>
                     </div>
+
+                    <!-- Element PDF z ikoną -->
+                    <a *ngIf="l.type==='pdf' && l.url" 
+                       class="grid-link sub-link pdf-item"
+                       [href]="l.url"
+                       target="_blank"
+                       rel="noopener">
+                      <span class="pdf-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <rect x="3" y="3" width="18" height="18" rx="4" fill="#d32f2f"/>
+                          <text x="6" y="17" font-size="10" font-family="Arial, sans-serif" fill="#fff" font-weight="bold">PDF</text>
+                        </svg>
+                      </span>
+                      <span [innerHTML]="l.label || l.url"></span>
+                    </a>
 
                     <!-- Element tekstowy (opis w podlinku) -->
                     <div *ngIf="l.type==='opis' && l.text" class="grid-link sub-link text-item" style="position:relative;">

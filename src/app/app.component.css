@@ -691,7 +691,7 @@ html, body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(59,130,246,0.12);
+  background: #fff6fb !important; /* jeszcze jaśniejsze różowe tło na overlay */
   display: flex;
   justify-content: center;
   align-items: center;

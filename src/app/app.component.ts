@@ -248,12 +248,10 @@ export class AppComponent implements OnInit {
   // ----------------------
   toggle = (obj: Item) => {
     this.folderVisibilityService.toggle(this.items, obj, () => this.stopAllAudio());
-    // Specjalna logika dla 'utrzymanie 3 nowe filtry'
+    // Specjalna logika dla 'utrzymanie 3 nowe filtry' - tylko reset opisu
     if (obj.links) {
       const utrzymanie = obj.links.find(g => g.name === 'utrzymanie 3 nowe filtry');
       if (utrzymanie && utrzymanie.links) {
-        const album = utrzymanie.links.find(l => l.name === 'Album');
-        if (album) album.show = false;
         const tekst = utrzymanie.links.find(l => l.type === 'opis');
         if (tekst) tekst.show = false;
       }
@@ -420,13 +418,14 @@ readonly thirdWeekDay1 = ThirdWeekTexts.dzien1;
 
 
 
-
 items: Item[] = [
  
 {
   title: DynamicTitles.getFirstWeekTitle(this.startDate),
   show: false, // opcjonalnie, żeby nie był od razu rozwinięty
   links: [
+ 
+
     {
         name: 'XForm sprawdzające naruszenia w komunikatach',
         show: false,
@@ -439,27 +438,39 @@ items: Item[] = [
       }
     ] 
 },
+
 {
   title: DynamicTitles.getSecondWeekTitle(this.startDate),
   show: false,
    links: [
-    {
+  {
         name: 'CA-11798 Klauzula na współmałżonka cz. 1',
         show: false,
         links: [
+          {
+            name: 'Przegląd kodu',
+            show: false,
+            links: [
           { image: 'assets/tydzien2/0a.jpg',type:'foto', label: 'przelew plik pdf' },
           { image: 'assets/tydzien2/1a.jpg',type:'foto', label: 'szukanie po ciągu znaków' },
           { image: 'assets/tydzien2/2a.jpg',type:'foto', label: 'przypisanie do właściwej kategorii' },
-          { text: this.secondWeekDay1, type:'opis', label: 'CA-11798 Klauzula na współmałżonka cz. 1' },
+            ]
+          },
+            { text: this.secondWeekDay1, type:'opis', label: 'klauzula' },
         ]
       },
         {
-        name: 'CA-11792 RODO dla GP aktualizacja',
+        name: 'CA-11792 RODO do GP aktualizacja',
         show: false,
         links: [
-          { image: 'assets/tydzien2/0b.jpg',type:'foto', label: 'rodo 1' },
-          { image: 'assets/tydzien2/1b.jpg',type:'foto', label: 'rodo 2' },
-          { text: this.secondWeekDay0, type:'opis', label: 'CA-11792 RODO dla GP aktualizacja' },
+          {
+            name: 'zalacznik',
+            show: false,
+            links: [
+              // Możesz dodać więcej plików PDF lub obrazków analogicznie jak w Przegląd kodu
+              { type: 'pdf', url: 'assets/tydzien2/rodo.pdf', label: '<b>CA-11792</b> Klauzula RODO dla GP ' }
+            ]
+          }
         ]
       },
        {
@@ -470,12 +481,14 @@ items: Item[] = [
             name: 'Przegląd kodu',
             show: false,
             links: [
-              { image: 'assets/tydzien2/CAM-3986.jpg',type:'foto', label: 'Tylko sprawy,<br>gdzie termin pierwszej licytacji przypada nie wcześniej jak za 2 tyg.' },
-              { image: 'assets/tydzien2/CAM-3987.jpg',type:'foto', label: 'Tylko sprawy z zabezpieczoną nieruchomością <br>lub sprawy bez zabepieczonej nieruchomości' },
-              { image: 'assets/tydzien2/CAM-4071.jpg',type:'foto', label: 'Tylko klienci, którzy mają PESEL lub klienci bez nr PESEL' }
+              { image: 'assets/tydzien2/CAM-3986.jpg',type:'foto', label: '<b>CAM-3986</b> <br>Tylko sprawy, gdzie termin pierwszej licytacji przypada nie wcześniej jak za 2 tyg.' },
+              { image: 'assets/tydzien2/CAM-3987.jpg',type:'foto', label: '<b>CAM-3987</b> <br>Tylko sprawy z zabezpieczoną nieruchomością lub sprawy bez zabepieczonej nieruchomości' },
+              { image: 'assets/tydzien2/CAM-4071.jpg',type:'foto', label: '<b>CAM-4071</b> <br>Tylko klienci, którzy mają PESEL lub klienci bez nr PESEL' },
+              { image: 'assets/tydzien2/CAM-4071a.jpg',type:'foto', label: '<b>CAM-4071</b> <br>Tylko klienci, którzy mają PESEL lub klienci bez nr PESEL' },
+              { image: 'assets/tydzien2/CAM-4071b.jpg',type:'foto', label: '<b>CAM-4071</b> <br>Tylko klienci, którzy mają PESEL lub klienci bez nr PESEL' }
             ]
           },
-          { text: this.secondWeekDay1, type:'opis', label: 'utrzymanie 3 nowe filtry' }
+            { text: this.secondWeekDay1, type:'opis', label: 'filtry' },
         ]
       }
     ] 
@@ -502,4 +515,5 @@ items: Item[] = [
       }
   ]
 }
-];}
+];
+}
