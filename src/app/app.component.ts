@@ -513,20 +513,36 @@ items: Item[] = [
   title: DynamicTitles.getThirdWeekTitle(this.startDate),
   show: false,
    links: [
-    {
-        name: 'CA-cvy',
+      {
+        name: 'CA-11798 Klauzula na współmałżonka cz. 2',
         show: false,
         links: [
-          { image: 'assets/tydzien1/0.jpg',type:'foto' },
-          { text: this.thirdWeekDay0, type:'opis', label: 'CA-cvy' },
+          {
+            name: 'Przegląd kodu',
+            show: false,
+            links: [
+          { image: 'assets/tydzien3/0a.jpg',type:'foto', label: 'kod kolektora MailingService' },
+          { image: 'assets/tydzien3/1a.jpg',type:'foto', label: 'Nowe pismo testowe: Generator masowy z załacznikami' },
+          { image: 'assets/tydzien3/2a.jpg',type:'foto', label: 'Podpiecie paczki z kolektorem do pisma' },
+          { image: 'assets/tydzien3/3a.jpg',type:'foto', label: 'Generowanie pisma i wybor załacznika, za którego odpowiada kolektor' },
+          { image: 'assets/tydzien3/3a.jpg',type:'foto', label: 'Generowanie pisma i wybor załacznika, za którego odpowiada kolektor' },
+            ]
+          },
+          { type: 'pdf', url: 'assets/tydzien3/PismoiZalacznik.pdf', label: '<b>CA-11798 </b> Klauzula na współmałżonka z załacznikiem' }
         ]
       },
           {
-        name: 'CA-cvy',
+        name: 'CA-11837 [AMI EXPRESS] Wdrażanie pisma GP',
         show: false,
         links: [
-          { image: 'assets/tydzien1/0.jpg',type:'foto' },
-          { text: this.thirdWeekDay1, type:'opis', label: 'CA-cvy' },
+           {
+            name: 'zalacznik',
+            show: false,
+            links: [
+              // Możesz dodać więcej plików PDF lub obrazków analogicznie jak w Przegląd kodu
+              { type: 'pdf', url: 'assets/tydzien3/GP.pdf', label: '<b>CA-11837</b> BRAND_GP_AMIEXPRESS' }
+            ]
+          }
         ]
       }
   ]
