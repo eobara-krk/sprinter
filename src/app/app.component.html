@@ -331,3 +331,16 @@
     </ng-container>
   </ng-container>
 </div>
+
+<!-- FULLSCREEN PHOTO ALBUM - overlay poza main -->
+<div *ngFor="let item of items" style="display:contents">
+  <ng-container *ngFor="let group of item.links">
+    <ng-container *ngFor="let l of group.links">
+      <div *ngIf="l.name === 'Przegląd kodu' && l.show && hasPhotoElements(l.links || []) && getPhotoCount(l.links || []) > 1" class="fullscreen-local" (click)="toggleOnlyNestedGroup(l, group.links || [])">
+        <div (click)="$event.stopPropagation()">
+          <photo-gallery [photos]="getPhotoElements(l.links || [])" [groupName]="l.name || ''"></photo-gallery>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>

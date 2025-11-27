@@ -12,7 +12,10 @@ export class PhotoGalleryComponent {
   private _photos: { image: string; label?: string }[] = [];
   @Input() set photos(val: { image: string; label?: string }[]) {
     this._photos = val || [];
-    this.photoIndex = 0; // resetuj indeks przy zmianie zdjęć
+    // Nie resetuj photoIndex jeśli album jest fullscreen
+    if (this.photoIndex >= this._photos.length) {
+      this.photoIndex = 0;
+    }
   }
   get photos() {
     return this._photos;
@@ -31,9 +34,8 @@ export class PhotoGalleryComponent {
       this.photoIndex = 0;
       return;
     }
-    if (idx < 0) idx = max - 1;
-    if (idx >= max) idx = 0;
-    this.photoIndex = idx;
+    // Obsługa przesuwania w lewo/prawo z zawijaniem
+    this.photoIndex = ((idx % max) + max) % max;
   }
 
   getCurrentPhoto() {
