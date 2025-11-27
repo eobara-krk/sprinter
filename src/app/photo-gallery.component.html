@@ -1,0 +1,15 @@
+<div class="photo-gallery-container" *ngIf="photos && photos.length">
+  <div *ngIf="photos.length > 1" class="photo-album-controls">
+    <button (click)="setPhotoIndex(photoIndex-1)">&#8592;</button>
+    <div class="photo-view">
+      <img [src]="getCurrentPhoto().image" alt="Zdjęcie" class="gallery-photo" />
+      <span class="photo-label" *ngIf="getCurrentPhoto().label" [innerHTML]="getCurrentPhoto().label"></span>
+    </div>
+    <button (click)="setPhotoIndex(photoIndex+1)">&#8594;</button>
+  </div>
+  <div *ngIf="photos.length === 1" class="photo-view">
+    <img [src]="photos[0].image" alt="Zdjęcie" class="gallery-photo" />
+    <span class="photo-label" *ngIf="photos[0].label" [innerHTML]="photos[0].label"></span>
+  </div>
+  <div *ngIf="photos.length > 1" class="photo-counter">{{ photoIndex+1 }} / {{ getPhotoCount() }}</div>
+</div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PhotoGalleryComponent } from './photo-gallery.component';
 import { CommonModule, NgFor, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FirstWeekTexts } from './firstWeek-texts';
@@ -68,12 +69,27 @@ interface Item {
     NgSwitch,
     NgSwitchCase,
     NgSwitchDefault,
-    RouterModule
+    RouterModule,
+    PhotoGalleryComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent implements OnInit {
+    // Zwraca tylko elementy typu 'foto' z podanej tablicy linków
+    public getPhotoElements(links: SingleLink[]): { image: string; label?: string }[] {
+      return Array.isArray(links)
+        ? links
+            .filter(l => l.type === 'foto' && typeof l.image === 'string')
+            .map(l => ({ image: l.image as string, label: l.label }))
+        : [];
+    }
+  // Zwraca liczbę zdjęć typu 'foto' w podanej tablicy linków
+  public getPhotoCount(links: SingleLink[]): number {
+    return Array.isArray(links) ? links.filter(l => l.type === 'foto').length : 0;
+  }
+// ...istniejący kod...
   constructor(
     private whatsappCopyService: WhatsappCopyService,
     private whatsappFormatter: WhatsAppFormatterService,
@@ -230,7 +246,19 @@ export class AppComponent implements OnInit {
   // ----------------------
   // ROZWIJANIE/ZWIJANIE EVENTÓW
   // ----------------------
-  toggle = (obj: Item) => this.folderVisibilityService.toggle(this.items, obj, () => this.stopAllAudio());
+  toggle = (obj: Item) => {
+    this.folderVisibilityService.toggle(this.items, obj, () => this.stopAllAudio());
+    // Specjalna logika dla 'utrzymanie 3 nowe filtry'
+    if (obj.links) {
+      const utrzymanie = obj.links.find(g => g.name === 'utrzymanie 3 nowe filtry');
+      if (utrzymanie && utrzymanie.links) {
+        const album = utrzymanie.links.find(l => l.name === 'Album');
+        if (album) album.show = false;
+        const tekst = utrzymanie.links.find(l => l.type === 'opis');
+        if (tekst) tekst.show = false;
+      }
+    }
+  };
 
   // Zatrzymuje wszystkie odtwarzane audio przez serwis
   stopAllAudio = () => {
@@ -244,13 +272,17 @@ export class AppComponent implements OnInit {
   toggleLink = (group: LinkGroup) => this.folderVisibilityService.toggleLink(group, this.summaryPassword);
 
   // Metoda do przełączania zagnieżdżonych grup (tylko jeden otwarty, kliknięcie na otwarty zamyka)
-  toggleOnlyNestedGroup = (nestedGroup: SingleLink, siblings: SingleLink[]) => {
+  toggleOnlyNestedGroup = (nestedGroup: any, siblings: any[]) => {
+    if (!siblings || siblings.length < 2) {
+      nestedGroup.show = !nestedGroup.show;
+      return;
+    }
     if (nestedGroup.show) {
       nestedGroup.show = false;
-    } else {
-      siblings.forEach(s => s.show = false);
-      nestedGroup.show = true;
+      return;
     }
+    siblings.forEach(s => s.show = false);
+    nestedGroup.show = true;
   };
 
   // ----------------------
@@ -434,10 +466,16 @@ items: Item[] = [
         name: 'utrzymanie 3 nowe filtry',
         show: false,
         links: [
-          { image: 'assets/tydzien2/CAM-3986.jpg',type:'foto', label: 'Tylko sprawy,<br>gdzie termin pierwszej licytacji przypada nie wcześniej jak za 2 tyg.' },
-          { image: 'assets/tydzien2/CAM-3987.jpg',type:'foto', label: 'Tylko sprawy z zabezpieczoną nieruchomością <br>lub sprawy bez zabepieczonej nieruchomości' },
-          { image: 'assets/tydzien2/CAM-4071.jpg',type:'foto', label: 'Tylko klienci, którzy mają PESEL lub klienci bez nr PESEL' },
-          { text: this.secondWeekDay1, type:'opis', label: 'utrzymanie 3 nowe filtry' },
+          {
+            name: 'Przegląd kodu',
+            show: false,
+            links: [
+              { image: 'assets/tydzien2/CAM-3986.jpg',type:'foto', label: 'Tylko sprawy,<br>gdzie termin pierwszej licytacji przypada nie wcześniej jak za 2 tyg.' },
+              { image: 'assets/tydzien2/CAM-3987.jpg',type:'foto', label: 'Tylko sprawy z zabezpieczoną nieruchomością <br>lub sprawy bez zabepieczonej nieruchomości' },
+              { image: 'assets/tydzien2/CAM-4071.jpg',type:'foto', label: 'Tylko klienci, którzy mają PESEL lub klienci bez nr PESEL' }
+            ]
+          },
+          { text: this.secondWeekDay1, type:'opis', label: 'utrzymanie 3 nowe filtry' }
         ]
       }
     ] 
@@ -462,9 +500,6 @@ items: Item[] = [
           { text: this.thirdWeekDay1, type:'opis', label: 'CA-cvy' },
         ]
       }
-    ] 
-      },]
-
-
-
+  ]
 }
+];}

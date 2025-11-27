@@ -32,14 +32,7 @@
           <div class="date-line" style="text-align: center;"><h2>{{ currentDateTime | date:'EEEE dd.MM.yyyy':'':'pl-PL' }} r.</h2></div>
           
           <div class="audio-section" style="display: flex; flex-direction: column; align-items: flex-end; width: 100%;">
-            <div style="display: flex; flex-direction: column; align-items: flex-end; width: 100%;">
-              <div style="display: flex; gap: 8px; align-items: center; justify-content: flex-end; width: 100%;">
-  
-              </div>
-              <div style="display: flex; justify-content: flex-end; width: 100%;">
-               
-              </div>
-            </div>
+            <!-- Audio controls mogą być tu dodane, jeśli będą potrzebne -->
           </div>
         </div>
       </div>
@@ -120,7 +113,7 @@
                 <span *ngIf="(group.name && isToday(group.name)) || hasInnerTodayElements(group)">👉</span>
                 <span class="expand-icon">{{ group.show ? '▼' : '▶' }}</span>
                 <span>📁</span>
-                {{ group.name }}
+                <span class="zadanie-label">{{ group.name }}</span>
               </div>
 
               <!-- PODLINKI (grupy z wieloma linkami) -->
@@ -130,50 +123,125 @@
                   <div class="link-grid" [class.photo-grid]="hasPhotoElements(links)">
                 <ng-container *ngFor="let l of links">
                   
-                  <!-- Jeśli link ma zagnieżdżone linki (drugi poziom) -->
+                  <!-- Jeśli link ma zagnieżdżone linki -->
                   <ng-container *ngIf="l.links && l.links.length > 0">
                     <div class="nested-group">
-                      <div class="nested-header" (click)="toggleOnlyNestedGroup(l, links)">
+                      <div class="nested-header" (click)="toggleOnlyNestedGroup(l, links); $event.stopPropagation()">
                         <span class="nested-icon">{{ l.show ? '▼' : '▶' }}</span>
-                        <span [ngSwitch]="l.type">
-                          <span *ngSwitchCase="'film'">🎬</span>
-                          <span *ngSwitchCase="'pdf'">📕</span>
-                          <span *ngSwitchCase="'exec'">💿</span>
-                          <span *ngSwitchCase="'foto'">📷</span>
-                          <span *ngSwitchCase="'audio'">🎵</span>
-                          <span *ngSwitchCase="'youtube'">📺</span>
-                          <span *ngSwitchCase="'html'">🌐</span>
-                          <span *ngSwitchDefault>📁</span>
-                        </span>
-                        {{ l.name || l.label || 'Grupa zagnieżdżona' }}
+                        <span>💻</span>
+                        {{ l.name || l.label || 'Kod' }}
                       </div>
-                      
                       <!-- Zagnieżdżone linki -->
                       <div *ngIf="l.show" class="nested-links">
-                        <a *ngFor="let nestedLink of l.links; trackBy: trackByNestedLink"
-                           class="grid-link nested-link"
-                           [class.today-highlight]="(nestedLink.label || nestedLink.url) ? isToday(nestedLink.label || nestedLink.url || '') : false"
-                           [href]="nestedLink.url || null"
-                           target="_blank"
-                           rel="noopener"
-                           (click)="$event.stopPropagation()">
-
-                          <span *ngIf="(nestedLink.label || nestedLink.url) && isToday(nestedLink.label || nestedLink.url || '')">👉</span>
-                          <span class="sub-icon">➤➤</span>
-
-                          <span [ngSwitch]="nestedLink.type">
-                            <span *ngSwitchCase="'film'">🎬</span>
-                            <span *ngSwitchCase="'pdf'">📕</span>
-                            <span *ngSwitchCase="'exec'">💿</span>
-                            <span *ngSwitchCase="'foto'">📷</span>
-                            <span *ngSwitchCase="'audio'">🎵</span>
-                            <span *ngSwitchCase="'youtube'">📺</span>
-                            <span *ngSwitchCase="'html'">🌐</span>
-                            <span *ngSwitchDefault>📁</span>
-                          </span>
-
-                          {{ nestedLink.label || nestedLink.url }}
-                        </a>
+                        <photo-gallery *ngIf="hasPhotoElements(l.links) && getPhotoCount(l.links) > 1"
+                          [photos]="getPhotoElements(l.links)"
+                          [groupName]="l.name || ''">
+                        </photo-gallery>
+                        <ng-container *ngFor="let nestedLink of l.links">
+                          <ng-container *ngIf="nestedLink.links && nestedLink.links.length > 0; else leafLink">
+                            <div class="nested-group">
+                              <div class="nested-header" (click)="toggleOnlyNestedGroup(nestedLink, l.links); $event.stopPropagation()">
+                                <span class="nested-icon">{{ nestedLink.show ? '▼' : '▶' }}</span>
+                                <span>💻</span>
+                                {{ nestedLink.name || nestedLink.label || 'Kod' }}
+                              </div>
+                              <div *ngIf="nestedLink.show" class="nested-links">
+                                <photo-gallery *ngIf="hasPhotoElements(nestedLink.links) && getPhotoCount(nestedLink.links) > 1"
+                                  [photos]="getPhotoElements(nestedLink.links)"
+                                  [groupName]="nestedLink.name || ''">
+                                </photo-gallery>
+                                <ng-container *ngFor="let deepLink of nestedLink.links">
+                                  <ng-container *ngIf="deepLink.links && deepLink.links.length > 0; else deepLeaf">
+                                    <div class="nested-group">
+                                      <div class="nested-header" (click)="toggleOnlyNestedGroup(deepLink, nestedLink.links); $event.stopPropagation()">
+                                        <span class="nested-icon">{{ deepLink.show ? '▼' : '▶' }}</span>
+                                        <span>💻</span>
+                                        {{ deepLink.name || deepLink.label || 'Kod' }}
+                                      </div>
+                                      <div *ngIf="deepLink.show" class="nested-links">
+                                        <photo-gallery *ngIf="hasPhotoElements(deepLink.links) && getPhotoCount(deepLink.links) > 1"
+                                          [photos]="getPhotoElements(deepLink.links)"
+                                          [groupName]="deepLink.name || ''">
+                                        </photo-gallery>
+                                        <ng-container *ngFor="let leaf of deepLink.links">
+                                          <ng-container *ngIf="leaf.links && leaf.links.length > 0; else leafLeaf">
+                                            <!-- Jeszcze głębiej: kolejne poziomy -->
+                                          </ng-container>
+                                          <ng-template #leafLeaf>
+                                            <a class="grid-link nested-link"
+                                               [class.today-highlight]="(leaf.label || leaf.url) ? isToday(leaf.label || leaf.url || '') : false"
+                                               [href]="leaf.url || null"
+                                               target="_blank"
+                                               rel="noopener"
+                                               (click)="$event.stopPropagation()">
+                                              <span *ngIf="(leaf.label || leaf.url) && isToday(leaf.label || leaf.url || '')">👉</span>
+                                              <span class="sub-icon">➤➤</span>
+                                              <span [ngSwitch]="leaf.type">
+                                                <span *ngSwitchCase="'film'">🎬</span>
+                                                <span *ngSwitchCase="'pdf'">📕</span>
+                                                <span *ngSwitchCase="'exec'">💿</span>
+                                                <span *ngSwitchCase="'foto'">📷</span>
+                                                <span *ngSwitchCase="'audio'">🎵</span>
+                                                <span *ngSwitchCase="'youtube'">📺</span>
+                                                <span *ngSwitchCase="'html'">🌐</span>
+                                                <span *ngSwitchDefault>📁</span>
+                                              </span>
+                                              {{ leaf.label || leaf.url }}
+                                            </a>
+                                          </ng-template>
+                                        </ng-container>
+                                      </div>
+                                    </div>
+                                  </ng-container>
+                                  <ng-template #deepLeaf>
+                                    <a class="grid-link nested-link"
+                                       [class.today-highlight]="(deepLink.label || deepLink.url) ? isToday(deepLink.label || deepLink.url || '') : false"
+                                       [href]="deepLink.url || null"
+                                       target="_blank"
+                                       rel="noopener"
+                                       (click)="$event.stopPropagation()">
+                                      <span *ngIf="(deepLink.label || deepLink.url) && isToday(deepLink.label || deepLink.url || '')">👉</span>
+                                      <span class="sub-icon">➤➤</span>
+                                      <span [ngSwitch]="deepLink.type">
+                                        <span *ngSwitchCase="'film'">🎬</span>
+                                        <span *ngSwitchCase="'pdf'">📕</span>
+                                        <span *ngSwitchCase="'exec'">💿</span>
+                                        <span *ngSwitchCase="'foto'">📷</span>
+                                        <span *ngSwitchCase="'audio'">🎵</span>
+                                        <span *ngSwitchCase="'youtube'">📺</span>
+                                        <span *ngSwitchCase="'html'">🌐</span>
+                                        <span *ngSwitchDefault>📁</span>
+                                      </span>
+                                      {{ deepLink.label || deepLink.url }}
+                                    </a>
+                                  </ng-template>
+                                </ng-container>
+                              </div>
+                            </div>
+                          </ng-container>
+                          <ng-template #leafLink>
+                            <a class="grid-link nested-link"
+                               [class.today-highlight]="(nestedLink.label || nestedLink.url) ? isToday(nestedLink.label || nestedLink.url || '') : false"
+                               [href]="nestedLink.url || null"
+                               target="_blank"
+                               rel="noopener"
+                               (click)="$event.stopPropagation()">
+                              <span *ngIf="(nestedLink.label || nestedLink.url) && isToday(nestedLink.label || nestedLink.url || '')">👉</span>
+                              <span class="sub-icon">➤➤</span>
+                              <span [ngSwitch]="nestedLink.type">
+                                <span *ngSwitchCase="'film'">🎬</span>
+                                <span *ngSwitchCase="'pdf'">📕</span>
+                                <span *ngSwitchCase="'exec'">💿</span>
+                                <span *ngSwitchCase="'foto'">📷</span>
+                                <span *ngSwitchCase="'audio'">🎵</span>
+                                <span *ngSwitchCase="'youtube'">📺</span>
+                                <span *ngSwitchCase="'html'">🌐</span>
+                                <span *ngSwitchDefault>📁</span>
+                              </span>
+                              {{ nestedLink.label || nestedLink.url }}
+                            </a>
+                          </ng-template>
+                        </ng-container>
                       </div>
                     </div>
                   </ng-container>
