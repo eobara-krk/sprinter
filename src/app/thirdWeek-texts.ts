@@ -1,5 +1,5 @@
 export class ThirdWeekTexts {
-static dzien0: string = `<b>jakis tekst</b>
+static MHC: string = `<b>jakis tekst</b>
 <i> kolejny tekst </i>
 Kolejny`;
 

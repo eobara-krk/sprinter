@@ -413,7 +413,7 @@ readonly secondWeekDay1 = SecondWeekTexts.dzien1;
 readonly secondWeekZakresy = SecondWeekTexts.zakresy;
 
 
-readonly thirdWeekDay0 = ThirdWeekTexts.dzien0;
+readonly thirdWeekMHC = ThirdWeekTexts.MHC;
 readonly thirdWeekDay1 = ThirdWeekTexts.dzien1;
 
 
@@ -543,6 +543,22 @@ items: Item[] = [
               { type: 'pdf', url: 'assets/tydzien3/GP.pdf', label: '<b>CA-11837</b> BRAND_GP_AMIEXPRESS' }
             ]
           }
+        ]
+      },
+      {
+        name: 'MHC xyz',
+        show: false,
+        links: [
+          {
+            name: 'Przegląd kodu',
+            show: false,
+            links: [
+              { image: 'assets/tydzien3/mhc1.jpg',type:'foto', label: '<b>mhc</b>' },
+              { image: 'assets/tydzien3/mhc2.jpg',type:'foto', label: '<b>mhc</b>' },
+            ]
+          },
+            { text: this.thirdWeekMHC, type:'opis', label: 'MHC-ugoda' },
+            { type: 'pdf', url: 'assets/tydzien3/mhc.pdf', label: '<b>mhc</b>' }
         ]
       }
   ]
