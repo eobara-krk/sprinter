@@ -410,6 +410,7 @@ readonly firstWeekDay3 = FirstWeekTexts.dzien3;
 
 readonly secondWeekDay0 = SecondWeekTexts.dzien0;
 readonly secondWeekDay1 = SecondWeekTexts.dzien1;
+readonly secondWeekZakresy = SecondWeekTexts.zakresy;
 
 
 readonly thirdWeekDay0 = ThirdWeekTexts.dzien0;
@@ -474,7 +475,7 @@ items: Item[] = [
         ]
       },
        {
-        name: 'utrzymanie 3 nowe filtry',
+        name: 'utrzymanie: 3 nowe filtry',
         show: false,
         links: [
           {
@@ -489,6 +490,21 @@ items: Item[] = [
             ]
           },
             { text: this.secondWeekDay1, type:'opis', label: 'filtry' },
+        ]
+      },
+      {
+        name: 'CAM-2028: zmiana zakresów ukrywania nieuzywanych pism',
+        show: false,
+        links: [
+          {
+            name: 'Przegląd kodu',
+            show: false,
+            links: [
+              { image: 'assets/tydzien2/zakres1.jpg',type:'foto', label: '<b>CAM-2028</b> <i>DEL_SP_MailingLetterTemplate_Deleted</i> <br>procedura pilnująca zakresów' },
+              { image: 'assets/tydzien2/zakres2.jpg',type:'foto', label: '<b>CAM-2028</b> <br>Przykłady zakresów' },
+            ]
+          },
+            { text: this.secondWeekZakresy, type:'opis', label: 'zakresy' },
         ]
       }
     ] 
