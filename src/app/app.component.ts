@@ -7,9 +7,7 @@ import  {SecondWeekTexts } from './secondWeek-texts';
 import {ThirdWeekTexts} from './thirdWeek-texts';  
 import { TextFormatService } from './text-format.service';
 import { TextVisibilityService } from './text-visibility.service';
-import { DynamicTitles } from './dynamic-titles';
 import { FolderVisibilityService } from './folder-visibility.service';
-// Usunięto LinkService, logika przeniesiona lokalnie
 import { ImageService } from './image.service';
 
 // Typy dla linków i itemów
@@ -333,7 +331,7 @@ readonly thirdWeekDay1 = ThirdWeekTexts.dzien1;
 items: Item[] = [
  
 {
-  title: DynamicTitles.getFirstWeekTitle(this.startDate),
+  title: 'XFormy monitorujące naruszenia w komunikatach mail/sms/pismo',
   show: false, // opcjonalnie, żeby nie był od razu rozwinięty
   links: [
  
@@ -352,7 +350,7 @@ items: Item[] = [
 },
 
 {
-  title: DynamicTitles.getSecondWeekTitle(this.startDate),
+  title: '<b>Sprint 10:</b> <i>12 XI - 26 XI</i>',
   show: false,
    links: [
   {
@@ -421,7 +419,7 @@ items: Item[] = [
     ] 
 },
 {
-  title: DynamicTitles.getThirdWeekTitle(this.startDate),
+  title: '<b>Sprint 11:</b> <i>26 XI - 10 XII</i>',
   show: false,
    links: [
       {
