@@ -408,8 +408,7 @@ items: Item[] = [
                 { image: 'assets/tydzien3/1a.jpg',type:'foto', label: 'szukanie po ciągu znaków' },
                 { image: 'assets/tydzien3/2a.jpg',type:'foto', label: 'przypisanie do właściwej kategorii' },
             ]
-          },
-            { text: this.secondWeekDay1, type:'opis', label: 'klauzula' },
+          }
         ]
       },
       {
@@ -420,11 +419,11 @@ items: Item[] = [
             name: 'Przegląd kodu',
             show: false,
             links: [
-          { image: 'assets/tydzien3/0a.jpg',type:'foto', label: 'kod kolektora MailingService' },
-          { image: 'assets/tydzien3/1a.jpg',type:'foto', label: 'Nowe pismo testowe: Generator masowy z załacznikami' },
-          { image: 'assets/tydzien3/2a.jpg',type:'foto', label: 'Podpiecie paczki z kolektorem do pisma' },
-          { image: 'assets/tydzien3/3a.jpg',type:'foto', label: 'Generowanie pisma i wybor załacznika, za którego odpowiada kolektor' },
-          { image: 'assets/tydzien3/3a.jpg',type:'foto', label: 'Generowanie pisma i wybor załacznika, za którego odpowiada kolektor' },
+          { image: 'assets/tydzien3/3a.jpg',type:'foto', label: 'kod kolektora MailingService' },
+          { image: 'assets/tydzien3/4a.jpg',type:'foto', label: 'Nowe pismo testowe: Generator masowy z załacznikami' },
+          { image: 'assets/tydzien3/5a.jpg',type:'foto', label: 'Podpiecie paczki z kolektorem do pisma' },
+          { image: 'assets/tydzien3/6a.jpg',type:'foto', label: 'Generowanie pisma i wybor załacznika, za którego odpowiada kolektor' },
+          { image: 'assets/tydzien3/7a.jpg',type:'foto', label: 'Generowanie pisma i wybor załacznika, za którego odpowiada kolektor' },
             ]
           },
           { type: 'pdf', url: 'assets/tydzien3/PismoiZalacznik.pdf', label: '<b>CA-11798 </b> Klauzula na współmałżonka z załacznikiem' }
