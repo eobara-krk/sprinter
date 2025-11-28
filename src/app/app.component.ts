@@ -338,17 +338,65 @@ items: Item[] = [
           { image: 'assets/tydzien1/pismaAdres.jpg',type:'foto', label: 'adres na pismach' },
           { text: this.firstWeekDay1, type:'opis', label: 'adres sms/maile' },
           { text: this.firstWeekDay2, type:'opis', label: 'maile czcionka' },
-          { text: this.firstWeekDay3, type:'opis', label: 'zakazane znaki w sms' },
+          { text: this.firstWeekDay3, type:'opis', label: 'zakazane znaki w sms' },    
+        ]
+      },
+{
+        name: 'CAM-2028: zmiana zakresów ukrywania nieużywanych pism',
+        show: false,
+        links: [
+          {
+            name: 'Przegląd kodu',
+            show: false,
+            links: [
+              { image: 'assets/tydzien2/zakres1.jpg',type:'foto', label: '<b>CAM-2028</b> <i>DEL_SP_MailingLetterTemplate_Deleted</i> <br>procedura pilnująca zakresów' },
+              { image: 'assets/tydzien2/zakres2.jpg',type:'foto', label: '<b>CAM-2028</b> <br>Przykłady zakresów' },
+            ]
+          },
+            { text: this.secondWeekZakresy, type:'opis', label: 'zakresy' },
         ]
       }
-    ] 
+    ],   
 },
 
 {
   title: '<b>Sprint 10:</b> <i>12 XI - 26 XI</i>',
   show: false,
    links: [
-  {
+  
+
+       {
+        name: 'utrzymanie: 3 nowe filtry',
+        show: false,
+        links: [
+          {
+            name: 'Przegląd kodu',
+            show: false,
+            links: [
+              { image: 'assets/tydzien2/CAM-3986.jpg',type:'foto', label: '<b>CAM-3986</b> <br>Tylko sprawy, gdzie termin pierwszej licytacji przypada nie wcześniej jak za 2 tyg.' },
+              { image: 'assets/tydzien2/CAM-3987.jpg',type:'foto', label: '<b>CAM-3987</b> <br>Tylko sprawy z zabezpieczoną nieruchomością lub sprawy bez zabepieczonej nieruchomości' },
+              { image: 'assets/tydzien2/CAM-4071.jpg',type:'foto', label: '<b>CAM-4071</b> <br>Tylko klienci, którzy mają PESEL lub klienci bez nr PESEL' },
+              { image: 'assets/tydzien2/CAM-4071a.jpg',type:'foto', label: '<b>CAM-4071</b> <br>Tylko klienci, którzy mają PESEL lub klienci bez nr PESEL' },
+              { image: 'assets/tydzien2/CAM-4071b.jpg',type:'foto', label: '<b>CAM-4071</b> <br>Tylko klienci, którzy mają PESEL lub klienci bez nr PESEL' }
+            ]
+          }
+
+        ]
+      }
+    ] 
+},
+{
+  title: '<b>Sprint 11:</b> <i>26 XI - 10 XII</i>',
+  show: false,
+   links: [
+            {
+        name: 'CA-11792 RODO do GP aktualizacja',
+        show: false,
+        links: [
+            { type: 'pdf', url: 'assets/tydzien2/rodo.pdf', label: '<b>CA-11792</b> Klauzula RODO dla GP ' }
+        ]
+      },
+      {
         name: 'CA-11798 Klauzula na współmałżonka cz. 1',
         show: false,
         links: [
@@ -364,52 +412,6 @@ items: Item[] = [
             { text: this.secondWeekDay1, type:'opis', label: 'klauzula' },
         ]
       },
-        {
-        name: 'CA-11792 RODO do GP aktualizacja',
-        show: false,
-        links: [
-            { type: 'pdf', url: 'assets/tydzien2/rodo.pdf', label: '<b>CA-11792</b> Klauzula RODO dla GP ' }
-        ]
-      },
-       {
-        name: 'utrzymanie: 3 nowe filtry',
-        show: false,
-        links: [
-          {
-            name: 'Przegląd kodu',
-            show: false,
-            links: [
-              { image: 'assets/tydzien2/CAM-3986.jpg',type:'foto', label: '<b>CAM-3986</b> <br>Tylko sprawy, gdzie termin pierwszej licytacji przypada nie wcześniej jak za 2 tyg.' },
-              { image: 'assets/tydzien2/CAM-3987.jpg',type:'foto', label: '<b>CAM-3987</b> <br>Tylko sprawy z zabezpieczoną nieruchomością lub sprawy bez zabepieczonej nieruchomości' },
-              { image: 'assets/tydzien2/CAM-4071.jpg',type:'foto', label: '<b>CAM-4071</b> <br>Tylko klienci, którzy mają PESEL lub klienci bez nr PESEL' },
-              { image: 'assets/tydzien2/CAM-4071a.jpg',type:'foto', label: '<b>CAM-4071</b> <br>Tylko klienci, którzy mają PESEL lub klienci bez nr PESEL' },
-              { image: 'assets/tydzien2/CAM-4071b.jpg',type:'foto', label: '<b>CAM-4071</b> <br>Tylko klienci, którzy mają PESEL lub klienci bez nr PESEL' }
-            ]
-          },
-            { text: this.secondWeekDay1, type:'opis', label: 'filtry' },
-        ]
-      },
-      {
-        name: 'CAM-2028: zmiana zakresów ukrywania nieuzywanych pism',
-        show: false,
-        links: [
-          {
-            name: 'Przegląd kodu',
-            show: false,
-            links: [
-              { image: 'assets/tydzien2/zakres1.jpg',type:'foto', label: '<b>CAM-2028</b> <i>DEL_SP_MailingLetterTemplate_Deleted</i> <br>procedura pilnująca zakresów' },
-              { image: 'assets/tydzien2/zakres2.jpg',type:'foto', label: '<b>CAM-2028</b> <br>Przykłady zakresów' },
-            ]
-          },
-            { text: this.secondWeekZakresy, type:'opis', label: 'zakresy' },
-        ]
-      }
-    ] 
-},
-{
-  title: '<b>Sprint 11:</b> <i>26 XI - 10 XII</i>',
-  show: false,
-   links: [
       {
         name: 'CA-11798 Klauzula na współmałżonka cz. 2',
         show: false,
@@ -432,7 +434,7 @@ items: Item[] = [
         name: 'CA-11837 [AMI EXPRESS] Wdrażanie pisma GP',
         show: false,
         links: [
-            { type: 'pdf', url: 'assets/tydzien3/GP.pdf', label: '<b>CA-11837</b> BRAND_GP_AMIEXPRESS' }
+            { type: 'pdf', url: 'assets/tydzien3/amiexpres.pdf', label: '<b>CA-11837</b> BRAND_GP_AMIEXPRESS' }
         ]
       },
       {
