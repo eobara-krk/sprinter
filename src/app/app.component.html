@@ -34,10 +34,7 @@
               <h2 style="font-size:1.1em; margin:0;">{{ currentDateTime | date:'EEEE dd.MM.yyyy':'':'pl-PL' }} r.</h2>
             </div>
           </div>
-          
-          <div class="audio-section" style="display: flex; flex-direction: column; align-items: flex-end; width: 100%;">
-            <!-- Audio controls mogą być tu dodane, jeśli będą potrzebne -->
-          </div>
+       
         </div>
       </div>
     </div>
@@ -48,9 +45,8 @@
     <!-- EVENTY -->
   <div *ngFor="let item of items; let i = index, trackBy: trackByTitle" class="event-card" [attr.id]="'folder-' + i">
 
-      <!-- Nagłówek wydarzenia -->
-      <div class="event-header" (click)="toggle(item)">
-  <!-- Usunięto warunek na dzisiejszą datę -->
+  <!-- Nagłówek wydarzenia gówny folder z pineską-->
+  <div class="event-header" (click)="toggle(item)">
   <span>📌 <span class="event-title" [innerHTML]="item.title"></span></span>
   <span>{{ item.show ? '▲' : '▼' }}</span>
       </div>
@@ -82,7 +78,6 @@
 
             <!-- OPIS -->
             <div *ngIf="group.type==='opis'" class="grid-link description-link" (click)="openOnly(group, item)">
-              <!-- Usunięto warunek na dzisiejszą datę -->
               <span *ngIf="group.protected">🔒</span>
               <span *ngIf="!group.protected">📝</span>
               {{ group.name }}
@@ -101,7 +96,7 @@
                   <ng-container *ngIf="group.links[0].name === 'zalacznik'">
                     <span class="folder-icon" style="color:gold">📁</span>
                   </ng-container>
-                  <span class="zadanie-label">{{ group.name }}</span>
+                    <span class="zadanie-label">{{ group.links[0].name }}</span>
                 </div>
                 <!-- Album zdjęć w podgrupie lub PDF-y w zalacznik -->
                 <div *ngIf="group.links[0].show" class="sub-links-container">
@@ -316,7 +311,6 @@
                         <span class="text-toggle-icon">▼</span>
                       </div>
                     </div>
-                    <!-- overlay tekstu przeniesiony na koniec pliku -->
                   </ng-container>
                 </ng-container>
                   </div>
