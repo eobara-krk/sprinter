@@ -9,7 +9,6 @@ import { TextFormatService } from './text-format.service';
 import { TextVisibilityService } from './text-visibility.service';
 import { getDaysToEnd, getDaysRangeLabel } from './cycle-utils';
 import { DynamicTitles } from './dynamic-titles';
-import { AudioPlayerService } from './audio-player.service';
 import { getWiosnaStart, getWiosnaStop } from './constants';
 import { FolderVisibilityService } from './folder-visibility.service';
 import { DateUtilsService } from './date-utils.service';
@@ -89,9 +88,9 @@ export class AppComponent implements OnInit {
   }
 // ...istniejący kod...
   constructor(
-    public audioPlayer: AudioPlayerService,
     public textVisibilityService: TextVisibilityService,
     public textFormatService: TextFormatService,
+    // public audioPlayer: AudioPlayerService,
     public folderVisibilityService: FolderVisibilityService,
     public dateUtilsService: DateUtilsService,
     public linkService: LinkService,
@@ -101,39 +100,12 @@ export class AppComponent implements OnInit {
   title = '33';
 
   // AUDIO PLAYER TOTUS TUUS przez serwis
-  audioUrl = 'assets/totus_tuus.mp3';
-
-  summaryPassword = 'syn';
-
+  // Removed leftover audio logic
   currentDateTime: Date = new Date(); // data biezaca
    //currentDateTime: Date | null = new Date(2026, 4, 1); // (2025, 4, 2) = 2 maj
 
 
   // KONFIGURACJA DAT - tutaj ustawiasz datę startu 
- get startDate(): Date {
-    const today = this.currentDateTime ?? new Date();
-    today.setHours(0,0,0,0);
-    const year = today.getFullYear();
-    const wiosnaStart = getWiosnaStart(year);
-    const wiosnaStop = getWiosnaStop(year);
-    if (today >  wiosnaStart && today < wiosnaStop) {
-      return new Date(year, 2, 22); // 22 marca
-    } else {
-      return new Date(year, 9, 27); // 27 października
-    }
-  }
-
-    // Licznik dni do 8 grudnia lub 3 maja
-  get daysToEnd(): string {
-    return getDaysToEnd(this.currentDateTime);
-  }
-
-  get daysRangeLabel(): string {
-    return getDaysRangeLabel(this.currentDateTime);
-  }
-
-
-  // Metoda pomocnicza do generowania nazwy dnia z datą
   private getDayName(date: Date): string {
     const dayNames = ['niedziela', 'poniedziałek', 'wtorek', 'środa', 'czwartek', 'piątek', 'sobota'];
     const dayName = dayNames[date.getDay()];
@@ -151,46 +123,6 @@ export class AppComponent implements OnInit {
   }
 
 
-  // Debounce helper
-  private lastAudioToggle = 0;
-  private debounceMs = 400;
-
-  // Unified audio toggle for any audio file (Totus Tuus or local) with debounce
-  toggleAudio(url: string = this.audioUrl) {
-    const now = Date.now();
-    if (now - this.lastAudioToggle < this.debounceMs) {
-      return;
-    }
-    this.lastAudioToggle = now;
-
-    const audioEl = (this.audioPlayer as any).audioElements?.[url];
-    if (audioEl && audioEl.paused && audioEl.currentTime > 0 && (this.audioPlayer.getCurrentUrl() === null)) {
-      audioEl.play();
-      (this.audioPlayer as any).playingUrl = url;
-    } else if (this.audioPlayer.isPlaying(url)) {
-      this.audioPlayer.pauseOnly(url);
-    } else {
-      // Stop all other audio
-      this.audioPlayer.stopAll();
-      this.audioPlayer.play(
-        url,
-        0.8,
-        () => {},
-        () => {}
-      );
-    }
-  }
-
-  // Stop any audio by url
-  stopAudio(url: string = this.audioUrl) {
-  this.audioPlayer.pause(url);
-  }
- 
-  // Sprawdza czy w tablicy linków jest audio z url
-  hasAudioLink(links: SingleLink[]): boolean {
-    return Array.isArray(links) && links.some(x => x.type === 'audio' && !!x.url);
-  }
-
 
 
   fullscreenImage: string | null = null; // <-- globalny fullscreen
@@ -207,14 +139,6 @@ export class AppComponent implements OnInit {
     }, 2000);
   }
 
-  // Odtwarzanie lokalnych audio przez serwis
-  playLocalAudio(url: string, volume = 1, onEnd?: () => void, onError?: () => void) {
-    this.audioPlayer.play(url, volume, onEnd, onError);
-  }
-
-  isLocalAudioPlaying(url: string): boolean {
-    return this.audioPlayer.isPlaying(url);
-  }
 
   // Automatyczne otwieranie folderów z dzisiejsą datą
   openTodayFolders = () => this.folderVisibilityService.openTodayFolders(
@@ -247,9 +171,13 @@ export class AppComponent implements OnInit {
 
   // Zatrzymuje wszystkie odtwarzane audio przez serwis
   stopAllAudio = () => {
-  this.audioPlayer.stopAll();
-  this.audioPlayer.pause(this.audioUrl);
+    // Funkcja pusta, audio usunięte
   };
+  summaryPassword = 'syn';
+  get startDate(): Date {
+    // Przykładowa implementacja, dostosuj według potrzeb
+    return new Date();
+  }
 
   // ----------------------
   // CHRONIONE TEKSTY
