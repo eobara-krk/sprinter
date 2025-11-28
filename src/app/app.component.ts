@@ -328,7 +328,7 @@ readonly thirdWeekDay1 = ThirdWeekTexts.dzien1;
 items: Item[] = [
  
 {
-  title: 'XFormy monitorujące naruszenia w komunikatach mail/sms/pismo',
+  title: 'XFormy na potrzeby komunikatów mail/sms/pismo',
   show: false, // opcjonalnie, żeby nie był od razu rozwinięty
   links: [
      {
