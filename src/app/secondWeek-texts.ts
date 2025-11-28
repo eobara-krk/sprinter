@@ -17,7 +17,5 @@ static zakresy: string = `<div style="font-family: 'Segoe UI', Tahoma, Geneva, V
     1) Pismo jest utworzone - czekamy <b>90 dni</b> na wysyłkę, jeśli nie zostanie wysłane - ukrywamy.<br>
     2) Pismo zostało wysłane - czekamy <b>2 lata</b> na ponowną wysyłkę, jeśli nie ma kolejnej wysyłki - ukrywamy.<br>
     3) Pismo zostało odkryte - czekamy <b>45 dni</b> na wysyłkę, jeśli nie ma wysyłki w ciągu 45 dni - ukrywamy.<br><br>
-
-    (Dane w polu: <em>Kto utworzył szablon</em>, pojawia się dla pism utworzonych po 27.03.2023 r.)
   </div>`;
 }

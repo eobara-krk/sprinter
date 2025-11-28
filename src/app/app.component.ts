@@ -312,12 +312,11 @@ export class AppComponent implements OnInit {
 readonly firstWeekDay1 = FirstWeekTexts.dzien1;
 readonly firstWeekDay2 = FirstWeekTexts.dzien2;
 readonly firstWeekDay3 = FirstWeekTexts.dzien3;
+readonly firstWeekDay4 = FirstWeekTexts.zakresy;
 
 
 readonly secondWeekDay0 = SecondWeekTexts.dzien0;
 readonly secondWeekDay1 = SecondWeekTexts.dzien1;
-readonly secondWeekZakresy = SecondWeekTexts.zakresy;
-
 
 readonly thirdWeekMHC = ThirdWeekTexts.MHC;
 readonly thirdWeekDay1 = ThirdWeekTexts.dzien1;
@@ -345,6 +344,7 @@ items: Item[] = [
         name: 'CAM-2028: zmiana zakresów ukrywania nieużywanych pism',
         show: false,
         links: [
+          { text: this.firstWeekDay4, type:'opis', label: 'zakresy' },
           {
             name: 'Przegląd kodu',
             show: false,
@@ -352,8 +352,8 @@ items: Item[] = [
               { image: 'assets/tydzien1/zakres1.jpg',type:'foto', label: '<b>CAM-2028</b> <i>DEL_SP_MailingLetterTemplate_Deleted</i> <br>procedura pilnująca zakresów' },
               { image: 'assets/tydzien1/zakres2.jpg',type:'foto', label: '<b>CAM-2028</b> <br>Przykłady zakresów' },
             ]
-          },
-            { text: this.secondWeekZakresy, type:'opis', label: 'zakresy' },
+          }
+            
         ]
       }
     ],   
@@ -406,7 +406,7 @@ items: Item[] = [
             links: [
                 { image: 'assets/tydzien3/0a.jpg',type:'foto', label: 'przelew plik pdf' },
                 { image: 'assets/tydzien3/1a.jpg',type:'foto', label: 'szukanie po ciągu znaków' },
-                { image: 'assets/tydzien3/2a.jpg',type:'foto', label: 'przypisanie do właściwej kategorii' },
+                { image: 'assets/tydzien3/2a.jpg',type:'foto', label: 'przypisanie do właściwej kategorii w zakładce Z załączniki' },
             ]
           }
         ]
@@ -419,14 +419,14 @@ items: Item[] = [
             name: 'Przegląd kodu',
             show: false,
             links: [
-          { image: 'assets/tydzien3/3a.jpg',type:'foto', label: 'kod kolektora MailingService' },
-          { image: 'assets/tydzien3/4a.jpg',type:'foto', label: 'Nowe pismo testowe: Generator masowy z załacznikami' },
-          { image: 'assets/tydzien3/5a.jpg',type:'foto', label: 'Podpiecie paczki z kolektorem do pisma' },
-          { image: 'assets/tydzien3/6a.jpg',type:'foto', label: 'Generowanie pisma i wybor załacznika, za którego odpowiada kolektor' },
-          { image: 'assets/tydzien3/7a.jpg',type:'foto', label: 'Generowanie pisma i wybor załacznika, za którego odpowiada kolektor' },
+          { image: 'assets/tydzien3/3a0.jpg',type:'foto', label: 'Kod kolektora w MailingService' },
+          { image: 'assets/tydzien3/3a1.jpg',type:'foto', label: 'Konfiguracja kolektora w bazie' },
+          { image: 'assets/tydzien3/3a2.jpg',type:'foto', label: 'Podpinanie pisma pod paczke z kolektorem' },
+          { image: 'assets/tydzien3/3a.jpg',type:'foto', label: 'Sądowy generator pism masowych z załacznikami' },
+          { image: 'assets/tydzien3/4a.jpg',type:'foto', label: 'Wybieram, który załacznik dołaczyć do pisma' },
             ]
           },
-          { type: 'pdf', url: 'assets/tydzien3/PismoiZalacznik.pdf', label: '<b>CA-11798 </b> Klauzula na współmałżonka z załacznikiem' }
+          { type: 'pdf', url: 'assets/tydzien3/pismoZal.pdf', label: '<b>CA-11798 </b> Klauzula na współmałżonka z załacznikiem' }
         ]
       },
       {
@@ -437,7 +437,7 @@ items: Item[] = [
         ]
       },
       {
-        name: 'MHC xyz',
+        name: 'MHC warsztayu',
         show: false,
         links: [
           {
