@@ -7,12 +7,9 @@ import  {SecondWeekTexts } from './secondWeek-texts';
 import {ThirdWeekTexts} from './thirdWeek-texts';  
 import { TextFormatService } from './text-format.service';
 import { TextVisibilityService } from './text-visibility.service';
-import { getDaysToEnd, getDaysRangeLabel } from './cycle-utils';
 import { DynamicTitles } from './dynamic-titles';
-import { getWiosnaStart, getWiosnaStop } from './constants';
 import { FolderVisibilityService } from './folder-visibility.service';
-import { DateUtilsService } from './date-utils.service';
-import { LinkService } from './link.service';
+// Usunięto LinkService, logika przeniesiona lokalnie
 import { ImageService } from './image.service';
 
 // Typy dla linków i itemów
@@ -92,8 +89,8 @@ export class AppComponent implements OnInit {
     public textFormatService: TextFormatService,
     // public audioPlayer: AudioPlayerService,
     public folderVisibilityService: FolderVisibilityService,
-    public dateUtilsService: DateUtilsService,
-    public linkService: LinkService,
+    // ...existing code...
+    // public linkService: LinkService,
     public imageService: ImageService
   ) {}
   
@@ -133,7 +130,7 @@ export class AppComponent implements OnInit {
   // INICJALIZACJA - AUTOMATYCZNE OTWIERANIE DZISIEJSZYCH FOLDERÓW
   // ----------------------
   ngOnInit() {
-    this.openTodayFolders();
+    // this.openTodayFolders() removed
     setTimeout(() => {
       this.scrollToToday();
     }, 2000);
@@ -141,17 +138,16 @@ export class AppComponent implements OnInit {
 
 
   // Automatyczne otwieranie folderów z dzisiejsą datą
-  openTodayFolders = () => this.folderVisibilityService.openTodayFolders(
-    this.items,
-    (title: string) => this.dateUtilsService.isTodayInTitleRange(title, this.currentDateTime),
-    (name: string) => this.dateUtilsService.isToday(name, this.currentDateTime)
-  );
 
    // ----------------------
   // OTWIERANIE LINKÓW
   // ----------------------
   openLink(linkOrGroup: SingleLink | SingleLink[]) {
-    this.linkService.openLink(linkOrGroup);
+    if (Array.isArray(linkOrGroup)) {
+      if (linkOrGroup.length > 0) window.open(linkOrGroup[0].url, '_blank');
+      return;
+    }
+    if (linkOrGroup.url) window.open(linkOrGroup.url, '_blank');
   }
 
   // ----------------------
@@ -224,10 +220,7 @@ export class AppComponent implements OnInit {
   // ----------------------
   // CZY DANA DATA JEST DZISIAJ
   // ----------------------
-  isTodayInTitleRange = (title: string) => this.dateUtilsService.isTodayInTitleRange(title, this.currentDateTime);
-  isToday = (name: string) => this.dateUtilsService.isToday(name, this.currentDateTime);
-  hasInnerTodayElements = (group: LinkGroup) => this.dateUtilsService.hasInnerTodayElements(group, this.currentDateTime);
-  hasInnerTodayGroups = (item: Item) => this.dateUtilsService.hasInnerTodayGroups(item, this.currentDateTime);
+  // ...existing code...
 
   // ----------------------
   // OTWIERANIE TYLKO JEDNEJ GRUPY
@@ -238,14 +231,17 @@ export class AppComponent implements OnInit {
 
     // NOWA METODA: BEZPIECZNY GŁÓWNY LINK
   // ----------------------
-  getMainLink = (group: LinkGroup): string | null => this.linkService.getMainLink(group);
+  getMainLink = (group: LinkGroup): string | null => {
+    if (!group.links || group.links.length === 0) return null;
+    return group.links.length === 1 ? group.links[0]?.url || null : null;
+  };
 
   // ----------------------
   // KONTROLKI NAWIGACJI MOBILE
   // ----------------------
   collapseAll = () => this.folderVisibilityService.collapseAll(this.items);
 
-  expandToday = () => this.folderVisibilityService.expandToday(this.items, (items: Item[]) => this.openTodayFolders());
+  expandToday = () => this.folderVisibilityService.expandToday(this.items, () => {});
 
   // ----------------------
   // ZAMYKANIE STRONY

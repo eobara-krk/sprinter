@@ -1,5 +1,45 @@
 import { Injectable } from '@angular/core';
-import { Item, LinkGroup, SingleLink } from './constants';
+// Lokalne typy przeniesione z constants.ts
+interface LinkGroup {
+  name: string;
+  show?: boolean;
+  type?: string;
+  links?: SingleLink[];
+  text?: string;
+  protected?: boolean;
+  image?: string;
+  fullscreen?: boolean;
+  url?: string;
+}
+
+interface SingleLink {
+  url?: string;
+  type?: string;
+  label?: string;
+  fullscreen?: boolean;
+  image?: string;
+  name?: string;
+  show?: boolean;
+  links?: SingleLink[];
+  text?: string;
+  hidden?: boolean;
+}
+
+interface Meeting {
+  date: string;
+  show: boolean;
+  links?: LinkGroup[];
+  meetings?: Meeting[];
+}
+
+interface Item {
+  title: string;
+  show: boolean;
+  image?: string;
+  fullscreen?: boolean;
+  links?: LinkGroup[];
+  meetings?: Meeting[];
+}
 
 @Injectable({ providedIn: 'root' })
 export class FolderVisibilityService {

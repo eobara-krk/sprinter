@@ -50,7 +50,7 @@
 
       <!-- Nagłówek wydarzenia -->
       <div class="event-header" (click)="toggle(item)">
-  <span *ngIf="isTodayInTitleRange(item.title) || hasInnerTodayGroups(item)">👉</span>
+  <!-- Usunięto warunek na dzisiejszą datę -->
   <span>📌 <span class="event-title" [innerHTML]="item.title"></span></span>
   <span>{{ item.show ? '▲' : '▼' }}</span>
       </div>
@@ -82,7 +82,7 @@
 
             <!-- OPIS -->
             <div *ngIf="group.type==='opis'" class="grid-link description-link" (click)="openOnly(group, item)">
-              <span *ngIf="(group.name && isToday(group.name)) || hasInnerTodayElements(group)">👉</span>
+              <!-- Usunięto warunek na dzisiejszą datę -->
               <span *ngIf="group.protected">🔒</span>
               <span *ngIf="!group.protected">📝</span>
               {{ group.name }}
@@ -129,13 +129,10 @@
             <div *ngIf="group.type !== 'opis' && group.links && group.links.length > 1" 
                  class="group-container"
                  [class.expanded]="group.show"
-                 [class.today-highlight]="group.name ? isToday(group.name) : false"
                  (click)="openOnly(group, item); $event.stopPropagation()">
                  
               <!-- Główny link grupy -->
-              <div class="grid-link main-link"
-                   [class.today-highlight]="group.name ? isToday(group.name) : false">
-                <span *ngIf="(group.name && isToday(group.name)) || hasInnerTodayElements(group)">👉</span>
+              <div class="grid-link main-link">
                 <span class="expand-icon">{{ group.show ? '▼' : '▶' }}</span>
                 <span>📁</span>
                 <span class="zadanie-label">{{ group.name }}</span>
@@ -197,12 +194,12 @@
                                           </ng-container>
                                           <ng-template #leafLeaf>
                                             <a class="grid-link nested-link"
-                                               [class.today-highlight]="(leaf.label || leaf.url) ? isToday(leaf.label || leaf.url || '') : false"
+                                               
                                                [href]="leaf.url || null"
                                                target="_blank"
                                                rel="noopener"
                                                (click)="$event.stopPropagation()">
-                                              <span *ngIf="(leaf.label || leaf.url) && isToday(leaf.label || leaf.url || '')">👉</span>
+                                              
                                               <span class="sub-icon">➤➤</span>
                                               <span [ngSwitch]="leaf.type">
                                                 <span *ngSwitchCase="'film'">🎬</span>
@@ -223,12 +220,12 @@
                                   </ng-container>
                                   <ng-template #deepLeaf>
                                     <a class="grid-link nested-link"
-                                       [class.today-highlight]="(deepLink.label || deepLink.url) ? isToday(deepLink.label || deepLink.url || '') : false"
+                                       
                                        [href]="deepLink.url || null"
                                        target="_blank"
                                        rel="noopener"
                                        (click)="$event.stopPropagation()">
-                                      <span *ngIf="(deepLink.label || deepLink.url) && isToday(deepLink.label || deepLink.url || '')">👉</span>
+                                      
                                       <span class="sub-icon">➤➤</span>
                                       <span [ngSwitch]="deepLink.type">
                                         <span *ngSwitchCase="'film'">🎬</span>
@@ -249,12 +246,12 @@
                           </ng-container>
                           <ng-template #leafLink>
                             <a class="grid-link nested-link"
-                               [class.today-highlight]="(nestedLink.label || nestedLink.url) ? isToday(nestedLink.label || nestedLink.url || '') : false"
+                               
                                [href]="nestedLink.url || null"
                                target="_blank"
                                rel="noopener"
                                (click)="$event.stopPropagation()">
-                              <span *ngIf="(nestedLink.label || nestedLink.url) && isToday(nestedLink.label || nestedLink.url || '')">👉</span>
+                              
                               <span class="sub-icon">➤➤</span>
                               <span [ngSwitch]="nestedLink.type">
                                 <span *ngSwitchCase="'film'">🎬</span>
@@ -278,9 +275,8 @@
                   <ng-container *ngIf="!l.links || l.links.length === 0">
                     <!-- Element foto (tylko zdjęcie) -->
                     <div *ngIf="l.type==='foto'" 
-                         class="grid-link sub-link foto-item"
-                         [class.today-highlight]="(l.label || l.url) ? isToday(l.label || l.url || '') : false">
-                      <div class="link-thumb-container">
+                         class="grid-link sub-link foto-item">
+                       <div class="link-thumb-container">
                         <img [src]="l.image" 
                              alt="Miniaturka" 
                              class="link-thumb"
@@ -291,7 +287,7 @@
                              (click)="toggleFullscreen(l.image); $event.preventDefault(); $event.stopPropagation();" />
                         <span class="link-label" *ngIf="l.label" [innerHTML]="l.label"></span>
                       </div>
-                      <span *ngIf="(l.label || l.url) && isToday(l.label || l.url || '')">👉</span>
+                      
                     </div>
 
                     <!-- Element PDF z ikoną -->
