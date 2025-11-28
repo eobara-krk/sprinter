@@ -78,7 +78,8 @@
               <div *ngIf="group.links && group.links.length > 0" class="group-container">
                 <div class="grid-link main-link" (click)="toggleOnlyNestedGroup(group, item.links || [])">
                   <span class="expand-icon">▶</span>
-                  <span>📁</span>
+                  <span *ngIf="group.name !== 'Przegląd kodu'">📁</span>
+                  <span *ngIf="group.name === 'Przegląd kodu'">🖼️</span>
                   <span class="zadanie-label">{{ group.name }}</span>
                   <span>{{ group.show ? '▲' : '▼' }}</span>
                 </div>
@@ -88,7 +89,8 @@
                     <div *ngIf="link.links && link.links.length > 0" class="group-container nested-group">
                       <div class="grid-link main-link" (click)="toggleOnlyNestedGroup(link, group.links)">
                         <span class="expand-icon">▶</span>
-                        <span>📁</span>
+                        <span *ngIf="link.name !== 'Przegląd kodu'">📁</span>
+                        <span *ngIf="link.name === 'Przegląd kodu'">🖼️</span>
                         <span class="zadanie-label">{{ link.name }}</span>
                         <span>{{ link.show ? '▲' : '▼' }}</span>
                       </div>
@@ -99,7 +101,8 @@
                           <div *ngIf="sublink.links && sublink.links.length > 0" class="group-container nested-group">
                             <div class="grid-link main-link" (click)="toggleOnlyNestedGroup(sublink, link.links)">
                               <span class="expand-icon">▶</span>
-                              <span>📁</span>
+                              <span *ngIf="sublink.name !== 'Przegląd kodu'">📁</span>
+                              <span *ngIf="sublink.name === 'Przegląd kodu'">🖼️</span>
                               <span class="zadanie-label">{{ sublink.name }}</span>
                               <span>{{ sublink.show ? '▲' : '▼' }}</span>
                             </div>

@@ -1,3 +1,21 @@
+/* Podfolder - tło i obramowanie dla lepszej widoczności */
+.sub-links-container {
+  background: #f6f8fa;
+  border-left: 2px solid #d1d5db;
+  margin-left: 8px;
+  padding: 8px 0 8px 12px;
+  border-radius: 0 8px 8px 0;
+}
+/* WCIĘCIA DLA DRZEWKA */
+.group-container {
+  margin-left: 24px;
+}
+.group-container.nested-group {
+  margin-left: 32px;
+}
+.group-container.nested-group .group-container.nested-group {
+  margin-left: 40px;
+}
 /* FULLSCREEN OVERLAY dla tekstu */
 .text-fullscreen-overlay {
   position: fixed;
