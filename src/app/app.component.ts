@@ -5,10 +5,8 @@ import { RouterModule } from '@angular/router';
 import { FirstWeekTexts } from './firstWeek-texts';
 import  {SecondWeekTexts } from './secondWeek-texts';
 import {ThirdWeekTexts} from './thirdWeek-texts';  
-import { WhatsAppFormatterService } from './whatsapp-formatter.service';
 import { TextFormatService } from './text-format.service';
 import { TextVisibilityService } from './text-visibility.service';
-import { WhatsappCopyService } from './whatsapp-copy.service';
 import { getDaysToEnd, getDaysRangeLabel } from './cycle-utils';
 import { DynamicTitles } from './dynamic-titles';
 import { AudioPlayerService } from './audio-player.service';
@@ -91,8 +89,6 @@ export class AppComponent implements OnInit {
   }
 // ...istniejący kod...
   constructor(
-    private whatsappCopyService: WhatsappCopyService,
-    private whatsappFormatter: WhatsAppFormatterService,
     public audioPlayer: AudioPlayerService,
     public textVisibilityService: TextVisibilityService,
     public textFormatService: TextFormatService,
@@ -196,15 +192,6 @@ export class AppComponent implements OnInit {
   }
 
 
-  // Kopiowanie tekstu + linku audio w formacie WhatsApp
-  copyAudioTextToClipboard(links: SingleLink[]) {
-    this.whatsappCopyService.copyAudioTextToClipboard(links, this.whatsappFormatter);
-  }
-
-  copyAsWhatsapp(text: string) {
-    const formatted = this.whatsappFormatter.simpleFormatForWhatsApp(text);
-    navigator.clipboard.writeText(formatted);
-  }
 
   fullscreenImage: string | null = null; // <-- globalny fullscreen
   private hasScrolledToToday: boolean = false; // Flaga czy już przewinięto do dzisiejszej daty
