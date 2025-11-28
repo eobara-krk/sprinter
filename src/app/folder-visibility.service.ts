@@ -66,26 +66,21 @@ export class FolderVisibilityService {
 
   toggle(items: Item[], obj: Item, stopAllAudio: () => void) {
     items.forEach((item: Item) => {
+      // Zamykaj inne foldery
       if (item !== obj) {
         item.show = false;
-        item.links?.forEach((group: LinkGroup) => {
-          group.show = false;
-          group.links?.forEach((nestedLink: SingleLink) => {
-            if (nestedLink.show !== undefined) nestedLink.show = false;
-          });
-        });
-      } else {
-        if (item.show) {
-          item.links?.forEach((group: LinkGroup) => {
-            group.show = false;
-            group.links?.forEach((nestedLink: SingleLink) => {
-              if (nestedLink.show !== undefined) nestedLink.show = false;
-            });
-          });
-        }
       }
     });
-    if (obj.show) stopAllAudio();
+    // Zamykaj podfoldery tylko jeśli zamykamy główny folder
+    if (obj.show === true) {
+      obj.links?.forEach((group: LinkGroup) => {
+        group.show = false;
+        group.links?.forEach((nestedLink: SingleLink) => {
+          if (nestedLink.show !== undefined) nestedLink.show = false;
+        });
+      });
+      stopAllAudio();
+    }
     obj.show = !obj.show;
   }
 

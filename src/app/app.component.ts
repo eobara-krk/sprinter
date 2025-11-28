@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PhotoGalleryComponent } from './photo-gallery.component';
-import { CommonModule, NgFor, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FirstWeekTexts } from './firstWeek-texts';
 import  {SecondWeekTexts } from './secondWeek-texts';
@@ -55,12 +55,9 @@ interface Item {
   selector: 'app-root',
   standalone: true,
   imports: [
-    CommonModule,        // <-- potrzebne do date pipe i dyrektyw typu ngSwitch
+    CommonModule,        // <-- potrzebne do date pipe i dyrektyw typu ngIf
     NgFor,
     NgIf,
-    NgSwitch,
-    NgSwitchCase,
-    NgSwitchDefault,
     RouterModule,
     PhotoGalleryComponent
   ],
@@ -334,14 +331,12 @@ items: Item[] = [
   title: 'XFormy monitorujące naruszenia w komunikatach mail/sms/pismo',
   show: false, // opcjonalnie, żeby nie był od razu rozwinięty
   links: [
- 
-
-    {
+     {
         name: 'XForm sprawdzające naruszenia w komunikatach',
         show: false,
         links: [
           { image: 'assets/tydzien1/pismaAdres.jpg',type:'foto', label: 'adres na pismach' },
-           { text: this.firstWeekDay1, type:'opis', label: 'adres sms/maile' },
+          { text: this.firstWeekDay1, type:'opis', label: 'adres sms/maile' },
           { text: this.firstWeekDay2, type:'opis', label: 'maile czcionka' },
           { text: this.firstWeekDay3, type:'opis', label: 'zakazane znaki w sms' },
         ]
@@ -361,9 +356,9 @@ items: Item[] = [
             name: 'Przegląd kodu',
             show: false,
             links: [
-          { image: 'assets/tydzien2/0a.jpg',type:'foto', label: 'przelew plik pdf' },
-          { image: 'assets/tydzien2/1a.jpg',type:'foto', label: 'szukanie po ciągu znaków' },
-          { image: 'assets/tydzien2/2a.jpg',type:'foto', label: 'przypisanie do właściwej kategorii' },
+                { image: 'assets/tydzien2/0a.jpg',type:'foto', label: 'przelew plik pdf' },
+                { image: 'assets/tydzien2/1a.jpg',type:'foto', label: 'szukanie po ciągu znaków' },
+                { image: 'assets/tydzien2/2a.jpg',type:'foto', label: 'przypisanie do właściwej kategorii' },
             ]
           },
             { text: this.secondWeekDay1, type:'opis', label: 'klauzula' },
@@ -373,14 +368,7 @@ items: Item[] = [
         name: 'CA-11792 RODO do GP aktualizacja',
         show: false,
         links: [
-          {
-            name: 'zalacznik',
-            show: false,
-            links: [
-              // Możesz dodać więcej plików PDF lub obrazków analogicznie jak w Przegląd kodu
-              { type: 'pdf', url: 'assets/tydzien2/rodo.pdf', label: '<b>CA-11792</b> Klauzula RODO dla GP ' }
-            ]
-          }
+            { type: 'pdf', url: 'assets/tydzien2/rodo.pdf', label: '<b>CA-11792</b> Klauzula RODO dla GP ' }
         ]
       },
        {
@@ -440,18 +428,11 @@ items: Item[] = [
           { type: 'pdf', url: 'assets/tydzien3/PismoiZalacznik.pdf', label: '<b>CA-11798 </b> Klauzula na współmałżonka z załacznikiem' }
         ]
       },
-          {
+      {
         name: 'CA-11837 [AMI EXPRESS] Wdrażanie pisma GP',
         show: false,
         links: [
-           {
-            name: 'zalacznik',
-            show: false,
-            links: [
-              // Możesz dodać więcej plików PDF lub obrazków analogicznie jak w Przegląd kodu
-              { type: 'pdf', url: 'assets/tydzien3/GP.pdf', label: '<b>CA-11837</b> BRAND_GP_AMIEXPRESS' }
-            ]
-          }
+            { type: 'pdf', url: 'assets/tydzien3/GP.pdf', label: '<b>CA-11837</b> BRAND_GP_AMIEXPRESS' }
         ]
       },
       {

@@ -66,257 +66,174 @@
         <!-- GRUPY LINKÓW I OPISY -->
         <div class="groups-container">
           <ng-container *ngFor="let group of item.links; trackBy: trackByName">
-
-
-            <!-- Miniaturka grupy -->
-            <div class="event-image-container" *ngIf="group.image">
-              <img [src]="group.image"
-                   alt="Obraz grupy"
-                   class="event-thumb"
-                   (click)="toggleFullscreen(group.image); $event.stopPropagation();" />
-            </div>
-
-            <!-- OPIS -->
-            <div *ngIf="group.type==='opis'" class="grid-link description-link" (click)="openOnly(group, item)">
-              <span *ngIf="group.protected">🔒</span>
-              <span *ngIf="!group.protected">📝</span>
-              {{ group.name }}
-
-              <div *ngIf="group.show && group.text" class="event-description">
-                <div class="justified-text" [innerHTML]="textFormatService.processTextWithLinks(group.text)"></div>
+              <!-- Miniaturka grupy -->
+              <div class="event-image-container" *ngIf="group.image">
+                <img [src]="group.image"
+                     alt="Obraz grupy"
+                     class="event-thumb"
+                     (click)="toggleFullscreen(group.image); $event.stopPropagation();" />
               </div>
-            </div>
 
-              <!-- Wyświetl nazwę grupy, jeśli nie ma opisu ani linków, ale jest podgrupa 'Przegląd kodu' -->
-              <div *ngIf="!group.type && group.links && group.links.length === 1 && (group.links[0].name === 'Przegląd kodu' || group.links[0].name === 'zalacznik')" class="group-container">
-                <div class="grid-link main-link" (click)="group.links[0].show = !group.links[0].show; $event.stopPropagation();">
-                  <span class="expand-icon">{{ group.links[0].show ? '▼' : '▶' }}</span>
-                  <span *ngIf="group.links[0].name && group.links[0].name.toLowerCase().includes('przegląd')" style="color:#2563eb;font-size:1.3em">💻</span>
-                  <!-- folder tylko dla zalacznik -->
-                  <ng-container *ngIf="group.links[0].name === 'zalacznik'">
-                    <span class="folder-icon" style="color:gold">📁</span>
-                  </ng-container>
-                    <span class="zadanie-label">{{ group.links[0].name }}</span>
+              <!-- FOLDER NA ZAŁĄCZNIKI (zawsze, jeśli są linki) -->
+              <div *ngIf="group.links && group.links.length > 0" class="group-container">
+                <div class="grid-link main-link" (click)="toggleOnlyNestedGroup(group, item.links || [])">
+                  <span class="expand-icon">▶</span>
+                  <span>📁</span>
+                  <span class="zadanie-label">{{ group.name }}</span>
+                  <span>{{ group.show ? '▲' : '▼' }}</span>
                 </div>
-                <!-- Album zdjęć w podgrupie lub PDF-y w zalacznik -->
-                <div *ngIf="group.links[0].show" class="sub-links-container">
-                  <photo-gallery *ngIf="group.links[0].name === 'Przegląd kodu' && hasPhotoElements(group.links[0].links || []) && getPhotoCount(group.links[0].links || []) > 1"
-                    [photos]="getPhotoElements(group.links[0].links || [])"
-                    [groupName]="group.links[0].name || ''">
-                  </photo-gallery>
-                  <ng-container *ngIf="group.links[0].name === 'zalacznik'">
-                    <div class="pdf-list">
-                      <a *ngFor="let pdf of group.links[0].links" class="grid-link sub-link pdf-item" [href]="pdf.url" target="_blank" rel="noopener">
+                <div class="sub-links-container" *ngIf="group.show">
+                  <ng-container *ngFor="let link of group.links">
+                    <!-- Rekurencyjny podfolder: jeśli link ma links (czyli jest podfolderem) -->
+                    <div *ngIf="link.links && link.links.length > 0" class="group-container nested-group">
+                      <div class="grid-link main-link" (click)="toggleOnlyNestedGroup(link, group.links)">
+                        <span class="expand-icon">▶</span>
+                        <span>📁</span>
+                        <span class="zadanie-label">{{ link.name }}</span>
+                        <span>{{ link.show ? '▲' : '▼' }}</span>
+                      </div>
+                      <div class="sub-links-container" *ngIf="link.show">
+                        <!-- Rekurencja: wywołaj ten sam blok dla podfolderu -->
+                        <ng-container *ngFor="let sublink of link.links">
+                          <!-- Rekurencja: podfoldery niższego poziomu -->
+                          <div *ngIf="sublink.links && sublink.links.length > 0" class="group-container nested-group">
+                            <div class="grid-link main-link" (click)="toggleOnlyNestedGroup(sublink, link.links)">
+                              <span class="expand-icon">▶</span>
+                              <span>📁</span>
+                              <span class="zadanie-label">{{ sublink.name }}</span>
+                              <span>{{ sublink.show ? '▲' : '▼' }}</span>
+                            </div>
+                            <div class="sub-links-container" *ngIf="sublink.show">
+                              <ng-container *ngFor="let subsub of sublink.links">
+                                <!-- PDF -->
+                                <a *ngIf="subsub.type==='pdf' && subsub.url" 
+                                   class="grid-link sub-link pdf-item"
+                                   [href]="subsub.url"
+                                   target="_blank"
+                                   rel="noopener">
+                                  <span class="pdf-icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                      <rect x="3" y="3" width="18" height="18" rx="4" fill="#d32f2f"/>
+                                      <text x="6" y="17" font-size="10" font-family="Arial, sans-serif" fill="#fff" font-weight="bold">PDF</text>
+                                    </svg>
+                                  </span>
+                                  <span [innerHTML]="subsub.label || subsub.url"></span>
+                                </a>
+                                <!-- FOTO -->
+                                <div *ngIf="subsub.type==='foto'" class="grid-link sub-link foto-item">
+                                  <div class="link-thumb-container">
+                                    <img [src]="subsub.image" 
+                                         alt="Miniaturka" 
+                                         class="link-thumb"
+                                         loading="lazy"
+                                         decoding="async"
+                                         (load)="onImageLoad($event)"
+                                         (error)="onImageError($event)"
+                                         (click)="toggleFullscreen(subsub.image); $event.preventDefault(); $event.stopPropagation();" />
+                                    <span class="link-label" *ngIf="subsub.label" [innerHTML]="subsub.label"></span>
+                                  </div>
+                                </div>
+                                <!-- OPIS W PODLINKU -->
+                                <div *ngIf="subsub.type==='opis' && subsub.text" class="grid-link sub-link text-item" style="position:relative;">
+                                  <div *ngIf="!subsub.show" class="text-collapsed-header" (click)="textVisibilityService.toggleTextVisibility(subsub); $event.stopPropagation();">
+                                    <div class="text-collapsed-left">
+                                      <span class="text-icon">📝</span>
+                                      <div class="text-toggle-label" [innerHTML]="subsub.label || 'Opis' "></div>
+                                    </div>
+                                    <span class="text-toggle-icon">▼</span>
+                                  </div>
+                                </div>
+                              </ng-container>
+                            </div>
+                          </div>
+                          <!-- Standardowe linki (nie są podfolderem) -->
+                          <ng-container *ngIf="!sublink.links || sublink.links.length === 0">
+                            <!-- PDF -->
+                            <a *ngIf="sublink.type==='pdf' && sublink.url" 
+                               class="grid-link sub-link pdf-item"
+                               [href]="sublink.url"
+                               target="_blank"
+                               rel="noopener">
+                              <span class="pdf-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <rect x="3" y="3" width="18" height="18" rx="4" fill="#d32f2f"/>
+                                  <text x="6" y="17" font-size="10" font-family="Arial, sans-serif" fill="#fff" font-weight="bold">PDF</text>
+                                </svg>
+                              </span>
+                              <span [innerHTML]="sublink.label || sublink.url"></span>
+                            </a>
+                            <!-- FOTO -->
+                            <div *ngIf="sublink.type==='foto'" class="grid-link sub-link foto-item">
+                              <div class="link-thumb-container">
+                                <img [src]="sublink.image" 
+                                     alt="Miniaturka" 
+                                     class="link-thumb"
+                                     loading="lazy"
+                                     decoding="async"
+                                     (load)="onImageLoad($event)"
+                                     (error)="onImageError($event)"
+                                     (click)="toggleFullscreen(sublink.image); $event.preventDefault(); $event.stopPropagation();" />
+                                <span class="link-label" *ngIf="sublink.label" [innerHTML]="sublink.label"></span>
+                              </div>
+                            </div>
+                            <!-- OPIS W PODLINKU -->
+                            <div *ngIf="sublink.type==='opis' && sublink.text" class="grid-link sub-link text-item" style="position:relative;">
+                              <div *ngIf="!sublink.show" class="text-collapsed-header" (click)="textVisibilityService.toggleTextVisibility(sublink); $event.stopPropagation();">
+                                <div class="text-collapsed-left">
+                                  <span class="text-icon">📝</span>
+                                  <div class="text-toggle-label" [innerHTML]="sublink.label || 'Opis' "></div>
+                                </div>
+                                <span class="text-toggle-icon">▼</span>
+                              </div>
+                            </div>
+                          </ng-container>
+                        </ng-container>
+                      </div>
+                    </div>
+                    <!-- Standardowe linki (nie są podfolderem) -->
+                    <ng-container *ngIf="!link.links || link.links.length === 0">
+                      <!-- PDF -->
+                      <a *ngIf="link.type==='pdf' && link.url" 
+                         class="grid-link sub-link pdf-item"
+                         [href]="link.url"
+                         target="_blank"
+                         rel="noopener">
                         <span class="pdf-icon">
                           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="3" y="3" width="18" height="18" rx="4" fill="#d32f2f"/>
                             <text x="6" y="17" font-size="10" font-family="Arial, sans-serif" fill="#fff" font-weight="bold">PDF</text>
                           </svg>
                         </span>
-                        <span [innerHTML]="pdf.label || pdf.url"></span>
+                        <span [innerHTML]="link.label || link.url"></span>
                       </a>
-                    </div>
-                  </ng-container>
-                </div>
-              </div>
-
-            <!-- GRUPA Z WIELOMA LINKAMI (nie jest opisem i ma więcej niż 1 link) -->
-            <div *ngIf="group.type !== 'opis' && group.links && group.links.length > 1" 
-                 class="group-container"
-                 [class.expanded]="group.show"
-                 (click)="openOnly(group, item); $event.stopPropagation()">
-                 
-              <!-- Główny link grupy -->
-              <div class="grid-link main-link">
-                <span class="expand-icon">{{ group.show ? '▼' : '▶' }}</span>
-                <span>📁</span>
-                <span class="zadanie-label">{{ group.name }}</span>
-              </div>
-
-              <!-- PODLINKI (grupy z wieloma linkami) -->
-              <ng-container *ngIf="group.show && group.links as links">
-                <div *ngIf="links.length > 1" class="sub-links-container">
-                  <div class="connection-line"></div>
-                  <div class="link-grid" [class.photo-grid]="hasPhotoElements(links)">
-                <ng-container *ngFor="let l of links">
-                  
-                  <!-- Jeśli link ma zagnieżdżone linki -->
-                  <ng-container *ngIf="l.links && l.links.length > 0">
-                    <div class="nested-group">
-                      <div class="nested-header" (click)="toggleOnlyNestedGroup(l, links); $event.stopPropagation()">
-                        <span class="nested-icon">{{ l.show ? '▼' : '▶' }}</span>
-                        <span class="folder-icon" style="color:gold">📁</span>
-                        <ng-container *ngIf="l.name !== 'Przegląd kodu'; else kodIcon"></ng-container>
-                        <ng-template #kodIcon><span style="color:#2563eb;font-size:1.3em">💻</span> Przegląd kodu</ng-template>
-                      </div>
-                      <!-- Zagnieżdżone linki -->
-                      <div *ngIf="l.show" class="nested-links">
-                        <photo-gallery *ngIf="hasPhotoElements(l.links) && getPhotoCount(l.links) > 1"
-                          [photos]="getPhotoElements(l.links)"
-                          [groupName]="l.name || ''">
-                        </photo-gallery>
-                        <ng-container *ngFor="let nestedLink of l.links">
-                          <ng-container *ngIf="nestedLink.links && nestedLink.links.length > 0; else leafLink">
-                            <div class="nested-group">
-                              <div class="nested-header" (click)="toggleOnlyNestedGroup(nestedLink, l.links); $event.stopPropagation()">
-                                <span class="nested-icon">{{ nestedLink.show ? '▼' : '▶' }}</span>
-                                <span class="folder-icon" style="color:gold">📁</span>
-                                <ng-container *ngIf="nestedLink.name !== 'Przegląd kodu'; else kodIcon2"></ng-container>
-                                <ng-template #kodIcon2><span style="color:#2563eb;font-size:1.3em">💻</span> Przegląd kodu</ng-template>
-                              </div>
-                              <div *ngIf="nestedLink.show" class="nested-links">
-                                <photo-gallery *ngIf="hasPhotoElements(nestedLink.links) && getPhotoCount(nestedLink.links) > 1"
-                                  [photos]="getPhotoElements(nestedLink.links)"
-                                  [groupName]="nestedLink.name || ''">
-                                </photo-gallery>
-                                <ng-container *ngFor="let deepLink of nestedLink.links">
-                                  <ng-container *ngIf="deepLink.links && deepLink.links.length > 0; else deepLeaf">
-                                    <div class="nested-group">
-                                      <div class="nested-header" (click)="toggleOnlyNestedGroup(deepLink, nestedLink.links); $event.stopPropagation()">
-                                        <span class="nested-icon">{{ deepLink.show ? '▼' : '▶' }}</span>
-                                        <span class="folder-icon" style="color:gold">📁</span>
-                                        <ng-container *ngIf="deepLink.name !== 'Przegląd kodu'; else kodIcon3"></ng-container>
-                                        <ng-template #kodIcon3><span style="color:#2563eb;font-size:1.3em">💻</span> Przegląd kodu</ng-template>
-                                      </div>
-                                      <div *ngIf="deepLink.show" class="nested-links">
-                                        <photo-gallery *ngIf="hasPhotoElements(deepLink.links) && getPhotoCount(deepLink.links) > 1"
-                                          [photos]="getPhotoElements(deepLink.links)"
-                                          [groupName]="deepLink.name || ''">
-                                        </photo-gallery>
-                                        <ng-container *ngFor="let leaf of deepLink.links">
-                                          <ng-container *ngIf="leaf.links && leaf.links.length > 0; else leafLeaf">
-                                            <!-- Jeszcze głębiej: kolejne poziomy -->
-                                          </ng-container>
-                                          <ng-template #leafLeaf>
-                                            <a class="grid-link nested-link"
-                                               
-                                               [href]="leaf.url || null"
-                                               target="_blank"
-                                               rel="noopener"
-                                               (click)="$event.stopPropagation()">
-                                              
-                                              <span class="sub-icon">➤➤</span>
-                                              <span [ngSwitch]="leaf.type">
-                                                <span *ngSwitchCase="'film'">🎬</span>
-                                                <span *ngSwitchCase="'pdf'">📕</span>
-                                                <span *ngSwitchCase="'exec'">💿</span>
-                                                <span *ngSwitchCase="'foto'">📷</span>
-                                                <span *ngSwitchCase="'audio'">🎵</span>
-                                                <span *ngSwitchCase="'youtube'">📺</span>
-                                                <span *ngSwitchCase="'html'">🌐</span>
-                                                <span *ngSwitchDefault>📁</span>
-                                              </span>
-                                              {{ leaf.label || leaf.url }}
-                                            </a>
-                                          </ng-template>
-                                        </ng-container>
-                                      </div>
-                                    </div>
-                                  </ng-container>
-                                  <ng-template #deepLeaf>
-                                    <a class="grid-link nested-link"
-                                       
-                                       [href]="deepLink.url || null"
-                                       target="_blank"
-                                       rel="noopener"
-                                       (click)="$event.stopPropagation()">
-                                      
-                                      <span class="sub-icon">➤➤</span>
-                                      <span [ngSwitch]="deepLink.type">
-                                        <span *ngSwitchCase="'film'">🎬</span>
-                                        <span *ngSwitchCase="'pdf'">📕</span>
-                                        <span *ngSwitchCase="'exec'">💿</span>
-                                        <span *ngSwitchCase="'foto'">📷</span>
-                                        <span *ngSwitchCase="'audio'">🎵</span>
-                                        <span *ngSwitchCase="'youtube'">📺</span>
-                                        <span *ngSwitchCase="'html'">🌐</span>
-                                        <span *ngSwitchDefault>📁</span>
-                                      </span>
-                                      {{ deepLink.label || deepLink.url }}
-                                    </a>
-                                  </ng-template>
-                                </ng-container>
-                              </div>
-                            </div>
-                          </ng-container>
-                          <ng-template #leafLink>
-                            <a class="grid-link nested-link"
-                               
-                               [href]="nestedLink.url || null"
-                               target="_blank"
-                               rel="noopener"
-                               (click)="$event.stopPropagation()">
-                              
-                              <span class="sub-icon">➤➤</span>
-                              <span [ngSwitch]="nestedLink.type">
-                                <span *ngSwitchCase="'film'">🎬</span>
-                                <span *ngSwitchCase="'pdf'">📕</span>
-                                <span *ngSwitchCase="'exec'">💿</span>
-                                <span *ngSwitchCase="'foto'">📷</span>
-                                <span *ngSwitchCase="'audio'">🎵</span>
-                                <span *ngSwitchCase="'youtube'">📺</span>
-                                <span *ngSwitchCase="'html'">🌐</span>
-                                <span *ngSwitchDefault>📁</span>
-                              </span>
-                              {{ nestedLink.label || nestedLink.url }}
-                            </a>
-                          </ng-template>
-                        </ng-container>
-                      </div>
-                    </div>
-                  </ng-container>
-
-                  <!-- Zwykły link (bez zagnieżdżonych linków) -->
-                  <ng-container *ngIf="!l.links || l.links.length === 0">
-                    <!-- Element foto (tylko zdjęcie) -->
-                    <div *ngIf="l.type==='foto'" 
-                         class="grid-link sub-link foto-item">
-                       <div class="link-thumb-container">
-                        <img [src]="l.image" 
-                             alt="Miniaturka" 
-                             class="link-thumb"
-                             loading="lazy"
-                             decoding="async"
-                             (load)="onImageLoad($event)"
-                             (error)="onImageError($event)"
-                             (click)="toggleFullscreen(l.image); $event.preventDefault(); $event.stopPropagation();" />
-                        <span class="link-label" *ngIf="l.label" [innerHTML]="l.label"></span>
-                      </div>
-                      
-                    </div>
-
-                    <!-- Element PDF z ikoną -->
-                    <a *ngIf="l.type==='pdf' && l.url" 
-                       class="grid-link sub-link pdf-item"
-                       [href]="l.url"
-                       target="_blank"
-                       rel="noopener">
-                      <span class="pdf-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <rect x="3" y="3" width="18" height="18" rx="4" fill="#d32f2f"/>
-                          <text x="6" y="17" font-size="10" font-family="Arial, sans-serif" fill="#fff" font-weight="bold">PDF</text>
-                        </svg>
-                      </span>
-                      <span [innerHTML]="l.label || l.url"></span>
-                    </a>
-
-                    <!-- Element tekstowy (opis w podlinku) -->
-                    <div *ngIf="l.type==='opis' && l.text" class="grid-link sub-link text-item" style="position:relative;">
-                      <!-- Etykieta gdy tekst jest zwinięty -->
-                      <div *ngIf="!l.show" class="text-collapsed-header" (click)="textVisibilityService.toggleTextVisibility(l); $event.stopPropagation();">
-                        <div class="text-collapsed-left">
-                          <span class="text-icon">📝</span>
-                          <div class="text-toggle-label" [innerHTML]="l.label || 'Czułe serce św. Ludwika'"></div>
+                      <!-- FOTO -->
+                      <div *ngIf="link.type==='foto'" class="grid-link sub-link foto-item">
+                        <div class="link-thumb-container">
+                          <img [src]="link.image" 
+                               alt="Miniaturka" 
+                               class="link-thumb"
+                               loading="lazy"
+                               decoding="async"
+                               (load)="onImageLoad($event)"
+                               (error)="onImageError($event)"
+                               (click)="toggleFullscreen(link.image); $event.preventDefault(); $event.stopPropagation();" />
+                          <span class="link-label" *ngIf="link.label" [innerHTML]="link.label"></span>
                         </div>
-                        <span class="text-toggle-icon">▼</span>
                       </div>
-                    </div>
+                      <!-- OPIS W PODLINKU -->
+                      <div *ngIf="link.type==='opis' && link.text" class="grid-link sub-link text-item" style="position:relative;">
+                        <div *ngIf="!link.show" class="text-collapsed-header" (click)="textVisibilityService.toggleTextVisibility(link); $event.stopPropagation();">
+                          <div class="text-collapsed-left">
+                            <span class="text-icon">📝</span>
+                            <div class="text-toggle-label" [innerHTML]="link.label || 'Opis' "></div>
+                          </div>
+                          <span class="text-toggle-icon">▼</span>
+                        </div>
+                      </div>
+                    </ng-container>
                   </ng-container>
-                </ng-container>
-                  </div>
                 </div>
-              </ng-container>
-            </div>
+              </div>
           </ng-container>
         </div>
       </div>
