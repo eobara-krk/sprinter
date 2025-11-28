@@ -79,7 +79,7 @@
                 <div class="grid-link main-link" (click)="toggleOnlyNestedGroup(group, item.links || [])">
                   <span class="expand-icon">▶</span>
                   <span *ngIf="group.name !== 'Przegląd kodu'">📁</span>
-                  <span *ngIf="group.name === 'Przegląd kodu'">🖼️</span>
+                  <span *ngIf="group.name === 'Przegląd kodu'">💻</span>
                   <span class="zadanie-label">{{ group.name }}</span>
                   <span>{{ group.show ? '▲' : '▼' }}</span>
                 </div>
@@ -90,7 +90,7 @@
                       <div class="grid-link main-link" (click)="toggleOnlyNestedGroup(link, group.links)">
                         <span class="expand-icon">▶</span>
                         <span *ngIf="link.name !== 'Przegląd kodu'">📁</span>
-                        <span *ngIf="link.name === 'Przegląd kodu'">🖼️</span>
+                        <span *ngIf="link.name === 'Przegląd kodu'">💻</span>
                         <span class="zadanie-label">{{ link.name }}</span>
                         <span>{{ link.show ? '▲' : '▼' }}</span>
                       </div>
@@ -102,7 +102,7 @@
                             <div class="grid-link main-link" (click)="toggleOnlyNestedGroup(sublink, link.links)">
                               <span class="expand-icon">▶</span>
                               <span *ngIf="sublink.name !== 'Przegląd kodu'">📁</span>
-                              <span *ngIf="sublink.name === 'Przegląd kodu'">🖼️</span>
+                              <span *ngIf="sublink.name === 'Przegląd kodu'">💻</span>
                               <span class="zadanie-label">{{ sublink.name }}</span>
                               <span>{{ sublink.show ? '▲' : '▼' }}</span>
                             </div>
@@ -140,7 +140,7 @@
                                 <div *ngIf="subsub.type==='opis' && subsub.text" class="grid-link sub-link text-item" style="position:relative;">
                                   <div *ngIf="!subsub.show" class="text-collapsed-header" (click)="textVisibilityService.toggleTextVisibility(subsub); $event.stopPropagation();">
                                     <div class="text-collapsed-left">
-                                      <span class="text-icon">📝</span>
+                                      <span class="text-icon">📢</span>
                                       <div class="text-toggle-label" [innerHTML]="subsub.label || 'Opis' "></div>
                                     </div>
                                     <span class="text-toggle-icon">▼</span>
@@ -183,7 +183,7 @@
                             <div *ngIf="sublink.type==='opis' && sublink.text" class="grid-link sub-link text-item" style="position:relative;">
                               <div *ngIf="!sublink.show" class="text-collapsed-header" (click)="textVisibilityService.toggleTextVisibility(sublink); $event.stopPropagation();">
                                 <div class="text-collapsed-left">
-                                  <span class="text-icon">📝</span>
+                                  <span class="text-icon">📢</span>
                                   <div class="text-toggle-label" [innerHTML]="sublink.label || 'Opis' "></div>
                                 </div>
                                 <span class="text-toggle-icon">▼</span>
@@ -227,7 +227,7 @@
                       <div *ngIf="link.type==='opis' && link.text" class="grid-link sub-link text-item" style="position:relative;">
                         <div *ngIf="!link.show" class="text-collapsed-header" (click)="textVisibilityService.toggleTextVisibility(link); $event.stopPropagation();">
                           <div class="text-collapsed-left">
-                            <span class="text-icon">📝</span>
+                            <span class="text-icon">📢</span>
                             <div class="text-toggle-label" [innerHTML]="link.label || 'Opis' "></div>
                           </div>
                           <span class="text-toggle-icon">▼</span>

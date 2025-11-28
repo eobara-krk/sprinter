@@ -349,8 +349,8 @@ items: Item[] = [
             name: 'Przegląd kodu',
             show: false,
             links: [
-              { image: 'assets/tydzien2/zakres1.jpg',type:'foto', label: '<b>CAM-2028</b> <i>DEL_SP_MailingLetterTemplate_Deleted</i> <br>procedura pilnująca zakresów' },
-              { image: 'assets/tydzien2/zakres2.jpg',type:'foto', label: '<b>CAM-2028</b> <br>Przykłady zakresów' },
+              { image: 'assets/tydzien1/zakres1.jpg',type:'foto', label: '<b>CAM-2028</b> <i>DEL_SP_MailingLetterTemplate_Deleted</i> <br>procedura pilnująca zakresów' },
+              { image: 'assets/tydzien1/zakres2.jpg',type:'foto', label: '<b>CAM-2028</b> <br>Przykłady zakresów' },
             ]
           },
             { text: this.secondWeekZakresy, type:'opis', label: 'zakresy' },
@@ -389,11 +389,11 @@ items: Item[] = [
   title: '<b>Sprint 11:</b> <i>26 XI - 10 XII</i>',
   show: false,
    links: [
-            {
+      {
         name: 'CA-11792 RODO do GP aktualizacja',
         show: false,
         links: [
-            { type: 'pdf', url: 'assets/tydzien2/rodo.pdf', label: '<b>CA-11792</b> Klauzula RODO dla GP ' }
+            { type: 'pdf', url: 'assets/tydzien3/rodo.pdf', label: '<b>CA-11792</b> Klauzula RODO dla GP ' }
         ]
       },
       {
@@ -404,9 +404,9 @@ items: Item[] = [
             name: 'Przegląd kodu',
             show: false,
             links: [
-                { image: 'assets/tydzien2/0a.jpg',type:'foto', label: 'przelew plik pdf' },
-                { image: 'assets/tydzien2/1a.jpg',type:'foto', label: 'szukanie po ciągu znaków' },
-                { image: 'assets/tydzien2/2a.jpg',type:'foto', label: 'przypisanie do właściwej kategorii' },
+                { image: 'assets/tydzien3/0a.jpg',type:'foto', label: 'przelew plik pdf' },
+                { image: 'assets/tydzien3/1a.jpg',type:'foto', label: 'szukanie po ciągu znaków' },
+                { image: 'assets/tydzien3/2a.jpg',type:'foto', label: 'przypisanie do właściwej kategorii' },
             ]
           },
             { text: this.secondWeekDay1, type:'opis', label: 'klauzula' },
