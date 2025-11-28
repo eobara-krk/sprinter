@@ -1,3 +1,21 @@
+.sub-links-container {
+  background: #f6f8fa;
+  border-left: 2px solid #d1d5db;
+  margin-left: 8px;
+  padding: 8px 0 8px 12px;
+  border-radius: 0 8px 8px 0;
+  box-shadow: 0 2px 8px rgba(59,130,246,0.06);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.sub-links-container:hover {
+  background: #e3e8ef;
+  box-shadow: 0 4px 16px rgba(59,130,246,0.12);
+}
+.grid-link.main-link:hover {
+  background: #e0e7ff;
+  color: #1e40af;
+  transition: background 0.2s, color 0.2s;
+}
 /* Podfolder - tło i obramowanie dla lepszej widoczności */
 .sub-links-container {
   background: #f6f8fa;

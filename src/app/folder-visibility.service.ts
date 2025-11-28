@@ -70,18 +70,20 @@ export class FolderVisibilityService {
       if (item !== obj) {
         item.show = false;
       }
-    });
-    // Zamykaj podfoldery tylko jeśli zamykamy główny folder
-    if (obj.show === true) {
-      obj.links?.forEach((group: LinkGroup) => {
+      // Zawsze zamykaj podfoldery i ich dzieci
+      item.links?.forEach((group: LinkGroup) => {
         group.show = false;
         group.links?.forEach((nestedLink: SingleLink) => {
-          if (nestedLink.show !== undefined) nestedLink.show = false;
+          nestedLink.show = false;
+          // Zamknij pod-podfoldery jeśli istnieją
+          nestedLink.links?.forEach((subsub: SingleLink) => {
+            subsub.show = false;
+          });
         });
       });
-      stopAllAudio();
-    }
+    });
     obj.show = !obj.show;
+    if (!obj.show) stopAllAudio();
   }
 
   openOnly(items: Item[], groupToOpen: LinkGroup, item: Item, summaryPassword: string) {
